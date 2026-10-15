@@ -1,0 +1,9 @@
+# Privacy and retention
+
+Public: account signing/encryption keys, verified first name and attested age, public photos, expiry and minimal provider records. No public birthdate, fiscal code, legal surname, state identifier, precise location, preferences, swipe logs, private handles or match graph. Issuer privately processes CIE attributes and may retain scoped duplicate-prevention records under explicit policy.
+
+Volunteer observes recipient mailbox routing, sizes, timing, source IP and encrypted parcels. Sender account credential and message kind stay inside recipient-sealed parcel. Traffic correlation can still link a transport source with recipient; anonymity is not guaranteed. Encryption does not hide metadata or protect public photos. Account ids correlate activity across peers until rotation. Direct connections expose IP; coarse geography still enables inference. Users must understand these limits before production use.
+
+Local persistence contains sensitive inbox, intent and match state. No plaintext private-key persistence by default. OS file permissions and encrypted/platform-keystore adapters protect mobile secrets; encrypted database policy remains deployment work if database holds clear personal state. Logs omit payloads. Expired network records become inaccessible immediately and are garbage-collected; local inbox retention is user-controlled, while replay markers remain through accepted message lifetime. Block/report retention must be bounded and explained.
+
+Deleting public content asks compliant peers to remove ownership leases and propagate tombstones. Cannot erase downloads from untrusted nodes or undo previously disclosed external contacts. Availability and erasure tradeoffs are explicit in [storage](storage.md).

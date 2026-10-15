@@ -1,0 +1,22 @@
+[package]
+name = "annoda-core"
+version = "0.1.0"
+edition = "2024"
+rust-version.workspace = true
+license = "AGPL-3.0-or-later"
+description = "Identity, protocol, storage, and matching primitives for Annoda"
+
+[dependencies]
+blake3 = "1.8"
+ed25519-dalek = { version = "2.2", features = ["zeroize"] }
+hpke = "0.14.1"
+getrandom = "0.4"
+rand_chacha = "0.10"
+postcard = { version = "1.1", features = ["alloc"] }
+rusqlite = { version = "0.38", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+zeroize = "1"
+
+[dev-dependencies]
+tempfile = "3"

@@ -1,0 +1,22 @@
+[package]
+name = "annoda-mobile-ffi"
+version = "0.1.0"
+edition = "2024"
+license.workspace = true
+rust-version.workspace = true
+
+[lib]
+crate-type = ["cdylib", "staticlib", "lib"]
+
+[features]
+cli = ["uniffi/cli"]
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+required-features = ["cli"]
+
+[dependencies]
+annoda-intelligence = { path = "../intelligence" }
+thiserror = "2"
+uniffi = "0.32.1"

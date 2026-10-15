@@ -1,0 +1,15 @@
+[package]
+name = "annoda-intelligence"
+version = "0.1.0"
+edition = "2024"
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+blake3 = "1.8"
+cpu-time = "1"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+thiserror = "2"
+
+[dev-dependencies]
+proptest = "1"

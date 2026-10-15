@@ -1,0 +1,14 @@
+/target/
+**/target/
+*.db
+*.db-shm
+*.db-wal
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
