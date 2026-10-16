@@ -12,11 +12,12 @@ use std::{
 use annoda_core::{
     identity::{TrustedIssuers, VerifiedCredential},
     protocol::{ContentHash, ContentLease, MailboxParcel, PhotoManifest, ProfileId, PublicProfile},
-    storage::{PeerStorage, StorageLimits},
+    storage::{MailboxCursor, PeerStorage, StorageLimits},
 };
 use futures::StreamExt;
 use libp2p::{
-    Multiaddr, PeerId, StreamProtocol, Swarm, SwarmBuilder, connection_limits, identity,
+    Multiaddr, PeerId, StreamProtocol, Swarm, connection_limits,
+    core::{Transport, upgrade},
     kad::{self, store::MemoryStore},
     multiaddr::Protocol,
     noise, request_response,
@@ -25,9 +26,11 @@ use libp2p::{
 };
 use tokio::sync::{mpsc, oneshot};
 
+use crate::node_identity::NodeIdentityStore;
+use crate::transfer::{MeteredIo, TransferMeter};
 use crate::wire::{
-    AnnodaCodec, MAX_FRAME_BYTES, MAX_MAILBOX_BATCH, RpcErrorCode, RpcRequest, RpcResponse,
-    frame_len,
+    AnnodaCodec, MAX_FRAME_BYTES, MAX_MAILBOX_BATCH, RpcErrorCode, RpcMailboxCursor, RpcRequest,
+    RpcResponse, frame_len,
 };
 
 const COMMAND_QUEUE: usize = 32;
@@ -153,28 +156,52 @@ pub struct PeerNode {
     issuers: TrustedIssuers,
     clock: Arc<dyn Clock>,
     task: Option<tokio::task::JoinHandle<()>>,
+    allowed_peers: Option<HashSet<PeerId>>,
 }
 
 impl PeerNode {
     pub async fn start(config: NodeConfig, issuers: TrustedIssuers) -> Result<Self, NetworkError> {
+        Self::start_mode(config, issuers, None, None, true, true, None).await
+    }
+
+    async fn start_mode(
+        config: NodeConfig,
+        issuers: TrustedIssuers,
+        meter: Option<Arc<TransferMeter>>,
+        allowed_peers: Option<HashSet<PeerId>>,
+        provide_services: bool,
+        listen: bool,
+        storage_busy_timeout: Option<Duration>,
+    ) -> Result<Self, NetworkError> {
         if config.max_connections == 0 || config.bandwidth_bytes_per_second == 0 {
             return Err(NetworkError::Startup(
                 "connection and bandwidth limits must be positive".into(),
             ));
         }
-        let storage = open_peer_storage(&config, config.clock.now())?;
-
-        let keys = identity::Keypair::generate_ed25519();
-        let peer_id = keys.public().to_peer_id();
+        let identity = NodeIdentityStore::new(&config.data_dir)
+            .open()
+            .map_err(|error| NetworkError::Startup(error.to_string()))?;
+        let (keys, peer_id, identity_lock) = identity.into_parts();
+        let storage = open_peer_storage(&config, config.clock.now(), storage_busy_timeout)?;
         let store = MemoryStore::new(peer_id);
         let mut kad = kad::Behaviour::new(peer_id, store);
-        kad.set_mode(Some(kad::Mode::Server));
+        kad.set_mode(Some(if provide_services {
+            kad::Mode::Server
+        } else {
+            kad::Mode::Client
+        }));
         let codec = AnnodaCodec;
         let rpc = RpcBehaviour::with_codec(
             codec,
             [(
                 StreamProtocol::new(PROTOCOL),
-                request_response::ProtocolSupport::Full,
+                if provide_services {
+                    request_response::ProtocolSupport::Full
+                } else {
+                    // Sync clients issue requests only. Omitting inbound support prevents
+                    // selected peers from making the client decode unsolicited RPC frames.
+                    request_response::ProtocolSupport::Outbound
+                },
             )],
             request_response::Config::default()
                 .with_request_timeout(config.request_timeout)
@@ -185,44 +212,59 @@ impl PeerNode {
                 .with_max_established(Some(config.max_connections))
                 .with_max_established_incoming(Some(config.max_connections.div_ceil(2))),
         );
-        let swarm = SwarmBuilder::with_existing_identity(keys)
-            .with_tokio()
-            .with_tcp(
-                tcp::Config::default(),
-                noise::Config::new,
-                yamux::Config::default,
+        let transport_meter = meter.clone();
+        let transport = tcp::tokio::Transport::new(tcp::Config::default())
+            .map(move |socket, _| MeteredIo::new(socket, transport_meter.clone()))
+            .upgrade(upgrade::Version::V1)
+            .authenticate(
+                noise::Config::new(&keys)
+                    .map_err(|e| NetworkError::Startup(format!("configure Noise: {e:?}")))?,
             )
-            .map_err(|e| NetworkError::Startup(format!("configure TCP transport: {e:?}")))?
-            .with_behaviour(|_| Behaviour {
+            .multiplex(yamux::Config::default())
+            .boxed();
+        let transport = libp2p::core::transport::timeout::TransportTimeout::new(
+            transport,
+            config.request_timeout,
+        )
+        .boxed();
+        let mut swarm = Swarm::new(
+            transport,
+            Behaviour {
                 rpc,
                 kad,
                 limits: connection_limits,
-            })
-            .map_err(|e| NetworkError::Startup(format!("configure swarm behaviour: {e:?}")))?
-            .with_swarm_config(|cfg| cfg.with_idle_connection_timeout(Duration::from_secs(60)))
-            .build();
+            },
+            peer_id,
+            libp2p::swarm::Config::with_tokio_executor()
+                .with_idle_connection_timeout(Duration::from_secs(60)),
+        );
 
-        let mut swarm = swarm;
-        let listen_addresses = if config.listen_addresses.is_empty() {
-            vec![
-                Multiaddr::empty()
-                    .with(Protocol::Ip4(std::net::Ipv4Addr::LOCALHOST))
-                    .with(Protocol::Tcp(0)),
-            ]
-        } else {
-            config.listen_addresses.clone()
-        };
-        for address in listen_addresses {
-            swarm
-                .listen_on(address.clone())
-                .map_err(|e| NetworkError::Startup(format!("listen on {address}: {e:?}")))?;
+        if listen {
+            let listen_addresses = if config.listen_addresses.is_empty() {
+                vec![
+                    Multiaddr::empty()
+                        .with(Protocol::Ip4(std::net::Ipv4Addr::LOCALHOST))
+                        .with(Protocol::Tcp(0)),
+                ]
+            } else {
+                config.listen_addresses.clone()
+            };
+            for address in listen_addresses {
+                swarm
+                    .listen_on(address.clone())
+                    .map_err(|e| NetworkError::Startup(format!("listen on {address}: {e:?}")))?;
+            }
         }
         for bootstrap in &config.bootstrap_peers {
             swarm.add_peer_address(bootstrap.peer_id, bootstrap.address.clone());
-            swarm
-                .behaviour_mut()
-                .kad
-                .add_address(&bootstrap.peer_id, bootstrap.address.clone());
+            if provide_services {
+                // Sync sessions dial only their selected peers. Adding addresses to
+                // Kademlia can trigger an automatic bootstrap and expand that set.
+                swarm
+                    .behaviour_mut()
+                    .kad
+                    .add_address(&bootstrap.peer_id, bootstrap.address.clone());
+            }
             let _ = swarm.dial(bootstrap.peer_id);
         }
         let (commands, rx) = mpsc::channel(COMMAND_QUEUE);
@@ -237,7 +279,11 @@ impl PeerNode {
                 clock: config.clock.clone(),
                 bandwidth_bytes_per_second: config.bandwidth_bytes_per_second,
                 max_lease_seconds: config.max_lease_seconds,
+                allowed_peers: allowed_peers.clone(),
+                provide_services,
+                bootstrap_kad: provide_services,
             },
+            identity_lock,
         ));
         Ok(Self {
             peer_id,
@@ -246,7 +292,26 @@ impl PeerNode {
             issuers,
             clock: config.clock,
             task: Some(task),
+            allowed_peers,
         })
+    }
+
+    pub(crate) async fn start_sync(
+        config: NodeConfig,
+        issuers: TrustedIssuers,
+        meter: Arc<TransferMeter>,
+        allowed_peers: HashSet<PeerId>,
+    ) -> Result<Self, NetworkError> {
+        Self::start_mode(
+            config,
+            issuers,
+            Some(meter),
+            Some(allowed_peers),
+            false,
+            false,
+            Some(Duration::from_millis(25)),
+        )
+        .await
     }
 
     pub fn peer_id(&self) -> PeerId {
@@ -283,6 +348,15 @@ impl PeerNode {
         peer: PeerId,
         request: RpcRequest,
     ) -> Result<RpcResponse, NetworkError> {
+        if self
+            .allowed_peers
+            .as_ref()
+            .is_some_and(|allowed| !allowed.contains(&peer))
+        {
+            return Err(NetworkError::Request(
+                "peer is outside sync allowlist".into(),
+            ));
+        }
         if !request.validate_frame_size() {
             return Err(NetworkError::InvalidFrame);
         }
@@ -504,6 +578,55 @@ impl PeerNode {
             _ => Err(NetworkError::Request("unexpected mailbox response".into())),
         }
     }
+
+    #[allow(clippy::too_many_arguments)] // Mirrors the authenticated paging RPC fields.
+    pub(crate) async fn poll_mailbox_page(
+        &self,
+        peer: PeerId,
+        recipient: VerifiedCredential,
+        proof: Vec<u8>,
+        challenge: [u8; 32],
+        proof_time: u64,
+        cursor: Option<MailboxCursor>,
+        limit: usize,
+    ) -> Result<(Vec<MailboxParcel>, Option<MailboxCursor>, bool), NetworkError> {
+        let cursor = cursor.map(|cursor| RpcMailboxCursor {
+            expires_at: cursor.expires_at,
+            parcel_id: cursor.parcel_id,
+        });
+        match self
+            .request(
+                peer,
+                RpcRequest::PollMailboxPage {
+                    recipient,
+                    proof,
+                    challenge,
+                    proof_time,
+                    cursor,
+                    limit: u16::try_from(limit)
+                        .map_err(|_| NetworkError::Request("mailbox limit too large".into()))?,
+                },
+            )
+            .await?
+        {
+            RpcResponse::MailboxPage {
+                parcels,
+                next_cursor,
+                completed,
+            } => Ok((
+                parcels,
+                next_cursor.map(|cursor| MailboxCursor {
+                    expires_at: cursor.expires_at,
+                    parcel_id: cursor.parcel_id,
+                }),
+                completed,
+            )),
+            RpcResponse::Mailbox(_) => Err(NetworkError::Request(
+                "peer does not support mailbox paging".into(),
+            )),
+            _ => Err(NetworkError::Request("unexpected mailbox response".into())),
+        }
+    }
 }
 
 fn insert_verified_profile(
@@ -533,6 +656,9 @@ struct Runtime {
     clock: Arc<dyn Clock>,
     bandwidth_bytes_per_second: u64,
     max_lease_seconds: u64,
+    allowed_peers: Option<HashSet<PeerId>>,
+    provide_services: bool,
+    bootstrap_kad: bool,
 }
 
 async fn run(
@@ -540,6 +666,7 @@ async fn run(
     mut commands: mpsc::Receiver<Command>,
     listeners: tokio::sync::watch::Sender<Vec<Multiaddr>>,
     mut runtime: Runtime,
+    _identity_lock: std::fs::File,
 ) {
     let mut bandwidth = TokenBucket::new(runtime.bandwidth_bytes_per_second);
     let mut maintenance = tokio::time::interval_at(
@@ -590,13 +717,22 @@ async fn run(
                     current.push(address);
                     let _ = listeners.send(current);
                 }
-                SwarmEvent::ConnectionEstablished { .. } if !bootstrapped => {
+                SwarmEvent::ConnectionEstablished { .. } if runtime.bootstrap_kad && !bootstrapped => {
                     bootstrapped = true;
                     let _ = swarm.behaviour_mut().kad.bootstrap();
                 }
                 SwarmEvent::Behaviour(BehaviourEvent::Rpc(request_response::Event::Message {
-                    peer: _, message: request_response::Message::Request { request, channel, .. }, ..
+                    peer, message: request_response::Message::Request { request, channel, .. }, ..
                 })) => {
+                    if !runtime.provide_services
+                        || runtime.allowed_peers.as_ref().is_some_and(|allowed| !allowed.contains(&peer))
+                    {
+                        let _ = swarm.behaviour_mut().rpc.send_response(
+                            channel,
+                            RpcResponse::Error { code: RpcErrorCode::Unauthorized },
+                        );
+                        continue;
+                    }
                     let request_bytes = frame_len(&request);
                     if !bandwidth.consume(request_bytes) {
                         let _ = swarm.behaviour_mut().rpc.send_response(channel, RpcResponse::Error { code: RpcErrorCode::Capacity });
@@ -655,6 +791,7 @@ async fn run(
             }
         }
     }
+    drop(swarm);
     for (_, response) in pending {
         let _ = response.send(Err(NetworkError::Closed));
     }
@@ -663,16 +800,22 @@ async fn run(
     }
 }
 
-fn open_peer_storage(config: &NodeConfig, now: u64) -> Result<PeerStorage, NetworkError> {
+fn open_peer_storage(
+    config: &NodeConfig,
+    now: u64,
+    busy_timeout: Option<Duration>,
+) -> Result<PeerStorage, NetworkError> {
     std::fs::create_dir_all(&config.data_dir)
         .map_err(|e| NetworkError::Startup(format!("create storage directory: {e:?}")))?;
-    let mut storage = PeerStorage::open(
-        config.data_dir.join("peer-storage.sqlite3"),
-        StorageLimits {
-            max_bytes: config.storage_bytes,
-            ..StorageLimits::default()
-        },
-    )
+    let path = config.data_dir.join("peer-storage.sqlite3");
+    let limits = StorageLimits {
+        max_bytes: config.storage_bytes,
+        ..StorageLimits::default()
+    };
+    let mut storage = match busy_timeout {
+        Some(timeout) => PeerStorage::open_with_busy_timeout(path, limits, timeout),
+        None => PeerStorage::open(path, limits),
+    }
     .map_err(|e| NetworkError::Startup(format!("open peer storage: {e:?}")))?;
     storage
         .expire(now)
@@ -749,6 +892,46 @@ fn apply_request(
                 )
                 .map(RpcResponse::Mailbox)
         }
+        RpcRequest::PollMailboxPage {
+            recipient,
+            challenge,
+            proof,
+            proof_time,
+            cursor,
+            limit,
+        } => {
+            if challenge.iter().all(|byte| *byte == 0)
+                || now.abs_diff(proof_time) > 30
+                || limit == 0
+                || limit as usize > MAX_MAILBOX_BATCH
+            {
+                return RpcResponse::Error {
+                    code: RpcErrorCode::Unauthorized,
+                };
+            }
+            storage
+                .poll_mailbox_page(
+                    &recipient,
+                    issuers,
+                    &challenge,
+                    &proof,
+                    proof_time,
+                    now,
+                    cursor.map(|cursor| MailboxCursor {
+                        expires_at: cursor.expires_at,
+                        parcel_id: cursor.parcel_id,
+                    }),
+                    limit as usize,
+                )
+                .map(|page| RpcResponse::MailboxPage {
+                    parcels: page.parcels,
+                    next_cursor: page.next_cursor.map(|cursor| RpcMailboxCursor {
+                        expires_at: cursor.expires_at,
+                        parcel_id: cursor.parcel_id,
+                    }),
+                    completed: page.completed,
+                })
+        }
         RpcRequest::ListProfiles { limit } => {
             if limit == 0 || limit > 50 {
                 return RpcResponse::Error {
@@ -805,139 +988,5 @@ impl TokenBucket {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-    use annoda_core::identity::{DevelopmentIssuer, DeviceKeyPair};
-    use annoda_core::protocol::{ContentLease, PhotoManifest};
-    use annoda_core::storage::StorageLimits;
-    use tempfile::TempDir;
-
-    #[test]
-    fn discovery_rejects_unverified_remote_profiles() {
-        let issuer = DevelopmentIssuer::new().expect("issuer");
-        let issuers = issuer.trusted_issuers();
-        let device = DeviceKeyPair::generate().expect("device");
-        let credential = issuer
-            .issue_synthetic(&device, "Profile", 25, 1, 100)
-            .expect("credential");
-        let mut profile =
-            PublicProfile::create(&device, credential, vec![], 50, &issuers, 2).expect("profile");
-        profile.signature[0] ^= 1;
-        let mut profiles = BTreeMap::new();
-        assert!(insert_verified_profile(&mut profiles, profile, &issuers, 3).is_err());
-        assert!(profiles.is_empty());
-    }
-
-    #[test]
-    fn startup_cleanup_reclaims_expired_photo_quota() {
-        let directory = TempDir::new().expect("storage directory");
-        let config = NodeConfig {
-            data_dir: directory.path().to_owned(),
-            storage_bytes: 120_000,
-            ..NodeConfig::default()
-        };
-        let issuer = DevelopmentIssuer::new().expect("issuer");
-        let issuers = issuer.trusted_issuers();
-        let old_device = DeviceKeyPair::generate().expect("old device");
-        let old_credential = issuer
-            .issue_synthetic(&old_device, "Old", 25, 1, 10)
-            .expect("old credential");
-        let old_bytes = vec![1; 80_000];
-        let old_manifest = PhotoManifest::from_bytes(&old_bytes, "image/jpeg").expect("manifest");
-        let old_profile = PublicProfile::create(
-            &old_device,
-            old_credential.clone(),
-            vec![old_manifest.clone()],
-            10,
-            &issuers,
-            2,
-        )
-        .expect("old profile");
-        let old_lease =
-            ContentLease::issue(&old_device, &old_credential, &old_manifest, 2, 10, &issuers)
-                .expect("old lease");
-
-        let mut storage = PeerStorage::open(
-            config.data_dir.join("peer-storage.sqlite3"),
-            StorageLimits {
-                max_bytes: config.storage_bytes,
-                ..StorageLimits::default()
-            },
-        )
-        .expect("open storage");
-        storage
-            .store_profile(&old_profile, &issuers, 3)
-            .expect("store old profile");
-        storage
-            .store_photo(
-                old_manifest.hash,
-                &old_lease,
-                &old_bytes,
-                &old_credential,
-                &issuers,
-                3,
-            )
-            .expect("store old photo");
-
-        let now = 20;
-        let new_device = DeviceKeyPair::generate().expect("new device");
-        let new_credential = issuer
-            .issue_synthetic(&new_device, "New", 25, now, now + 200)
-            .expect("new credential");
-        let new_bytes = vec![2; 80_000];
-        let new_manifest = PhotoManifest::from_bytes(&new_bytes, "image/jpeg").expect("manifest");
-        let new_profile = PublicProfile::create(
-            &new_device,
-            new_credential.clone(),
-            vec![new_manifest.clone()],
-            now + 100,
-            &issuers,
-            now,
-        )
-        .expect("new profile");
-        let new_lease = ContentLease::issue(
-            &new_device,
-            &new_credential,
-            &new_manifest,
-            now,
-            now + 100,
-            &issuers,
-        )
-        .expect("new lease");
-
-        storage
-            .store_profile(&new_profile, &issuers, now)
-            .expect("new profile fits");
-        assert!(
-            storage
-                .store_photo(
-                    new_manifest.hash,
-                    &new_lease,
-                    &new_bytes,
-                    &new_credential,
-                    &issuers,
-                    now
-                )
-                .is_err()
-        );
-        drop(storage);
-
-        let mut storage = open_peer_storage(&config, now).expect("startup expiry cleanup");
-        storage
-            .store_photo(
-                new_manifest.hash,
-                &new_lease,
-                &new_bytes,
-                &new_credential,
-                &issuers,
-                now,
-            )
-            .expect("new photo fits after expired blob reclamation");
-        assert_eq!(
-            storage
-                .get_photo(new_device.profile_id(), new_manifest.hash, &issuers, now)
-                .expect("read photo"),
-            Some(new_bytes),
-        );
-    }
-}
+#[path = "tests/node.rs"]
+mod tests;

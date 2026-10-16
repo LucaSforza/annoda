@@ -398,7 +398,7 @@ private func uniffiTraitInterfaceCallWithError<T, E>(
         callStatus.pointee.errorBuf = FfiConverterString.lower(String(describing: error))
     }
 }
-// Initial value and increment amount for handles. 
+// Initial value and increment amount for handles.
 // These ensure that SWIFT handles always have the lowest bit set
 fileprivate let UNIFFI_HANDLEMAP_INITIAL: UInt64 = 1
 fileprivate let UNIFFI_HANDLEMAP_DELTA: UInt64 = 2
@@ -497,6 +497,22 @@ fileprivate struct FfiConverterUInt32: FfiConverterPrimitive {
 #if swift(>=5.8)
 @_documentation(visibility: private)
 #endif
+fileprivate struct FfiConverterUInt64: FfiConverterPrimitive {
+    typealias FfiType = UInt64
+    typealias SwiftType = UInt64
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> UInt64 {
+        return try lift(readInt(&buf))
+    }
+
+    public static func write(_ value: SwiftType, into buf: inout [UInt8]) {
+        writeInt(&buf, lower(value))
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
 fileprivate struct FfiConverterDouble: FfiConverterPrimitive {
     typealias FfiType = Double
     typealias SwiftType = Double
@@ -580,17 +596,220 @@ fileprivate struct FfiConverterString: FfiConverter {
     }
 }
 
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterData: FfiConverterRustBuffer {
+    typealias SwiftType = Data
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> Data {
+        let len: Int32 = try readInt(&buf)
+        return Data(try readBytes(&buf, count: Int(len)))
+    }
+
+    public static func write(_ value: Data, into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        writeBytes(&buf, value)
+    }
+}
+
+
+
+
+public protocol AccountHandleProtocol: AnyObject, Sendable {
+
+    func acknowledgeNotification(eventId: Data) throws  -> Bool
+
+    func lock() throws
+
+    func notificationPreferences() throws  -> FfiNotificationPreferences
+
+    func pendingNotifications(limit: UInt32) throws  -> [FfiNotificationEvent]
+
+    func profileId() throws  -> Data
+
+    func setNotificationPreferences(preferences: FfiNotificationPreferences) throws
+
+    func startSyncSession(request: FfiSyncRequest) throws  -> SyncSession
+
+}
+open class AccountHandle: AccountHandleProtocol, @unchecked Sendable {
+    fileprivate let handle: UInt64
+
+    /// Used to instantiate a [FFIObject] without an actual handle, for fakes in tests, mostly.
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    public struct NoHandle {
+        public init() {}
+    }
+
+    // TODO: We'd like this to be `private` but for Swifty reasons,
+    // we can't implement `FfiConverter` without making this `required` and we can't
+    // make it `required` without making it `public`.
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    required public init(unsafeFromHandle handle: UInt64) {
+        self.handle = handle
+    }
+
+    // This constructor can be used to instantiate a fake object.
+    // - Parameter noHandle: Placeholder value so we can have a constructor separate from the default empty one that may be implemented for classes extending [FFIObject].
+    //
+    // - Warning:
+    //     Any object instantiated with this constructor cannot be passed to an actual Rust-backed object. Since there isn't a backing handle the FFI lower functions will crash.
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    public init(noHandle: NoHandle) {
+        self.handle = 0
+    }
+
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    public func uniffiCloneHandle() -> UInt64 {
+        return try! rustCall { uniffi_annoda_mobile_ffi_fn_clone_accounthandle(self.handle, $0) }
+    }
+    // No primary constructor declared for this class.
+
+    deinit {
+        if handle == 0 {
+            // Mock objects have handle=0 don't try to free them
+            return
+        }
+
+        try! rustCall { uniffi_annoda_mobile_ffi_fn_free_accounthandle(handle, $0) }
+    }
+
+
+
+
+open func acknowledgeNotification(eventId: Data)throws  -> Bool  {
+    return try  FfiConverterBool.lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_acknowledge_notification(
+            self.uniffiCloneHandle(),
+        FfiConverterData.lower(eventId),uniffiCallStatus
+    )
+})
+}
+
+open func lock()throws   {try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_lock(
+            self.uniffiCloneHandle(),uniffiCallStatus
+    )
+}
+}
+
+open func notificationPreferences()throws  -> FfiNotificationPreferences  {
+    return try  FfiConverterTypeFfiNotificationPreferences_lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_notification_preferences(
+            self.uniffiCloneHandle(),uniffiCallStatus
+    )
+})
+}
+
+open func pendingNotifications(limit: UInt32)throws  -> [FfiNotificationEvent]  {
+    return try  FfiConverterSequenceTypeFfiNotificationEvent.lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_pending_notifications(
+            self.uniffiCloneHandle(),
+        FfiConverterUInt32.lower(limit),uniffiCallStatus
+    )
+})
+}
+
+open func profileId()throws  -> Data  {
+    return try  FfiConverterData.lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_profile_id(
+            self.uniffiCloneHandle(),uniffiCallStatus
+    )
+})
+}
+
+open func setNotificationPreferences(preferences: FfiNotificationPreferences)throws   {try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_set_notification_preferences(
+            self.uniffiCloneHandle(),
+        FfiConverterTypeFfiNotificationPreferences_lower(preferences),uniffiCallStatus
+    )
+}
+}
+
+open func startSyncSession(request: FfiSyncRequest)throws  -> SyncSession  {
+    return try  FfiConverterTypeSyncSession_lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_accounthandle_start_sync_session(
+            self.uniffiCloneHandle(),
+        FfiConverterTypeFfiSyncRequest_lower(request),uniffiCallStatus
+    )
+})
+}
+
+
+
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeAccountHandle: FfiConverter {
+    typealias FfiType = UInt64
+    typealias SwiftType = AccountHandle
+
+    public static func lift(_ handle: UInt64) throws -> AccountHandle {
+        return AccountHandle(unsafeFromHandle: handle)
+    }
+
+    public static func lower(_ value: AccountHandle) -> UInt64 {
+        return value.uniffiCloneHandle()
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> AccountHandle {
+        let handle: UInt64 = try readInt(&buf)
+        return try lift(handle)
+    }
+
+    public static func write(_ value: AccountHandle, into buf: inout [UInt8]) {
+        writeInt(&buf, lower(value))
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeAccountHandle_lift(_ handle: UInt64) throws -> AccountHandle {
+    return try FfiConverterTypeAccountHandle.lift(handle)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeAccountHandle_lower(_ value: AccountHandle) -> UInt64 {
+    return FfiConverterTypeAccountHandle.lower(value)
+}
+
+
+
 
 
 
 public protocol LocalPreferenceModelProtocol: AnyObject, Sendable {
-    
-    func recordFeedback(version: UInt16, values: [Double], liked: Bool) throws 
-    
-    func reset() throws 
-    
+
+    func recordFeedback(version: UInt16, values: [Double], liked: Bool) throws
+
+    func reset() throws
+
     func score(version: UInt16, values: [Double]) throws  -> FfiRankingScore
-    
+
 }
 open class LocalPreferenceModel: LocalPreferenceModelProtocol, @unchecked Sendable {
     fileprivate let handle: UInt64
@@ -652,9 +871,9 @@ public convenience init(dimensions: UInt32, encoderVersion: UInt16)throws  {
         try! rustCall { uniffi_annoda_mobile_ffi_fn_free_localpreferencemodel(handle, $0) }
     }
 
-    
 
-    
+
+
 open func recordFeedback(version: UInt16, values: [Double], liked: Bool)throws   {try rustCallWithError(FfiConverterTypeFfiError_lift) {
         uniffiCallStatus in
     uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_record_feedback(
@@ -665,7 +884,7 @@ open func recordFeedback(version: UInt16, values: [Double], liked: Bool)throws  
     )
 }
 }
-    
+
 open func reset()throws   {try rustCallWithError(FfiConverterTypeFfiError_lift) {
         uniffiCallStatus in
     uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_reset(
@@ -673,7 +892,7 @@ open func reset()throws   {try rustCallWithError(FfiConverterTypeFfiError_lift) 
     )
 }
 }
-    
+
 open func score(version: UInt16, values: [Double])throws  -> FfiRankingScore  {
     return try  FfiConverterTypeFfiRankingScore_lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
         uniffiCallStatus in
@@ -684,9 +903,9 @@ open func score(version: UInt16, values: [Double])throws  -> FfiRankingScore  {
     )
 })
 }
-    
 
-    
+
+
 }
 
 
@@ -733,6 +952,493 @@ public func FfiConverterTypeLocalPreferenceModel_lower(_ value: LocalPreferenceM
 
 
 
+
+
+public protocol SyncSessionProtocol: AnyObject, Sendable {
+
+    func cancel()
+
+    func isFinished() throws  -> Bool
+
+    func waitResult(timeoutMs: UInt64) throws  -> FfiSyncReport?
+
+}
+open class SyncSession: SyncSessionProtocol, @unchecked Sendable {
+    fileprivate let handle: UInt64
+
+    /// Used to instantiate a [FFIObject] without an actual handle, for fakes in tests, mostly.
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    public struct NoHandle {
+        public init() {}
+    }
+
+    // TODO: We'd like this to be `private` but for Swifty reasons,
+    // we can't implement `FfiConverter` without making this `required` and we can't
+    // make it `required` without making it `public`.
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    required public init(unsafeFromHandle handle: UInt64) {
+        self.handle = handle
+    }
+
+    // This constructor can be used to instantiate a fake object.
+    // - Parameter noHandle: Placeholder value so we can have a constructor separate from the default empty one that may be implemented for classes extending [FFIObject].
+    //
+    // - Warning:
+    //     Any object instantiated with this constructor cannot be passed to an actual Rust-backed object. Since there isn't a backing handle the FFI lower functions will crash.
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    public init(noHandle: NoHandle) {
+        self.handle = 0
+    }
+
+#if swift(>=5.8)
+    @_documentation(visibility: private)
+#endif
+    public func uniffiCloneHandle() -> UInt64 {
+        return try! rustCall { uniffi_annoda_mobile_ffi_fn_clone_syncsession(self.handle, $0) }
+    }
+    // No primary constructor declared for this class.
+
+    deinit {
+        if handle == 0 {
+            // Mock objects have handle=0 don't try to free them
+            return
+        }
+
+        try! rustCall { uniffi_annoda_mobile_ffi_fn_free_syncsession(handle, $0) }
+    }
+
+
+
+
+open func cancel()  {try! rustCall() {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_syncsession_cancel(
+            self.uniffiCloneHandle(),uniffiCallStatus
+    )
+}
+}
+
+open func isFinished()throws  -> Bool  {
+    return try  FfiConverterBool.lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_syncsession_is_finished(
+            self.uniffiCloneHandle(),uniffiCallStatus
+    )
+})
+}
+
+open func waitResult(timeoutMs: UInt64)throws  -> FfiSyncReport?  {
+    return try  FfiConverterOptionTypeFfiSyncReport.lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_method_syncsession_wait_result(
+            self.uniffiCloneHandle(),
+        FfiConverterUInt64.lower(timeoutMs),uniffiCallStatus
+    )
+})
+}
+
+
+
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeSyncSession: FfiConverter {
+    typealias FfiType = UInt64
+    typealias SwiftType = SyncSession
+
+    public static func lift(_ handle: UInt64) throws -> SyncSession {
+        return SyncSession(unsafeFromHandle: handle)
+    }
+
+    public static func lower(_ value: SyncSession) -> UInt64 {
+        return value.uniffiCloneHandle()
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> SyncSession {
+        let handle: UInt64 = try readInt(&buf)
+        return try lift(handle)
+    }
+
+    public static func write(_ value: SyncSession, into buf: inout [UInt8]) {
+        writeInt(&buf, lower(value))
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeSyncSession_lift(_ handle: UInt64) throws -> SyncSession {
+    return try FfiConverterTypeSyncSession.lift(handle)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeSyncSession_lower(_ value: SyncSession) -> UInt64 {
+    return FfiConverterTypeSyncSession.lower(value)
+}
+
+
+
+
+public struct FfiAuthorizedReplica: Equatable, Hashable {
+    public var profile: Data
+    public var ownerCredential: Data
+    public var photos: [FfiAuthorizedReplicaPhoto]
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(profile: Data, ownerCredential: Data, photos: [FfiAuthorizedReplicaPhoto]) {
+        self.profile = profile
+        self.ownerCredential = ownerCredential
+        self.photos = photos
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiAuthorizedReplica: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiAuthorizedReplica: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiAuthorizedReplica {
+        return
+            try FfiAuthorizedReplica(
+                profile: FfiConverterData.read(from: &buf),
+                ownerCredential: FfiConverterData.read(from: &buf),
+                photos: FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiAuthorizedReplica, into buf: inout [UInt8]) {
+        FfiConverterData.write(value.profile, into: &buf)
+        FfiConverterData.write(value.ownerCredential, into: &buf)
+        FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto.write(value.photos, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiAuthorizedReplica_lift(_ buf: RustBuffer) throws -> FfiAuthorizedReplica {
+    return try FfiConverterTypeFfiAuthorizedReplica.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiAuthorizedReplica_lower(_ value: FfiAuthorizedReplica) -> RustBuffer {
+    return FfiConverterTypeFfiAuthorizedReplica.lower(value)
+}
+
+
+public struct FfiAuthorizedReplicaPhoto: Equatable, Hashable {
+    public var manifest: Data
+    public var lease: Data
+    public var bytes: Data
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(manifest: Data, lease: Data, bytes: Data) {
+        self.manifest = manifest
+        self.lease = lease
+        self.bytes = bytes
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiAuthorizedReplicaPhoto: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiAuthorizedReplicaPhoto: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiAuthorizedReplicaPhoto {
+        return
+            try FfiAuthorizedReplicaPhoto(
+                manifest: FfiConverterData.read(from: &buf),
+                lease: FfiConverterData.read(from: &buf),
+                bytes: FfiConverterData.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiAuthorizedReplicaPhoto, into buf: inout [UInt8]) {
+        FfiConverterData.write(value.manifest, into: &buf)
+        FfiConverterData.write(value.lease, into: &buf)
+        FfiConverterData.write(value.bytes, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiAuthorizedReplicaPhoto_lift(_ buf: RustBuffer) throws -> FfiAuthorizedReplicaPhoto {
+    return try FfiConverterTypeFfiAuthorizedReplicaPhoto.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiAuthorizedReplicaPhoto_lower(_ value: FfiAuthorizedReplicaPhoto) -> RustBuffer {
+    return FfiConverterTypeFfiAuthorizedReplicaPhoto.lower(value)
+}
+
+
+public struct FfiHostConditions: Equatable, Hashable {
+    public var wifiAvailable: Bool?
+    public var charging: Bool?
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(wifiAvailable: Bool?, charging: Bool?) {
+        self.wifiAvailable = wifiAvailable
+        self.charging = charging
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiHostConditions: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiHostConditions: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiHostConditions {
+        return
+            try FfiHostConditions(
+                wifiAvailable: FfiConverterOptionBool.read(from: &buf),
+                charging: FfiConverterOptionBool.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiHostConditions, into buf: inout [UInt8]) {
+        FfiConverterOptionBool.write(value.wifiAvailable, into: &buf)
+        FfiConverterOptionBool.write(value.charging, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiHostConditions_lift(_ buf: RustBuffer) throws -> FfiHostConditions {
+    return try FfiConverterTypeFfiHostConditions.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiHostConditions_lower(_ value: FfiHostConditions) -> RustBuffer {
+    return FfiConverterTypeFfiHostConditions.lower(value)
+}
+
+
+public struct FfiNotificationEvent: Equatable, Hashable {
+    public var eventId: Data
+    public var kind: FfiNotificationKind
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(eventId: Data, kind: FfiNotificationKind) {
+        self.eventId = eventId
+        self.kind = kind
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiNotificationEvent: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiNotificationEvent: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiNotificationEvent {
+        return
+            try FfiNotificationEvent(
+                eventId: FfiConverterData.read(from: &buf),
+                kind: FfiConverterTypeFfiNotificationKind.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiNotificationEvent, into buf: inout [UInt8]) {
+        FfiConverterData.write(value.eventId, into: &buf)
+        FfiConverterTypeFfiNotificationKind.write(value.kind, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiNotificationEvent_lift(_ buf: RustBuffer) throws -> FfiNotificationEvent {
+    return try FfiConverterTypeFfiNotificationEvent.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiNotificationEvent_lower(_ value: FfiNotificationEvent) -> RustBuffer {
+    return FfiConverterTypeFfiNotificationEvent.lower(value)
+}
+
+
+public struct FfiNotificationPreferences: Equatable, Hashable {
+    public var likesEnabled: Bool
+    public var matchesEnabled: Bool
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(likesEnabled: Bool, matchesEnabled: Bool) {
+        self.likesEnabled = likesEnabled
+        self.matchesEnabled = matchesEnabled
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiNotificationPreferences: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiNotificationPreferences: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiNotificationPreferences {
+        return
+            try FfiNotificationPreferences(
+                likesEnabled: FfiConverterBool.read(from: &buf),
+                matchesEnabled: FfiConverterBool.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiNotificationPreferences, into buf: inout [UInt8]) {
+        FfiConverterBool.write(value.likesEnabled, into: &buf)
+        FfiConverterBool.write(value.matchesEnabled, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiNotificationPreferences_lift(_ buf: RustBuffer) throws -> FfiNotificationPreferences {
+    return try FfiConverterTypeFfiNotificationPreferences.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiNotificationPreferences_lower(_ value: FfiNotificationPreferences) -> RustBuffer {
+    return FfiConverterTypeFfiNotificationPreferences.lower(value)
+}
+
+
+public struct FfiPeerContributionPolicy: Equatable, Hashable {
+    public var enabled: Bool
+    public var wifiOnly: Bool
+    public var chargingOnly: Bool
+    public var maxStorageBytes: UInt64
+    public var maxTransferBytes: UInt64
+    public var maxDurationMs: UInt64
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(enabled: Bool, wifiOnly: Bool, chargingOnly: Bool, maxStorageBytes: UInt64, maxTransferBytes: UInt64, maxDurationMs: UInt64) {
+        self.enabled = enabled
+        self.wifiOnly = wifiOnly
+        self.chargingOnly = chargingOnly
+        self.maxStorageBytes = maxStorageBytes
+        self.maxTransferBytes = maxTransferBytes
+        self.maxDurationMs = maxDurationMs
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiPeerContributionPolicy: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiPeerContributionPolicy: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiPeerContributionPolicy {
+        return
+            try FfiPeerContributionPolicy(
+                enabled: FfiConverterBool.read(from: &buf),
+                wifiOnly: FfiConverterBool.read(from: &buf),
+                chargingOnly: FfiConverterBool.read(from: &buf),
+                maxStorageBytes: FfiConverterUInt64.read(from: &buf),
+                maxTransferBytes: FfiConverterUInt64.read(from: &buf),
+                maxDurationMs: FfiConverterUInt64.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiPeerContributionPolicy, into buf: inout [UInt8]) {
+        FfiConverterBool.write(value.enabled, into: &buf)
+        FfiConverterBool.write(value.wifiOnly, into: &buf)
+        FfiConverterBool.write(value.chargingOnly, into: &buf)
+        FfiConverterUInt64.write(value.maxStorageBytes, into: &buf)
+        FfiConverterUInt64.write(value.maxTransferBytes, into: &buf)
+        FfiConverterUInt64.write(value.maxDurationMs, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiPeerContributionPolicy_lift(_ buf: RustBuffer) throws -> FfiPeerContributionPolicy {
+    return try FfiConverterTypeFfiPeerContributionPolicy.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiPeerContributionPolicy_lower(_ value: FfiPeerContributionPolicy) -> RustBuffer {
+    return FfiConverterTypeFfiPeerContributionPolicy.lower(value)
+}
+
+
 public struct FfiRankingScore: Equatable, Hashable {
     public var probability: Double
 
@@ -742,9 +1448,9 @@ public struct FfiRankingScore: Equatable, Hashable {
         self.probability = probability
     }
 
-    
 
-    
+
+
 }
 
 #if compiler(>=6)
@@ -783,24 +1489,335 @@ public func FfiConverterTypeFfiRankingScore_lower(_ value: FfiRankingScore) -> R
 }
 
 
-public 
+public struct FfiSyncBudget: Equatable, Hashable {
+    public var maxDurationMs: UInt64
+    public var maxDownloadBytes: UInt64
+    public var maxUploadBytes: UInt64
+    public var maxPeers: UInt16
+    public var maxMailboxItems: UInt16
+    public var maxConcurrentRequests: UInt16
+    public var retries: UInt16
+    public var requestTimeoutMs: UInt64
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(maxDurationMs: UInt64, maxDownloadBytes: UInt64, maxUploadBytes: UInt64, maxPeers: UInt16, maxMailboxItems: UInt16, maxConcurrentRequests: UInt16, retries: UInt16, requestTimeoutMs: UInt64) {
+        self.maxDurationMs = maxDurationMs
+        self.maxDownloadBytes = maxDownloadBytes
+        self.maxUploadBytes = maxUploadBytes
+        self.maxPeers = maxPeers
+        self.maxMailboxItems = maxMailboxItems
+        self.maxConcurrentRequests = maxConcurrentRequests
+        self.retries = retries
+        self.requestTimeoutMs = requestTimeoutMs
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiSyncBudget: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiSyncBudget: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiSyncBudget {
+        return
+            try FfiSyncBudget(
+                maxDurationMs: FfiConverterUInt64.read(from: &buf),
+                maxDownloadBytes: FfiConverterUInt64.read(from: &buf),
+                maxUploadBytes: FfiConverterUInt64.read(from: &buf),
+                maxPeers: FfiConverterUInt16.read(from: &buf),
+                maxMailboxItems: FfiConverterUInt16.read(from: &buf),
+                maxConcurrentRequests: FfiConverterUInt16.read(from: &buf),
+                retries: FfiConverterUInt16.read(from: &buf),
+                requestTimeoutMs: FfiConverterUInt64.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiSyncBudget, into buf: inout [UInt8]) {
+        FfiConverterUInt64.write(value.maxDurationMs, into: &buf)
+        FfiConverterUInt64.write(value.maxDownloadBytes, into: &buf)
+        FfiConverterUInt64.write(value.maxUploadBytes, into: &buf)
+        FfiConverterUInt16.write(value.maxPeers, into: &buf)
+        FfiConverterUInt16.write(value.maxMailboxItems, into: &buf)
+        FfiConverterUInt16.write(value.maxConcurrentRequests, into: &buf)
+        FfiConverterUInt16.write(value.retries, into: &buf)
+        FfiConverterUInt64.write(value.requestTimeoutMs, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncBudget_lift(_ buf: RustBuffer) throws -> FfiSyncBudget {
+    return try FfiConverterTypeFfiSyncBudget.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncBudget_lower(_ value: FfiSyncBudget) -> RustBuffer {
+    return FfiConverterTypeFfiSyncBudget.lower(value)
+}
+
+
+public struct FfiSyncPeer: Equatable, Hashable {
+    public var peerId: String
+    public var address: String
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(peerId: String, address: String) {
+        self.peerId = peerId
+        self.address = address
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiSyncPeer: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiSyncPeer: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiSyncPeer {
+        return
+            try FfiSyncPeer(
+                peerId: FfiConverterString.read(from: &buf),
+                address: FfiConverterString.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiSyncPeer, into buf: inout [UInt8]) {
+        FfiConverterString.write(value.peerId, into: &buf)
+        FfiConverterString.write(value.address, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncPeer_lift(_ buf: RustBuffer) throws -> FfiSyncPeer {
+    return try FfiConverterTypeFfiSyncPeer.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncPeer_lower(_ value: FfiSyncPeer) -> RustBuffer {
+    return FfiConverterTypeFfiSyncPeer.lower(value)
+}
+
+
+public struct FfiSyncReport: Equatable, Hashable {
+    public var status: FfiSyncStatus
+    public var verifiedItems: UInt32
+    public var rejectedItems: UInt32
+    public var downloadedBytes: UInt64
+    public var uploadedBytes: UInt64
+    public var contactedPeers: [String]
+    public var newEvents: [FfiNotificationEvent]
+    public var confirmedReplicas: UInt32
+    public var deferredReasons: [FfiSyncDeferredReason]
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(status: FfiSyncStatus, verifiedItems: UInt32, rejectedItems: UInt32, downloadedBytes: UInt64, uploadedBytes: UInt64, contactedPeers: [String], newEvents: [FfiNotificationEvent], confirmedReplicas: UInt32, deferredReasons: [FfiSyncDeferredReason]) {
+        self.status = status
+        self.verifiedItems = verifiedItems
+        self.rejectedItems = rejectedItems
+        self.downloadedBytes = downloadedBytes
+        self.uploadedBytes = uploadedBytes
+        self.contactedPeers = contactedPeers
+        self.newEvents = newEvents
+        self.confirmedReplicas = confirmedReplicas
+        self.deferredReasons = deferredReasons
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiSyncReport: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiSyncReport: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiSyncReport {
+        return
+            try FfiSyncReport(
+                status: FfiConverterTypeFfiSyncStatus.read(from: &buf),
+                verifiedItems: FfiConverterUInt32.read(from: &buf),
+                rejectedItems: FfiConverterUInt32.read(from: &buf),
+                downloadedBytes: FfiConverterUInt64.read(from: &buf),
+                uploadedBytes: FfiConverterUInt64.read(from: &buf),
+                contactedPeers: FfiConverterSequenceString.read(from: &buf),
+                newEvents: FfiConverterSequenceTypeFfiNotificationEvent.read(from: &buf),
+                confirmedReplicas: FfiConverterUInt32.read(from: &buf),
+                deferredReasons: FfiConverterSequenceTypeFfiSyncDeferredReason.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiSyncReport, into buf: inout [UInt8]) {
+        FfiConverterTypeFfiSyncStatus.write(value.status, into: &buf)
+        FfiConverterUInt32.write(value.verifiedItems, into: &buf)
+        FfiConverterUInt32.write(value.rejectedItems, into: &buf)
+        FfiConverterUInt64.write(value.downloadedBytes, into: &buf)
+        FfiConverterUInt64.write(value.uploadedBytes, into: &buf)
+        FfiConverterSequenceString.write(value.contactedPeers, into: &buf)
+        FfiConverterSequenceTypeFfiNotificationEvent.write(value.newEvents, into: &buf)
+        FfiConverterUInt32.write(value.confirmedReplicas, into: &buf)
+        FfiConverterSequenceTypeFfiSyncDeferredReason.write(value.deferredReasons, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncReport_lift(_ buf: RustBuffer) throws -> FfiSyncReport {
+    return try FfiConverterTypeFfiSyncReport.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncReport_lower(_ value: FfiSyncReport) -> RustBuffer {
+    return FfiConverterTypeFfiSyncReport.lower(value)
+}
+
+
+public struct FfiSyncRequest: Equatable, Hashable {
+    /**
+     * Postcard-encoded signed public credential; account secret material never enters this DTO.
+     */
+    public var credential: Data
+    public var trustedIssuerKeys: [Data]
+    public var revokedSerials: [Data]
+    public var peers: [FfiSyncPeer]
+    public var budget: FfiSyncBudget
+    public var contributionPolicy: FfiPeerContributionPolicy
+    public var hostConditions: FfiHostConditions
+    public var authorizedReplicas: [FfiAuthorizedReplica]
+
+    // Default memberwise initializers are never public by default, so we
+    // declare one manually.
+    public init(
+        /**
+         * Postcard-encoded signed public credential; account secret material never enters this DTO.
+         */credential: Data, trustedIssuerKeys: [Data], revokedSerials: [Data], peers: [FfiSyncPeer], budget: FfiSyncBudget, contributionPolicy: FfiPeerContributionPolicy, hostConditions: FfiHostConditions, authorizedReplicas: [FfiAuthorizedReplica]) {
+        self.credential = credential
+        self.trustedIssuerKeys = trustedIssuerKeys
+        self.revokedSerials = revokedSerials
+        self.peers = peers
+        self.budget = budget
+        self.contributionPolicy = contributionPolicy
+        self.hostConditions = hostConditions
+        self.authorizedReplicas = authorizedReplicas
+    }
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiSyncRequest: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiSyncRequest: FfiConverterRustBuffer {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiSyncRequest {
+        return
+            try FfiSyncRequest(
+                credential: FfiConverterData.read(from: &buf),
+                trustedIssuerKeys: FfiConverterSequenceData.read(from: &buf),
+                revokedSerials: FfiConverterSequenceData.read(from: &buf),
+                peers: FfiConverterSequenceTypeFfiSyncPeer.read(from: &buf),
+                budget: FfiConverterTypeFfiSyncBudget.read(from: &buf),
+                contributionPolicy: FfiConverterTypeFfiPeerContributionPolicy.read(from: &buf),
+                hostConditions: FfiConverterTypeFfiHostConditions.read(from: &buf),
+                authorizedReplicas: FfiConverterSequenceTypeFfiAuthorizedReplica.read(from: &buf)
+        )
+    }
+
+    public static func write(_ value: FfiSyncRequest, into buf: inout [UInt8]) {
+        FfiConverterData.write(value.credential, into: &buf)
+        FfiConverterSequenceData.write(value.trustedIssuerKeys, into: &buf)
+        FfiConverterSequenceData.write(value.revokedSerials, into: &buf)
+        FfiConverterSequenceTypeFfiSyncPeer.write(value.peers, into: &buf)
+        FfiConverterTypeFfiSyncBudget.write(value.budget, into: &buf)
+        FfiConverterTypeFfiPeerContributionPolicy.write(value.contributionPolicy, into: &buf)
+        FfiConverterTypeFfiHostConditions.write(value.hostConditions, into: &buf)
+        FfiConverterSequenceTypeFfiAuthorizedReplica.write(value.authorizedReplicas, into: &buf)
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncRequest_lift(_ buf: RustBuffer) throws -> FfiSyncRequest {
+    return try FfiConverterTypeFfiSyncRequest.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncRequest_lower(_ value: FfiSyncRequest) -> RustBuffer {
+    return FfiConverterTypeFfiSyncRequest.lower(value)
+}
+
+
+public
 enum FfiError: Swift.Error, Equatable, Hashable, Foundation.LocalizedError {
 
-    
-    
+
+
     case InvalidInput
     case IncompatibleModel
     case Internal
+    case AccountMissing
+    case AccountLocked
+    case AccountBusy
+    case AccountInaccessible
+    case AuthenticationFailed
+    case CorruptVault
+    case UnsupportedVaultVersion
+    case AccountAlreadyExists
+    case StorageFull
+    case StorageUnavailable
+    case Unauthorized
+    case NetworkUnavailable
+    case Cancelled
 
-    
 
-    
 
-    
+
+
+
     public var errorDescription: String? {
         String(reflecting: self)
     }
-    
+
 }
 
 #if compiler(>=6)
@@ -817,12 +1834,25 @@ public struct FfiConverterTypeFfiError: FfiConverterRustBuffer {
         let variant: Int32 = try readInt(&buf)
         switch variant {
 
-        
 
-        
+
+
         case 1: return .InvalidInput
         case 2: return .IncompatibleModel
         case 3: return .Internal
+        case 4: return .AccountMissing
+        case 5: return .AccountLocked
+        case 6: return .AccountBusy
+        case 7: return .AccountInaccessible
+        case 8: return .AuthenticationFailed
+        case 9: return .CorruptVault
+        case 10: return .UnsupportedVaultVersion
+        case 11: return .AccountAlreadyExists
+        case 12: return .StorageFull
+        case 13: return .StorageUnavailable
+        case 14: return .Unauthorized
+        case 15: return .NetworkUnavailable
+        case 16: return .Cancelled
 
          default: throw UniffiInternalError.unexpectedEnumCase
         }
@@ -831,21 +1861,73 @@ public struct FfiConverterTypeFfiError: FfiConverterRustBuffer {
     public static func write(_ value: FfiError, into buf: inout [UInt8]) {
         switch value {
 
-        
 
-        
-        
+
+
+
         case .InvalidInput:
             writeInt(&buf, Int32(1))
-        
-        
+
+
         case .IncompatibleModel:
             writeInt(&buf, Int32(2))
-        
-        
+
+
         case .Internal:
             writeInt(&buf, Int32(3))
-        
+
+
+        case .AccountMissing:
+            writeInt(&buf, Int32(4))
+
+
+        case .AccountLocked:
+            writeInt(&buf, Int32(5))
+
+
+        case .AccountBusy:
+            writeInt(&buf, Int32(6))
+
+
+        case .AccountInaccessible:
+            writeInt(&buf, Int32(7))
+
+
+        case .AuthenticationFailed:
+            writeInt(&buf, Int32(8))
+
+
+        case .CorruptVault:
+            writeInt(&buf, Int32(9))
+
+
+        case .UnsupportedVaultVersion:
+            writeInt(&buf, Int32(10))
+
+
+        case .AccountAlreadyExists:
+            writeInt(&buf, Int32(11))
+
+
+        case .StorageFull:
+            writeInt(&buf, Int32(12))
+
+
+        case .StorageUnavailable:
+            writeInt(&buf, Int32(13))
+
+
+        case .Unauthorized:
+            writeInt(&buf, Int32(14))
+
+
+        case .NetworkUnavailable:
+            writeInt(&buf, Int32(15))
+
+
+        case .Cancelled:
+            writeInt(&buf, Int32(16))
+
         }
     }
 }
@@ -863,6 +1945,301 @@ public func FfiConverterTypeFfiError_lift(_ buf: RustBuffer) throws -> FfiError 
 #endif
 public func FfiConverterTypeFfiError_lower(_ value: FfiError) -> RustBuffer {
     return FfiConverterTypeFfiError.lower(value)
+}
+
+
+
+public enum FfiNotificationKind: Equatable, Hashable {
+
+    case newLike
+    case newMatch
+
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiNotificationKind: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiNotificationKind: FfiConverterRustBuffer {
+    typealias SwiftType = FfiNotificationKind
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiNotificationKind {
+        let variant: Int32 = try readInt(&buf)
+        switch variant {
+
+        case 1: return .newLike
+
+        case 2: return .newMatch
+
+        default: throw UniffiInternalError.unexpectedEnumCase
+        }
+    }
+
+    public static func write(_ value: FfiNotificationKind, into buf: inout [UInt8]) {
+        switch value {
+
+
+        case .newLike:
+            writeInt(&buf, Int32(1))
+
+
+        case .newMatch:
+            writeInt(&buf, Int32(2))
+
+        }
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiNotificationKind_lift(_ buf: RustBuffer) throws -> FfiNotificationKind {
+    return try FfiConverterTypeFfiNotificationKind.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiNotificationKind_lower(_ value: FfiNotificationKind) -> RustBuffer {
+    return FfiConverterTypeFfiNotificationKind.lower(value)
+}
+
+
+
+
+public enum FfiSyncDeferredReason: Equatable, Hashable {
+
+    case noPeers
+    case noReachablePeers
+    case unsupportedPeer
+    case deadline
+    case contributionSkipped
+    case localStorageLimit
+
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiSyncDeferredReason: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiSyncDeferredReason: FfiConverterRustBuffer {
+    typealias SwiftType = FfiSyncDeferredReason
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiSyncDeferredReason {
+        let variant: Int32 = try readInt(&buf)
+        switch variant {
+
+        case 1: return .noPeers
+
+        case 2: return .noReachablePeers
+
+        case 3: return .unsupportedPeer
+
+        case 4: return .deadline
+
+        case 5: return .contributionSkipped
+
+        case 6: return .localStorageLimit
+
+        default: throw UniffiInternalError.unexpectedEnumCase
+        }
+    }
+
+    public static func write(_ value: FfiSyncDeferredReason, into buf: inout [UInt8]) {
+        switch value {
+
+
+        case .noPeers:
+            writeInt(&buf, Int32(1))
+
+
+        case .noReachablePeers:
+            writeInt(&buf, Int32(2))
+
+
+        case .unsupportedPeer:
+            writeInt(&buf, Int32(3))
+
+
+        case .deadline:
+            writeInt(&buf, Int32(4))
+
+
+        case .contributionSkipped:
+            writeInt(&buf, Int32(5))
+
+
+        case .localStorageLimit:
+            writeInt(&buf, Int32(6))
+
+        }
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncDeferredReason_lift(_ buf: RustBuffer) throws -> FfiSyncDeferredReason {
+    return try FfiConverterTypeFfiSyncDeferredReason.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncDeferredReason_lower(_ value: FfiSyncDeferredReason) -> RustBuffer {
+    return FfiConverterTypeFfiSyncDeferredReason.lower(value)
+}
+
+
+
+
+public enum FfiSyncStatus: Equatable, Hashable {
+
+    case complete
+    case partial
+    case deferred
+    case cancelled
+    case budgetExhausted
+
+
+
+
+
+}
+
+#if compiler(>=6)
+extension FfiSyncStatus: Sendable {}
+#endif
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public struct FfiConverterTypeFfiSyncStatus: FfiConverterRustBuffer {
+    typealias SwiftType = FfiSyncStatus
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> FfiSyncStatus {
+        let variant: Int32 = try readInt(&buf)
+        switch variant {
+
+        case 1: return .complete
+
+        case 2: return .partial
+
+        case 3: return .deferred
+
+        case 4: return .cancelled
+
+        case 5: return .budgetExhausted
+
+        default: throw UniffiInternalError.unexpectedEnumCase
+        }
+    }
+
+    public static func write(_ value: FfiSyncStatus, into buf: inout [UInt8]) {
+        switch value {
+
+
+        case .complete:
+            writeInt(&buf, Int32(1))
+
+
+        case .partial:
+            writeInt(&buf, Int32(2))
+
+
+        case .deferred:
+            writeInt(&buf, Int32(3))
+
+
+        case .cancelled:
+            writeInt(&buf, Int32(4))
+
+
+        case .budgetExhausted:
+            writeInt(&buf, Int32(5))
+
+        }
+    }
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncStatus_lift(_ buf: RustBuffer) throws -> FfiSyncStatus {
+    return try FfiConverterTypeFfiSyncStatus.lift(buf)
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+public func FfiConverterTypeFfiSyncStatus_lower(_ value: FfiSyncStatus) -> RustBuffer {
+    return FfiConverterTypeFfiSyncStatus.lower(value)
+}
+
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterOptionBool: FfiConverterRustBuffer {
+    typealias SwiftType = Bool?
+
+    public static func write(_ value: SwiftType, into buf: inout [UInt8]) {
+        guard let value = value else {
+            writeInt(&buf, Int8(0))
+            return
+        }
+        writeInt(&buf, Int8(1))
+        FfiConverterBool.write(value, into: &buf)
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> SwiftType {
+        switch try readInt(&buf) as Int8 {
+        case 0: return nil
+        case 1: return try FfiConverterBool.read(from: &buf)
+        default: throw UniffiInternalError.unexpectedOptionalTag
+        }
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterOptionTypeFfiSyncReport: FfiConverterRustBuffer {
+    typealias SwiftType = FfiSyncReport?
+
+    public static func write(_ value: SwiftType, into buf: inout [UInt8]) {
+        guard let value = value else {
+            writeInt(&buf, Int8(0))
+            return
+        }
+        writeInt(&buf, Int8(1))
+        FfiConverterTypeFfiSyncReport.write(value, into: &buf)
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> SwiftType {
+        switch try readInt(&buf) as Int8 {
+        case 0: return nil
+        case 1: return try FfiConverterTypeFfiSyncReport.read(from: &buf)
+        default: throw UniffiInternalError.unexpectedOptionalTag
+        }
+    }
 }
 
 #if swift(>=5.8)
@@ -889,10 +2266,203 @@ fileprivate struct FfiConverterSequenceDouble: FfiConverterRustBuffer {
         return seq
     }
 }
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceString: FfiConverterRustBuffer {
+    typealias SwiftType = [String]
+
+    public static func write(_ value: [String], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterString.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [String] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [String]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterString.read(from: &buf))
+        }
+        return seq
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceData: FfiConverterRustBuffer {
+    typealias SwiftType = [Data]
+
+    public static func write(_ value: [Data], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterData.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [Data] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [Data]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterData.read(from: &buf))
+        }
+        return seq
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceTypeFfiAuthorizedReplica: FfiConverterRustBuffer {
+    typealias SwiftType = [FfiAuthorizedReplica]
+
+    public static func write(_ value: [FfiAuthorizedReplica], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterTypeFfiAuthorizedReplica.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [FfiAuthorizedReplica] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [FfiAuthorizedReplica]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterTypeFfiAuthorizedReplica.read(from: &buf))
+        }
+        return seq
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto: FfiConverterRustBuffer {
+    typealias SwiftType = [FfiAuthorizedReplicaPhoto]
+
+    public static func write(_ value: [FfiAuthorizedReplicaPhoto], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterTypeFfiAuthorizedReplicaPhoto.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [FfiAuthorizedReplicaPhoto] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [FfiAuthorizedReplicaPhoto]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterTypeFfiAuthorizedReplicaPhoto.read(from: &buf))
+        }
+        return seq
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceTypeFfiNotificationEvent: FfiConverterRustBuffer {
+    typealias SwiftType = [FfiNotificationEvent]
+
+    public static func write(_ value: [FfiNotificationEvent], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterTypeFfiNotificationEvent.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [FfiNotificationEvent] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [FfiNotificationEvent]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterTypeFfiNotificationEvent.read(from: &buf))
+        }
+        return seq
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceTypeFfiSyncPeer: FfiConverterRustBuffer {
+    typealias SwiftType = [FfiSyncPeer]
+
+    public static func write(_ value: [FfiSyncPeer], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterTypeFfiSyncPeer.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [FfiSyncPeer] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [FfiSyncPeer]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterTypeFfiSyncPeer.read(from: &buf))
+        }
+        return seq
+    }
+}
+
+#if swift(>=5.8)
+@_documentation(visibility: private)
+#endif
+fileprivate struct FfiConverterSequenceTypeFfiSyncDeferredReason: FfiConverterRustBuffer {
+    typealias SwiftType = [FfiSyncDeferredReason]
+
+    public static func write(_ value: [FfiSyncDeferredReason], into buf: inout [UInt8]) {
+        let len = Int32(value.count)
+        writeInt(&buf, len)
+        for item in value {
+            FfiConverterTypeFfiSyncDeferredReason.write(item, into: &buf)
+        }
+    }
+
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> [FfiSyncDeferredReason] {
+        let len: Int32 = try readInt(&buf)
+        var seq = [FfiSyncDeferredReason]()
+        seq.reserveCapacity(Int(len))
+        for _ in 0 ..< len {
+            seq.append(try FfiConverterTypeFfiSyncDeferredReason.read(from: &buf))
+        }
+        return seq
+    }
+}
 public func apiVersion() -> String  {
     return try!  FfiConverterString.lift(try! rustCall() {
         uniffiCallStatus in
     uniffi_annoda_mobile_ffi_fn_func_api_version(uniffiCallStatus
+    )
+})
+}
+public func createAccount(directory: String, passphrase: String)throws  -> AccountHandle  {
+    return try  FfiConverterTypeAccountHandle_lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_func_create_account(
+        FfiConverterString.lower(directory),
+        FfiConverterString.lower(passphrase),uniffiCallStatus
+    )
+})
+}
+public func openAccount(directory: String, passphrase: String)throws  -> AccountHandle  {
+    return try  FfiConverterTypeAccountHandle_lift(try rustCallWithError(FfiConverterTypeFfiError_lift) {
+        uniffiCallStatus in
+    uniffi_annoda_mobile_ffi_fn_func_open_account(
+        FfiConverterString.lower(directory),
+        FfiConverterString.lower(passphrase),uniffiCallStatus
     )
 })
 }
@@ -915,6 +2485,33 @@ private let initializationResult: InitializationResult = {
     if (uniffi_annoda_mobile_ffi_checksum_func_api_version() != 2260) {
         return InitializationResult.apiChecksumMismatch
     }
+    if (uniffi_annoda_mobile_ffi_checksum_func_create_account() != 22263) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_func_open_account() != 32463) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification() != 64461) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_lock() != 34887) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_notification_preferences() != 43853) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_pending_notifications() != 40277) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_profile_id() != 53714) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_set_notification_preferences() != 6937) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_accounthandle_start_sync_session() != 58188) {
+        return InitializationResult.apiChecksumMismatch
+    }
     if (uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_record_feedback() != 37686) {
         return InitializationResult.apiChecksumMismatch
     }
@@ -922,6 +2519,15 @@ private let initializationResult: InitializationResult = {
         return InitializationResult.apiChecksumMismatch
     }
     if (uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_score() != 39928) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_syncsession_cancel() != 60835) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_syncsession_is_finished() != 45693) {
+        return InitializationResult.apiChecksumMismatch
+    }
+    if (uniffi_annoda_mobile_ffi_checksum_method_syncsession_wait_result() != 60845) {
         return InitializationResult.apiChecksumMismatch
     }
     if (uniffi_annoda_mobile_ffi_checksum_constructor_localpreferencemodel_new() != 29728) {

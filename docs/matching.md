@@ -23,3 +23,5 @@ Pass is local and private. Rejecting a like prevents delayed re-creation; expiry
 ContactHandle supports Instagram, Telegram, WhatsApp and Other(service,value), validates bounded nonempty values, and remains encrypted to matched peer. Disclosure payload binds match/participants and selected handles; never auto-share saved contacts. Each side chooses independently. Blocking stops further local disclosures. Deletion cannot retract already revealed external handles. Signed moderation decisions and reports do not create matches.
 
 [Class model](uml/classes.md), [online/offline/match/disclosure sequences](uml/sequences.md).
+
+M2 emits [outbox events](notifications.md) only from verified new positive-intent transitions and creates them atomically with persisted state. Existing replay/block/reject/contact gates remain unchanged.

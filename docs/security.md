@@ -23,3 +23,9 @@ Trust CIE identity facts completely. Trust only explicitly configured credential
 Use OS cryptographic RNG. No homemade encryption; standardized HPKE suite and maintained libraries. Sign exact deterministic bytes with per-purpose context. Validate before expensive work; reject unknown version/algorithm. Never log raw legal identity, private payloads, credentials or secret keys. Tests use synthetic identities only.
 
 Before Internet deployment: independent cryptographic review, fuzz parsers, signed fresh revocation, replay-safe retrieval, cross-process quotas, per-peer bandwidth/rate caps, revocation/key rotation/recovery, NAT/relay and mobile lifecycle tests, production inference, abuse operations and privacy/legal review. These are concrete release gates, not claims of implemented protection. [Progress](progress.md) must name residual gaps.
+
+## M2 threats and release boundaries
+
+[Key-management contract](key-management.md) covers offline vault guessing, corrupted/replaced files, hostile KDF parameters, filesystem permissions/symlinks, atomic creation and cross-process locks. Do not claim password recovery or file rollback prevention. Headless transport plaintext mode explicitly trusts operator filesystem/volume protection; account vaults stay encrypted. Unlocked process memory and sensitive SQLite remain exposed to same-user/device compromise.
+
+[Sync](background-sync.md) adds malicious length/bandwidth exhaustion, peer fanout, cancellation/crash windows and notification replay threats. Meter before I/O exceeds allowance, authenticate/decrypt before state, commit outbox/replay/checkpoint together and require explicit host ack. No launch-time/remote-availability guarantees. Only native host supplies power/radio conditions; background authorization unavailable means defer. Physical Keychain/Keystore integration and OS testing remain planned.

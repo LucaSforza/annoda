@@ -13,3 +13,5 @@ Mailbox storage retains opaque recipient-sealed parcels containing signed envelo
 ## Planned repair adapter
 
 `ReplicaRepair::repair(owner, hash, target, now) -> RepairReport` should report distinct confirmed providers, remaining deficit and typed provider errors. A future fetchable `StoredReplica` bundle includes signed profile/manifest, original signed owner lease and verified bytes, allowing volunteers to forward authorization without possessing owner keys. Repair must never extend original lease expiry. A jittered scheduler persists provider observations and retries boundedly with backoff/diverse peers. Initial directed replication helper alone is not that scheduler. Renewal requires new owner authorization and active renewed profile; offline repair cannot create it.
+
+M2 adds compatible SQLite tables for [notification events](notifications.md) and [sync checkpoints](background-sync.md). Existing M1 records remain readable. No key bytes enter SQLite. Core event/checkpoint transactions must finish before another network await. Separate node transport files use the explicitly documented filesystem-protected mode in [key management](key-management.md).

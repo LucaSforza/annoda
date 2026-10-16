@@ -21,3 +21,5 @@ Start with [vision](vision.md), [architecture](architecture.md), [contracts](con
 | Tradeoffs and dependency evidence | [ADR index](decisions/README.md) |
 | Implementation tracking | [Progress](progress.md) |
 | Reusable agent workflow | [KB skill](skills/annoda-kb/SKILL.md) |
+
+M2 authorities: [persistent keys](key-management.md), [bounded background sync](background-sync.md), [notification outbox](notifications.md), [voluntary contribution](peer-contribution.md), [M2 UML](uml/m2.md). [ADR 0004](decisions/0004-persistent-identities.md) and [ADR 0005](decisions/0005-sync-outbox.md) define persistence/migration and lifecycle tradeoffs.

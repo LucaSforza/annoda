@@ -9,6 +9,8 @@ annoda-core = { path = "../core" }
 anyhow.workspace = true
 clap = { version = "4.5", features = ["derive"] }
 futures.workspace = true
+getrandom = "0.3"
+libc = "0.2"
 libp2p = { version = "0.57", features = ["tokio", "tcp", "noise", "yamux", "kad", "request-response", "macros"] }
 postcard = { version = "1.1", features = ["alloc"] }
 serde.workspace = true
@@ -16,6 +18,8 @@ thiserror.workspace = true
 tokio.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
+tokio-util = { version = "0.7", features = ["rt"] }
+zeroize = "1.9"
 
 [dev-dependencies]
 annoda-intelligence = { path = "../intelligence" }

@@ -9,3 +9,5 @@ Peer reconnects repopulate addresses and refresh provider announcements. Durable
 NAT/DCUtR, relay reservation, AutoNAT and rendezvous are planned deployment adapters. A volunteer storage node is not automatically a circuit relay; do not label it operational relay without libp2p relay behavior and tests. Direct peers learn IP addresses. Tor or equivalent privacy transport is future work. Transport encryption protects links, not public photo confidentiality or mailbox routing metadata.
 
 [Network classes](uml/classes.md); [publication, retrieval and delivery sequences](uml/sequences.md).
+
+M2 persistent transport identity and temporary-session behavior are defined in [key management](key-management.md) and [background sync](background-sync.md). Stable PeerId requires the same protected node data directory; endpoint addresses may change. Temporary sessions meter actual TCP stream bytes and close their swarm before returning; a phone is not advertised as a permanent provider.

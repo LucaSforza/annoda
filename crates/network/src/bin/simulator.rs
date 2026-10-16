@@ -68,11 +68,5 @@ fn decode_key(value: &str) -> anyhow::Result<[u8; 32]> {
 }
 
 #[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn non_ascii_issuer_keys_are_rejected_without_slicing_panic() {
-        assert!(decode_key(&format!("€{}", "0".repeat(61))).is_err());
-    }
-}
+#[path = "../tests/bin_simulator.rs"]
+mod tests;
