@@ -1,5 +1,8 @@
 //! Bounded libp2p transport and durable volunteer storage adapter.
 
+#![forbid(unsafe_code)]
+
+pub mod client;
 mod node;
 mod node_identity;
 pub mod sync;

@@ -9,6 +9,7 @@ rust-version.workspace = true
 blake3 = "1.8"
 cpu-time = "1"
 image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+serde.workspace = true
 thiserror = "2"
 
 [dev-dependencies]

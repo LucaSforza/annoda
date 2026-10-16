@@ -21,6 +21,9 @@ use annoda_network::{
 use thiserror::Error;
 use zeroize::Zeroizing;
 
+mod application;
+pub use application::*;
+
 uniffi::setup_scaffolding!();
 
 const MAX_MODEL_DIMENSIONS: u32 = 4_096;
@@ -60,6 +63,18 @@ pub enum FfiError {
     NetworkUnavailable,
     #[error("operation was cancelled")]
     Cancelled,
+    #[error("credential issuer or subject is not trusted")]
+    UntrustedIdentity,
+    #[error("credential has expired")]
+    CredentialExpired,
+    #[error("required safety classifier is unavailable")]
+    SafetyUnavailable,
+    #[error("content was rejected by the safety policy")]
+    SafetyRejected,
+    #[error("operation is pending")]
+    Pending,
+    #[error("operation is unsupported")]
+    Unsupported,
 }
 
 impl From<AccountKeyStoreError> for FfiError {

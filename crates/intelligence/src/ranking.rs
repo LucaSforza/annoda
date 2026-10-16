@@ -1,9 +1,12 @@
 use std::collections::{HashSet, VecDeque};
 
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 const MAX_LEARNING_RATE: f64 = 1.0;
 const MAX_EMBEDDING_VALUE: f64 = 1.0;
+const MAX_MODEL_DIMENSIONS: usize = 4096;
+const MAX_RECENT_SEEN: usize = 512;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct PhotoEmbedding {
@@ -96,6 +99,18 @@ pub struct PreferenceModel {
     recent_seen_limit: usize,
 }
 
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PreferenceModelSnapshot {
+    pub format_version: u16,
+    pub weights: Vec<f64>,
+    pub bias: f64,
+    pub learning_rate: f64,
+    pub regularization: f64,
+    pub encoder_version: u16,
+    pub recent_seen: Vec<String>,
+    pub recent_seen_limit: usize,
+}
+
 #[derive(Debug, Clone, PartialEq)]
 pub struct RankedCandidate {
     pub candidate_id: String,
@@ -112,6 +127,8 @@ impl PreferenceModel {
         recent_seen_limit: usize,
     ) -> Result<Self, RankingError> {
         if dimensions == 0
+            || dimensions > MAX_MODEL_DIMENSIONS
+            || recent_seen_limit > MAX_RECENT_SEEN
             || !learning_rate.is_finite()
             || learning_rate <= 0.0
             || learning_rate > MAX_LEARNING_RATE
@@ -130,6 +147,55 @@ impl PreferenceModel {
             recent_seen: VecDeque::new(),
             recent_seen_limit,
         })
+    }
+
+    pub fn snapshot(&self) -> PreferenceModelSnapshot {
+        PreferenceModelSnapshot {
+            format_version: 1,
+            weights: self.weights.clone(),
+            bias: self.bias,
+            learning_rate: self.learning_rate,
+            regularization: self.regularization,
+            encoder_version: self.encoder_version,
+            recent_seen: self.recent_seen.iter().cloned().collect(),
+            recent_seen_limit: self.recent_seen_limit,
+        }
+    }
+
+    pub fn from_snapshot(snapshot: PreferenceModelSnapshot) -> Result<Self, RankingError> {
+        if snapshot.format_version != 1 {
+            return Err(RankingError::InvalidTrainingConfig);
+        }
+        let dimensions = snapshot.weights.len();
+        let mut model = Self::new(
+            dimensions,
+            snapshot.encoder_version,
+            snapshot.learning_rate,
+            snapshot.regularization,
+            snapshot.recent_seen_limit,
+        )?;
+        if !snapshot.bias.is_finite()
+            || snapshot.weights.iter().any(|weight| !weight.is_finite())
+            || snapshot.recent_seen.len() > snapshot.recent_seen_limit
+            || snapshot
+                .recent_seen
+                .iter()
+                .any(|id| id.is_empty() || id.len() > 128 || id.chars().any(char::is_control))
+        {
+            return Err(RankingError::InvalidTrainingConfig);
+        }
+        let mut unique_seen = HashSet::new();
+        if snapshot
+            .recent_seen
+            .iter()
+            .any(|id| !unique_seen.insert(id))
+        {
+            return Err(RankingError::InvalidTrainingConfig);
+        }
+        model.weights = snapshot.weights;
+        model.bias = snapshot.bias;
+        model.recent_seen = snapshot.recent_seen.into();
+        Ok(model)
     }
 
     pub fn score(&self, embedding: &PhotoEmbedding) -> Result<RankingScore, RankingError> {
@@ -290,9 +356,19 @@ impl SplitMix64 {
     }
 }
 
+#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+pub enum EncoderMode {
+    Real,
+    DevelopmentFixture,
+}
+
 pub trait PhotoEncoder {
     fn encode(&self, photo: &[u8]) -> Result<PhotoEmbedding, RankingError>;
     fn description(&self) -> &'static str;
+
+    fn mode(&self) -> EncoderMode {
+        EncoderMode::Real
+    }
 }
 
 /// Byte-shape fixture for tests and simulations; it does not infer visual preferences.
@@ -332,6 +408,10 @@ impl PhotoEncoder for DeterministicPhotoEncoder {
 
     fn description(&self) -> &'static str {
         "development fixture; byte-shape features only, not visual preference inference"
+    }
+
+    fn mode(&self) -> EncoderMode {
+        EncoderMode::DevelopmentFixture
     }
 }
 

@@ -33,3 +33,7 @@ At least one automatic test must use real libp2p encrypted transports, stop Alic
 ## M2 contracts
 
 [Key management](key-management.md), [sync](background-sync.md), [notifications](notifications.md) and [contribution policy](peer-contribution.md) supersede M1 memory-only lifecycle assumptions without changing signed identity/message formats. AccountKeyStore/portable vault and additive notification/checkpoint storage belong to core; NodeIdentityStore, metered session transport and sync_once belong to network; mobile-ffi exports account/session/cancellation/report/outbox DTOs without raw keys/libp2p types. Do not start sync implementation until key-persistence tests pass. Rust implementation delegates coordinate exact signatures under these contracts.
+
+## M3 application contract
+
+[Application API](application-api.md) and [durable operations](durable-operations.md) own high-level orchestration. Network gains the service and a normal intelligence dependency; core owns additive transactional records. No wire/vault format change. Mobile delegates to the service while retaining M2 APIs.

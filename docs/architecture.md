@@ -11,6 +11,7 @@ flowchart TD
     Node[headless node] --> Network
     Sim[simulator integration harness] --> Network
     Sim --> Intelligence
+    Network --> Intelligence
     Network --> Core
     Intelligence --> Core
     Core --> DB[SQLite local persistence]
@@ -24,3 +25,7 @@ The principal agent owns this KB and architecture. Delegated Rust agents own cod
 ## M2 lifecycle
 
 Reuse the four crates. Core gains a portable encrypted AccountKeyStore and additive transactional notification/checkpoint tables. Network gains separate stable NodeIdentityStore and a finite metered sync service. Mobile facade owns authorized account/session handles and cancellation. A native scheduler grants execution time but is not part of the matching protocol. [M2 contracts/UML](uml/m2.md) define ownership and restart behavior. No permanent daemon or centralized push component is introduced.
+
+## M3 application service
+
+AnnodaClient in annoda-network composes core, intelligence and finite transport; network now depends on intelligence. [Application API](application-api.md) defines ownership, and [ADR 0006](decisions/0006-application-service.md) records rationale. No native client coordinates private keys, SQL or raw envelopes.

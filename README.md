@@ -5,7 +5,7 @@ Annoda is an experimental, privacy-focused peer-to-peer matching prototype. Its 
 ## Workspace
 
 - `crates/core`: identity, signed protocol records, encrypted messages, SQLite storage, matching.
-- `crates/network`: peer networking and local simulator.
+- `crates/network`: peer networking, local simulator, and high-level `AnnodaClient` application service.
 - `crates/intelligence`: local ranking and photo-safety interfaces.
 - `crates/mobile-ffi`: native-facing Rust facade.
 
@@ -47,6 +47,15 @@ Background synchronization is a bounded Rust service shared by foreground and ho
 cargo test --locked -p annoda-network --test sync_loopback -- --nocapture
 ```
 
+The M3 application workflow and account-boundary security checks are:
+
+```sh
+cargo test --locked -p annoda-network --test application_client -- --nocapture
+cargo test --locked -p annoda-network --test application_security -- --nocapture
+```
+
+See the [application API contract](docs/application-api.md) and [durable operations contract](docs/durable-operations.md) for supported service behavior and recovery semantics.
+
 `PortableAccountVault` always encrypts account keys and requires an explicit create or unlock call with caller-supplied authorization. The volunteer node has a separate filesystem-protected plaintext transport identity in its private data directory so restarts retain the same PeerId; protect that directory and its storage volume. See [key management](docs/key-management.md) for permissions and recovery limits.
 
 To start a volunteer node, set a real trusted issuer public key as 64 hexadecimal characters, then configure the listen address and resource bounds. Add `--bootstrap "$PEER_ID@$MULTIADDR"` when joining an existing network; omit it for the first node.
@@ -70,6 +79,51 @@ cargo run -p annoda-mobile-ffi --features cli --bin uniffi-bindgen -- generate -
 cargo run -p annoda-mobile-ffi --features cli --bin uniffi-bindgen -- generate --language kotlin --out-dir bindings/kotlin --no-format target/debug/libannoda_mobile_ffi.so
 ```
 
-Production work still planned includes real CIE-backed identity verification, a production inference and moderation service, NAT traversal and relay support, automatic recovery, and the full mobile facade.
+Normalize generated trailing whitespace after regenerating the checked-in bindings:
+
+```sh
+python3 - <<'PY'
+from pathlib import Path
+import re
+
+paths = (
+    Path("crates/mobile-ffi/generated/kotlin/uniffi/annoda_mobile_ffi/annoda_mobile_ffi.kt"),
+    Path("crates/mobile-ffi/generated/python/annoda_mobile_ffi.py"),
+    Path("crates/mobile-ffi/generated/swift/annoda_mobile_ffi.swift"),
+    Path("crates/mobile-ffi/generated/swift/annoda_mobile_ffiFFI.h"),
+)
+for path in paths:
+    path.write_bytes(re.sub(rb"[ \t]+(?=\r?$)", b"", path.read_bytes(), flags=re.MULTILINE))
+PY
+```
+
+The UniFFI `ApplicationHandle` owns the unlocked account. Create or open it with a private
+directory, trusted issuer keys, configured volunteer peers, and an app-held passphrase; then
+request only public identity material for credential issuance. Keep the development safety
+fixture disabled in production.
+
+```swift
+let app = try createApplication(config: config, passphrase: passphrase)
+let publicIdentity = try app.identitySummary()
+try app.importCredential(credential: verifiedCredentialBytes)
+let candidates = try app.discover(query: query)
+try app.close()
+```
+
+```kotlin
+val app = createApplication(config, passphrase)
+val publicIdentity = app.identitySummary()
+app.importCredential(verifiedCredentialBytes)
+val candidates = app.discover(query)
+app.close()
+```
+
+Call `cancelCurrentOperation()` to cancel an active bounded network request. The checked-in
+Swift and Kotlin files are generated bindings; successful generation does not demonstrate
+compilation, runtime behavior, or OS execution guarantees with the target native toolchains.
+
+Production work still planned includes real CIE integration, real local inference, platform
+keystores, operational reporting, NAT traversal and relay support, distributed deletion, and
+automatic replica repair.
 
 See [`docs/progress.md`](docs/progress.md) for implementation status, verified commands, and remaining release limitations. The project is licensed under [AGPL-3.0-or-later](LICENSE).

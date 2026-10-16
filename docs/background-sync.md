@@ -42,3 +42,5 @@ Keep old RPC encodings/indices unchanged. Append `PollMailboxPage` and `MailboxP
 ## Scheduling limits
 
 Native host supplies OS execution window, network/battery conditions and notification permissions. No fixed period or wakeup guarantee. NAT/firewalls, vanished providers and lack of simultaneous reachability can prevent useful work. No durable provider announcement is made for an unavailable phone. Platform guidance/examples are in [mobile integration](mobile-integration.md); real native task scheduling and physical-device validation remain outside the Rust-only implementation proof.
+
+M3 [application sync](application-api.md) additionally drains the [durable outgoing queue](durable-operations.md). Existing M2 `sync_once` stays available; AnnodaClient composes outgoing delivery and incoming mailbox processing under one total budget/cancellation lifecycle. It must not grant each queued operation a fresh unbounded window. Repeated sync recovers saved publication/like/contact bytes without changing logical identity. Native scheduling constraints and explicit notification acknowledgement remain unchanged.
