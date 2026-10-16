@@ -11,3 +11,5 @@ Revocation strategy: issuer signs versioned, expiring serial revocation snapshot
 Duplicate prevention is issuer-local: privately retain a keyed digest of authoritative subject id scoped to Annoda and issuer, enforce one active account, revoke old credential on replacement. Never publish digest or government id. Multiple issuers require a privacy-preserving coordination agreement or accept cross-issuer duplicates; no claim of solved global uniqueness. Retention and recovery procedures require separate policy. CIE authority is trusted; misuse of a stolen device key remains a threat.
 
 See [registration and renewal sequences](uml/sequences.md) and [identity classes](uml/classes.md).
+
+M2 lifecycle and secure serialization authority: [key management](key-management.md). Restoring persisted private keys preserves subject binding; it never renews a credential or changes authoritative identity facts.

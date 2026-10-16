@@ -22,6 +22,8 @@
 
 Do not grant broader permissions or add unrelated review gates.
 
+The volunteer node's M2 transport identity is filesystem-protected plaintext under its private data directory, as specified in [key management](docs/key-management.md). This exception never applies to account keys; do not describe the node key as encrypted at rest.
+
 ## File search
 
 Use the FFF MCP tools for all file search operations. Use `find_files` to locate files and `grep`/`multi_grep` to search file contents. Read the identified files directly after locating them; do not substitute shell `find`, `grep`, or `rg` for FFF searches.

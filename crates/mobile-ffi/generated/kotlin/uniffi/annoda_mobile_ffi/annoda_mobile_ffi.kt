@@ -344,7 +344,7 @@ internal inline fun<T, reified E: Throwable> uniffiTraitInterfaceCallWithError(
         }
     }
 }
-// Initial value and increment amount for handles. 
+// Initial value and increment amount for handles.
 // These ensure that Kotlin-generated handles always have the lowest bit set
 private const val UNIFFI_HANDLEMAP_INITIAL = 1.toLong()
 private const val UNIFFI_HANDLEMAP_DELTA = 2.toLong()
@@ -354,7 +354,7 @@ private const val UNIFFI_HANDLEMAP_DELTA = 2.toLong()
 // This is used pass an opaque 64-bit handle representing a foreign object to the Rust code.
 internal class UniffiHandleMap<T: Any> {
     private val map = ConcurrentHashMap<Long, T>()
-    // Start 
+    // Start
     private val counter = java.util.concurrent.atomic.AtomicLong(UNIFFI_HANDLEMAP_INITIAL)
 
     val size: Int
@@ -677,55 +677,111 @@ internal object IntegrityCheckingUniffiLib {
     internal fun ensureInitialized() = Unit
     external fun uniffi_annoda_mobile_ffi_checksum_func_api_version(
     ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_func_create_account(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_func_open_account(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_lock(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_notification_preferences(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_pending_notifications(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_profile_id(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_set_notification_preferences(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_start_sync_session(
+    ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_record_feedback(
     ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_reset(
     ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_score(
     ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_syncsession_cancel(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_syncsession_is_finished(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_syncsession_wait_result(
+    ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_constructor_localpreferencemodel_new(
     ): Int
     external fun ffi_annoda_mobile_ffi_uniffi_contract_version(
     ): Int
 
-        
+
 }
 
 internal object UniffiLib {
-    
+
     // The Cleaner for the whole library
     internal val CLEANER: UniffiCleaner by lazy {
         UniffiCleaner.create()
     }
-    
+
 
     init {
         Native.register(UniffiLib::class.java, findLibraryName(componentName = "annoda_mobile_ffi"))
-        
+
     }
 
     internal fun ensureInitialized() = Unit
-    external fun uniffi_annoda_mobile_ffi_fn_clone_localpreferencemodel(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_clone_accounthandle(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Long
-    external fun uniffi_annoda_mobile_ffi_fn_free_localpreferencemodel(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_free_accounthandle(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Unit
-    external fun uniffi_annoda_mobile_ffi_fn_constructor_localpreferencemodel_new(`dimensions`: Int,`encoderVersion`: Short,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_acknowledge_notification(`ptr`: Long,`eventId`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Byte
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_lock(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_notification_preferences(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_pending_notifications(`ptr`: Long,`limit`: Int,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_profile_id(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_set_notification_preferences(`ptr`: Long,`preferences`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_accounthandle_start_sync_session(`ptr`: Long,`request`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
     ): Long
-    external fun uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_record_feedback(`ptr`: Long,`version`: Short,`values`: RustBuffer.ByValue,`liked`: Byte,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_clone_localpreferencemodel(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_free_localpreferencemodel(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Unit
-    external fun uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_reset(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_constructor_localpreferencemodel_new(`dimensions`: Int,`encoderVersion`: Short,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_record_feedback(`ptr`: Long,`version`: Short,`values`: RustBuffer.ByValue,`liked`: Byte,uniffi_out_err: UniffiRustCallStatus,
     ): Unit
-    external fun uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_score(`ptr`: Long,`version`: Short,`values`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
-    ): RustBuffer.ByValue
-    external fun uniffi_annoda_mobile_ffi_fn_func_api_version(uniffi_out_err: UniffiRustCallStatus, 
-    ): RustBuffer.ByValue
-    external fun ffi_annoda_mobile_ffi_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus, 
-    ): RustBuffer.ByValue
-    external fun ffi_annoda_mobile_ffi_rustbuffer_from_bytes(`bytes`: ForeignBytes.ByValue,uniffi_out_err: UniffiRustCallStatus, 
-    ): RustBuffer.ByValue
-    external fun ffi_annoda_mobile_ffi_rustbuffer_free(`buf`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_reset(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rustbuffer_reserve(`buf`: RustBuffer.ByValue,`additional`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_score(`ptr`: Long,`version`: Short,`values`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_clone_syncsession(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_free_syncsession(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_syncsession_cancel(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_syncsession_is_finished(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Byte
+    external fun uniffi_annoda_mobile_ffi_fn_method_syncsession_wait_result(`ptr`: Long,`timeoutMs`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_func_api_version(uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_func_create_account(`directory`: RustBuffer.ByValue,`passphrase`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_func_open_account(`directory`: RustBuffer.ByValue,`passphrase`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun ffi_annoda_mobile_ffi_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun ffi_annoda_mobile_ffi_rustbuffer_from_bytes(`bytes`: ForeignBytes.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun ffi_annoda_mobile_ffi_rustbuffer_free(`buf`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun ffi_annoda_mobile_ffi_rustbuffer_reserve(`buf`: RustBuffer.ByValue,`additional`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
     external fun ffi_annoda_mobile_ffi_rust_future_poll_u8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -733,7 +789,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_u8(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_u8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_u8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Int
     external fun ffi_annoda_mobile_ffi_rust_future_poll_i8(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -741,7 +797,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_i8(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_i8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_i8(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Byte
     external fun ffi_annoda_mobile_ffi_rust_future_poll_u16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -749,7 +805,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_u16(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_u16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_u16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Int
     external fun ffi_annoda_mobile_ffi_rust_future_poll_i16(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -757,7 +813,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_i16(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_i16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_i16(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Short
     external fun ffi_annoda_mobile_ffi_rust_future_poll_u32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -765,7 +821,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_u32(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_u32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_u32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Int
     external fun ffi_annoda_mobile_ffi_rust_future_poll_i32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -773,7 +829,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_i32(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_i32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_i32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Int
     external fun ffi_annoda_mobile_ffi_rust_future_poll_u64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -781,7 +837,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_u64(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_u64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_u64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Long
     external fun ffi_annoda_mobile_ffi_rust_future_poll_i64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -789,7 +845,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_i64(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_i64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_i64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Long
     external fun ffi_annoda_mobile_ffi_rust_future_poll_f32(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -797,7 +853,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_f32(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_f32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_f32(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Float
     external fun ffi_annoda_mobile_ffi_rust_future_poll_f64(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -805,7 +861,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_f64(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_f64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_f64(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Double
     external fun ffi_annoda_mobile_ffi_rust_future_poll_rust_buffer(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -813,7 +869,7 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_rust_buffer(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_rust_buffer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_rust_buffer(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
     external fun ffi_annoda_mobile_ffi_rust_future_poll_void(`handle`: Long,`callback`: UniffiRustFutureContinuationCallback,`callbackData`: Long,
     ): Unit
@@ -821,10 +877,10 @@ internal object UniffiLib {
     ): Unit
     external fun ffi_annoda_mobile_ffi_rust_future_free_void(`handle`: Long,
     ): Unit
-    external fun ffi_annoda_mobile_ffi_rust_future_complete_void(`handle`: Long,uniffi_out_err: UniffiRustCallStatus, 
+    external fun ffi_annoda_mobile_ffi_rust_future_complete_void(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): Unit
 
-        
+
 }
 
 private fun uniffiCheckContractApiVersion(lib: IntegrityCheckingUniffiLib) {
@@ -841,6 +897,33 @@ private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
     if ((lib.uniffi_annoda_mobile_ffi_checksum_func_api_version() and 0xFFFF) != 2260) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_func_create_account() and 0xFFFF) != 22263) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_func_open_account() and 0xFFFF) != 32463) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification() and 0xFFFF) != 64461) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_lock() and 0xFFFF) != 34887) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_notification_preferences() and 0xFFFF) != 43853) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_pending_notifications() and 0xFFFF) != 40277) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_profile_id() and 0xFFFF) != 53714) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_set_notification_preferences() and 0xFFFF) != 6937) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_start_sync_session() and 0xFFFF) != 58188) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
     if ((lib.uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_record_feedback() and 0xFFFF) != 37686) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
@@ -848,6 +931,15 @@ private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if ((lib.uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_score() and 0xFFFF) != 39928) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_syncsession_cancel() and 0xFFFF) != 60835) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_syncsession_is_finished() and 0xFFFF) != 45693) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_syncsession_wait_result() and 0xFFFF) != 60845) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if ((lib.uniffi_annoda_mobile_ffi_checksum_constructor_localpreferencemodel_new() and 0xFFFF) != 29728) {
@@ -928,7 +1020,7 @@ inline fun <T : Disposable?, R> T.use(block: (T) -> R) =
         }
     }
 
-/** 
+/**
  * Placeholder object used to signal that we're constructing an interface with a FFI handle.
  *
  * This is the first argument for interface constructors that input a raw handle. It exists is that
@@ -939,7 +1031,7 @@ inline fun <T : Disposable?, R> T.use(block: (T) -> R) =
  * */
 object UniffiWithHandle
 
-/** 
+/**
  * Used to instantiate an interface without an actual pointer, for fakes in tests, mostly.
  *
  * @suppress
@@ -1063,6 +1155,29 @@ public object FfiConverterUInt: FfiConverter<UInt, Int> {
 /**
  * @suppress
  */
+public object FfiConverterULong: FfiConverter<ULong, Long> {
+    override fun lift(value: Long): ULong {
+        return value.toULong()
+    }
+
+    override fun read(buf: ByteBuffer): ULong {
+        return lift(buf.getLong())
+    }
+
+    override fun lower(value: ULong): Long {
+        return value.toLong()
+    }
+
+    override fun allocationSize(value: ULong) = 8UL
+
+    override fun write(value: ULong, buf: ByteBuffer) {
+        buf.putLong(value.toLong())
+    }
+}
+
+/**
+ * @suppress
+ */
 public object FfiConverterDouble: FfiConverter<Double, Double> {
     override fun lift(value: Double): Double {
         return value
@@ -1163,6 +1278,379 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
     }
 }
 
+/**
+ * @suppress
+ */
+public object FfiConverterByteArray: FfiConverterRustBuffer<ByteArray> {
+    override fun read(buf: ByteBuffer): ByteArray {
+        val len = buf.getInt()
+        val byteArr = ByteArray(len)
+        buf.get(byteArr)
+        return byteArr
+    }
+    override fun allocationSize(value: ByteArray): ULong {
+        return 4UL + value.size.toULong()
+    }
+    override fun write(value: ByteArray, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        buf.put(value)
+    }
+}
+
+
+// This template implements a class for working with a Rust struct via a handle
+// to the live Rust struct on the other side of the FFI.
+//
+// There's some subtlety here, because we have to be careful not to operate on a Rust
+// struct after it has been dropped, and because we must expose a public API for freeing
+// theq Kotlin wrapper object in lieu of reliable finalizers. The core requirements are:
+//
+//   * Each instance holds an opaque handle to the underlying Rust struct.
+//     Method calls need to read this handle from the object's state and pass it in to
+//     the Rust FFI.
+//
+//   * When an instance is no longer needed, its handle should be passed to a
+//     special destructor function provided by the Rust FFI, which will drop the
+//     underlying Rust struct.
+//
+//   * Given an instance, calling code is expected to call the special
+//     `destroy` method in order to free it after use, either by calling it explicitly
+//     or by using a higher-level helper like the `use` method. Failing to do so risks
+//     leaking the underlying Rust struct.
+//
+//   * We can't assume that calling code will do the right thing, and must be prepared
+//     to handle Kotlin method calls executing concurrently with or even after a call to
+//     `destroy`, and to handle multiple (possibly concurrent!) calls to `destroy`.
+//
+//   * We must never allow Rust code to operate on the underlying Rust struct after
+//     the destructor has been called, and must never call the destructor more than once.
+//     Doing so may trigger memory unsafety.
+//
+//   * To mitigate many of the risks of leaking memory and use-after-free unsafety, a `Cleaner`
+//     is implemented to call the destructor when the Kotlin object becomes unreachable.
+//     This is done in a background thread. This is not a panacea, and client code should be aware that
+//      1. the thread may starve if some there are objects that have poorly performing
+//     `drop` methods or do significant work in their `drop` methods.
+//      2. the thread is shared across the whole library. This can be tuned by using `android_cleaner = true`,
+//         or `android = true` in the [`kotlin` section of the `uniffi.toml` file](https://mozilla.github.io/uniffi-rs/kotlin/configuration.html).
+//
+// If we try to implement this with mutual exclusion on access to the handle, there is the
+// possibility of a race between a method call and a concurrent call to `destroy`:
+//
+//    * Thread A starts a method call, reads the value of the handle, but is interrupted
+//      before it can pass the handle over the FFI to Rust.
+//    * Thread B calls `destroy` and frees the underlying Rust struct.
+//    * Thread A resumes, passing the already-read handle value to Rust and triggering
+//      a use-after-free.
+//
+// One possible solution would be to use a `ReadWriteLock`, with each method call taking
+// a read lock (and thus allowed to run concurrently) and the special `destroy` method
+// taking a write lock (and thus blocking on live method calls). However, we aim not to
+// generate methods with any hidden blocking semantics, and a `destroy` method that might
+// block if called incorrectly seems to meet that bar.
+//
+// So, we achieve our goals by giving each instance an associated `AtomicLong` counter to track
+// the number of in-flight method calls, and an `AtomicBoolean` flag to indicate whether `destroy`
+// has been called. These are updated according to the following rules:
+//
+//    * The initial value of the counter is 1, indicating a live object with no in-flight calls.
+//      The initial value for the flag is false.
+//
+//    * At the start of each method call, we atomically check the counter.
+//      If it is 0 then the underlying Rust struct has already been destroyed and the call is aborted.
+//      If it is nonzero them we atomically increment it by 1 and proceed with the method call.
+//
+//    * At the end of each method call, we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+//    * When `destroy` is called, we atomically flip the flag from false to true.
+//      If the flag was already true we silently fail.
+//      Otherwise we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+// Astute readers may observe that this all sounds very similar to the way that Rust's `Arc<T>` works,
+// and indeed it is, with the addition of a flag to guard against multiple calls to `destroy`.
+//
+// The overall effect is that the underlying Rust struct is destroyed only when `destroy` has been
+// called *and* all in-flight method calls have completed, avoiding violating any of the expectations
+// of the underlying Rust code.
+//
+// This makes a cleaner a better alternative to _not_ calling `destroy()` as
+// and when the object is finished with, but the abstraction is not perfect: if the Rust object's `drop`
+// method is slow, and/or there are many objects to cleanup, and it's on a low end Android device, then the cleaner
+// thread may be starved, and the app will leak memory.
+//
+// In this case, `destroy`ing manually may be a better solution.
+//
+// The cleaner can live side by side with the manual calling of `destroy`. In the order of responsiveness, uniffi objects
+// with Rust peers are reclaimed:
+//
+// 1. By calling the `destroy` method of the object, which calls `rustObject.free()`. If that doesn't happen:
+// 2. When the object becomes unreachable, AND the Cleaner thread gets to call `rustObject.free()`. If the thread is starved then:
+// 3. The memory is reclaimed when the process terminates.
+//
+// [1] https://stackoverflow.com/questions/24376768/can-java-finalize-an-object-when-it-is-still-in-scope/24380219
+//
+
+
+public interface AccountHandleInterface {
+
+    fun `acknowledgeNotification`(`eventId`: kotlin.ByteArray): kotlin.Boolean
+
+    fun `lock`()
+
+    fun `notificationPreferences`(): FfiNotificationPreferences
+
+    fun `pendingNotifications`(`limit`: kotlin.UInt): List<FfiNotificationEvent>
+
+    fun `profileId`(): kotlin.ByteArray
+
+    fun `setNotificationPreferences`(`preferences`: FfiNotificationPreferences)
+
+    fun `startSyncSession`(`request`: FfiSyncRequest): SyncSession
+
+    companion object
+}
+
+open class AccountHandle: Disposable, AutoCloseable, AccountHandleInterface
+{
+
+    @Suppress("UNUSED_PARAMETER")
+    /**
+     * @suppress
+     */
+    constructor(withHandle: UniffiWithHandle, handle: Long) {
+        this.handle = handle
+        this.cleanable = UniffiLib.CLEANER.register(this, UniffiCleanAction(handle))
+    }
+
+    /**
+     * @suppress
+     *
+     * This constructor can be used to instantiate a fake object. Only used for tests. Any
+     * attempt to actually use an object constructed this way will fail as there is no
+     * connected Rust object.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    constructor(noHandle: NoHandle) {
+        this.handle = 0
+        this.cleanable = null
+    }
+
+    protected val handle: Long
+    protected val cleanable: UniffiCleaner.Cleanable?
+
+    private val wasDestroyed = AtomicBoolean(false)
+    private val callCounter = AtomicLong(1)
+
+    /**
+     * Whether the current object has been destroyed and its reference is gone in the Rust side.
+     */
+    val uniffiIsDestroyed: Boolean get() = wasDestroyed.get()
+
+    override fun destroy() {
+        // Only allow a single call to this method.
+        // TODO: maybe we should log a warning if called more than once?
+        if (this.wasDestroyed.compareAndSet(false, true)) {
+            // This decrement always matches the initial count of 1 given at creation time.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable?.clean()
+            }
+        }
+    }
+
+    @Synchronized
+    override fun close() {
+        this.destroy()
+    }
+
+    internal inline fun <R> callWithHandle(block: (handle: Long) -> R): R {
+        // Check and increment the call counter, to keep the object alive.
+        // This needs a compare-and-set retry loop in case of concurrent updates.
+        do {
+            val c = this.callCounter.get()
+            if (c == 0L) {
+                throw IllegalStateException("${this.javaClass.simpleName} object has already been destroyed")
+            }
+            if (c == Long.MAX_VALUE) {
+                throw IllegalStateException("${this.javaClass.simpleName} call counter would overflow")
+            }
+        } while (! this.callCounter.compareAndSet(c, c + 1L))
+        // Now we can safely do the method call without the handle being freed concurrently.
+        try {
+            return block(this.uniffiCloneHandle())
+        } finally {
+            // This decrement always matches the increment we performed above.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable?.clean()
+            }
+        }
+    }
+
+    // Use a static inner class instead of a closure so as not to accidentally
+    // capture `this` as part of the cleanable's action.
+    private class UniffiCleanAction(private val handle: Long) : Runnable {
+        override fun run() {
+            if (handle == 0.toLong()) {
+                // Fake object created with `NoHandle`, don't try to free.
+                return;
+            }
+            uniffiRustCall { status ->
+                UniffiLib.uniffi_annoda_mobile_ffi_fn_free_accounthandle(handle, status)
+            }
+        }
+    }
+
+    /**
+     * @suppress
+     */
+    fun uniffiCloneHandle(): Long {
+        if (handle == 0.toLong()) {
+            throw InternalException("uniffiCloneHandle() called on NoHandle object");
+        }
+        return uniffiRustCall() { status ->
+            UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_accounthandle(handle, status)
+        }
+    }
+
+
+    @Throws(FfiException::class)override fun `acknowledgeNotification`(`eventId`: kotlin.ByteArray): kotlin.Boolean {
+            return FfiConverterBoolean.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_acknowledge_notification(
+        it,
+
+        FfiConverterByteArray.lower(`eventId`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `lock`()
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_lock(
+        it,
+        _status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `notificationPreferences`(): FfiNotificationPreferences {
+            return FfiConverterTypeFfiNotificationPreferences.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_notification_preferences(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `pendingNotifications`(`limit`: kotlin.UInt): List<FfiNotificationEvent> {
+            return FfiConverterSequenceTypeFfiNotificationEvent.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_pending_notifications(
+        it,
+
+        FfiConverterUInt.lower(`limit`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `profileId`(): kotlin.ByteArray {
+            return FfiConverterByteArray.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_profile_id(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `setNotificationPreferences`(`preferences`: FfiNotificationPreferences)
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_set_notification_preferences(
+        it,
+
+        FfiConverterTypeFfiNotificationPreferences.lower(`preferences`),_status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `startSyncSession`(`request`: FfiSyncRequest): SyncSession {
+            return FfiConverterTypeSyncSession.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_start_sync_session(
+        it,
+
+        FfiConverterTypeFfiSyncRequest.lower(`request`),_status)
+}
+    }
+    )
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * @suppress
+     */
+    companion object
+
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeAccountHandle: FfiConverter<AccountHandle, Long> {
+    override fun lower(value: AccountHandle): Long {
+        return value.uniffiCloneHandle()
+    }
+
+    override fun lift(value: Long): AccountHandle {
+        return AccountHandle(UniffiWithHandle, value)
+    }
+
+    override fun read(buf: ByteBuffer): AccountHandle {
+        return lift(buf.getLong())
+    }
+
+    override fun allocationSize(value: AccountHandle) = 8UL
+
+    override fun write(value: AccountHandle, buf: ByteBuffer) {
+        buf.putLong(lower(value))
+    }
+}
+
 
 // This template implements a class for working with a Rust struct via a handle
 // to the live Rust struct on the other side of the FFI.
@@ -1260,13 +1748,13 @@ public object FfiConverterString: FfiConverter<String, RustBuffer.ByValue> {
 
 
 public interface LocalPreferenceModelInterface {
-    
+
     fun `recordFeedback`(`version`: kotlin.UShort, `values`: List<kotlin.Double>, `liked`: kotlin.Boolean)
-    
+
     fun `reset`()
-    
+
     fun `score`(`version`: kotlin.UShort, `values`: List<kotlin.Double>): FfiRankingScore
-    
+
     companion object
 }
 
@@ -1295,11 +1783,11 @@ open class LocalPreferenceModel: Disposable, AutoCloseable, LocalPreferenceModel
         this.cleanable = null
     }
     constructor(`dimensions`: kotlin.UInt, `encoderVersion`: kotlin.UShort) :
-        this(UniffiWithHandle, 
+        this(UniffiWithHandle,
     uniffiRustCallWithError(FfiException) { _status ->
     UniffiLib.uniffi_annoda_mobile_ffi_fn_constructor_localpreferencemodel_new(
-    
-        
+
+
         FfiConverterUInt.lower(`dimensions`),
         FfiConverterUShort.lower(`encoderVersion`),_status)
 }
@@ -1381,25 +1869,25 @@ open class LocalPreferenceModel: Disposable, AutoCloseable, LocalPreferenceModel
         }
     }
 
-    
+
     @Throws(FfiException::class)override fun `recordFeedback`(`version`: kotlin.UShort, `values`: List<kotlin.Double>, `liked`: kotlin.Boolean)
-        = 
+        =
     callWithHandle {
     uniffiRustCallWithError(FfiException) { _status ->
     UniffiLib.uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_record_feedback(
         it,
-        
+
         FfiConverterUShort.lower(`version`),
         FfiConverterSequenceDouble.lower(`values`),
         FfiConverterBoolean.lower(`liked`),_status)
 }
     }
-    
-    
 
-    
+
+
+
     @Throws(FfiException::class)override fun `reset`()
-        = 
+        =
     callWithHandle {
     uniffiRustCallWithError(FfiException) { _status ->
     UniffiLib.uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_reset(
@@ -1407,37 +1895,37 @@ open class LocalPreferenceModel: Disposable, AutoCloseable, LocalPreferenceModel
         _status)
 }
     }
-    
-    
 
-    
+
+
+
     @Throws(FfiException::class)override fun `score`(`version`: kotlin.UShort, `values`: List<kotlin.Double>): FfiRankingScore {
             return FfiConverterTypeFfiRankingScore.lift(
     callWithHandle {
     uniffiRustCallWithError(FfiException) { _status ->
     UniffiLib.uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_score(
         it,
-        
+
         FfiConverterUShort.lower(`version`),
         FfiConverterSequenceDouble.lower(`values`),_status)
 }
     }
     )
     }
-    
-
-    
-
-    
 
 
-    
-    
+
+
+
+
+
+
+
     /**
      * @suppress
      */
     companion object
-    
+
 }
 
 
@@ -1465,16 +1953,561 @@ public object FfiConverterTypeLocalPreferenceModel: FfiConverter<LocalPreference
 }
 
 
+// This template implements a class for working with a Rust struct via a handle
+// to the live Rust struct on the other side of the FFI.
+//
+// There's some subtlety here, because we have to be careful not to operate on a Rust
+// struct after it has been dropped, and because we must expose a public API for freeing
+// theq Kotlin wrapper object in lieu of reliable finalizers. The core requirements are:
+//
+//   * Each instance holds an opaque handle to the underlying Rust struct.
+//     Method calls need to read this handle from the object's state and pass it in to
+//     the Rust FFI.
+//
+//   * When an instance is no longer needed, its handle should be passed to a
+//     special destructor function provided by the Rust FFI, which will drop the
+//     underlying Rust struct.
+//
+//   * Given an instance, calling code is expected to call the special
+//     `destroy` method in order to free it after use, either by calling it explicitly
+//     or by using a higher-level helper like the `use` method. Failing to do so risks
+//     leaking the underlying Rust struct.
+//
+//   * We can't assume that calling code will do the right thing, and must be prepared
+//     to handle Kotlin method calls executing concurrently with or even after a call to
+//     `destroy`, and to handle multiple (possibly concurrent!) calls to `destroy`.
+//
+//   * We must never allow Rust code to operate on the underlying Rust struct after
+//     the destructor has been called, and must never call the destructor more than once.
+//     Doing so may trigger memory unsafety.
+//
+//   * To mitigate many of the risks of leaking memory and use-after-free unsafety, a `Cleaner`
+//     is implemented to call the destructor when the Kotlin object becomes unreachable.
+//     This is done in a background thread. This is not a panacea, and client code should be aware that
+//      1. the thread may starve if some there are objects that have poorly performing
+//     `drop` methods or do significant work in their `drop` methods.
+//      2. the thread is shared across the whole library. This can be tuned by using `android_cleaner = true`,
+//         or `android = true` in the [`kotlin` section of the `uniffi.toml` file](https://mozilla.github.io/uniffi-rs/kotlin/configuration.html).
+//
+// If we try to implement this with mutual exclusion on access to the handle, there is the
+// possibility of a race between a method call and a concurrent call to `destroy`:
+//
+//    * Thread A starts a method call, reads the value of the handle, but is interrupted
+//      before it can pass the handle over the FFI to Rust.
+//    * Thread B calls `destroy` and frees the underlying Rust struct.
+//    * Thread A resumes, passing the already-read handle value to Rust and triggering
+//      a use-after-free.
+//
+// One possible solution would be to use a `ReadWriteLock`, with each method call taking
+// a read lock (and thus allowed to run concurrently) and the special `destroy` method
+// taking a write lock (and thus blocking on live method calls). However, we aim not to
+// generate methods with any hidden blocking semantics, and a `destroy` method that might
+// block if called incorrectly seems to meet that bar.
+//
+// So, we achieve our goals by giving each instance an associated `AtomicLong` counter to track
+// the number of in-flight method calls, and an `AtomicBoolean` flag to indicate whether `destroy`
+// has been called. These are updated according to the following rules:
+//
+//    * The initial value of the counter is 1, indicating a live object with no in-flight calls.
+//      The initial value for the flag is false.
+//
+//    * At the start of each method call, we atomically check the counter.
+//      If it is 0 then the underlying Rust struct has already been destroyed and the call is aborted.
+//      If it is nonzero them we atomically increment it by 1 and proceed with the method call.
+//
+//    * At the end of each method call, we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+//    * When `destroy` is called, we atomically flip the flag from false to true.
+//      If the flag was already true we silently fail.
+//      Otherwise we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+// Astute readers may observe that this all sounds very similar to the way that Rust's `Arc<T>` works,
+// and indeed it is, with the addition of a flag to guard against multiple calls to `destroy`.
+//
+// The overall effect is that the underlying Rust struct is destroyed only when `destroy` has been
+// called *and* all in-flight method calls have completed, avoiding violating any of the expectations
+// of the underlying Rust code.
+//
+// This makes a cleaner a better alternative to _not_ calling `destroy()` as
+// and when the object is finished with, but the abstraction is not perfect: if the Rust object's `drop`
+// method is slow, and/or there are many objects to cleanup, and it's on a low end Android device, then the cleaner
+// thread may be starved, and the app will leak memory.
+//
+// In this case, `destroy`ing manually may be a better solution.
+//
+// The cleaner can live side by side with the manual calling of `destroy`. In the order of responsiveness, uniffi objects
+// with Rust peers are reclaimed:
+//
+// 1. By calling the `destroy` method of the object, which calls `rustObject.free()`. If that doesn't happen:
+// 2. When the object becomes unreachable, AND the Cleaner thread gets to call `rustObject.free()`. If the thread is starved then:
+// 3. The memory is reclaimed when the process terminates.
+//
+// [1] https://stackoverflow.com/questions/24376768/can-java-finalize-an-object-when-it-is-still-in-scope/24380219
+//
+
+
+public interface SyncSessionInterface {
+
+    fun `cancel`()
+
+    fun `isFinished`(): kotlin.Boolean
+
+    fun `waitResult`(`timeoutMs`: kotlin.ULong): FfiSyncReport?
+
+    companion object
+}
+
+open class SyncSession: Disposable, AutoCloseable, SyncSessionInterface
+{
+
+    @Suppress("UNUSED_PARAMETER")
+    /**
+     * @suppress
+     */
+    constructor(withHandle: UniffiWithHandle, handle: Long) {
+        this.handle = handle
+        this.cleanable = UniffiLib.CLEANER.register(this, UniffiCleanAction(handle))
+    }
+
+    /**
+     * @suppress
+     *
+     * This constructor can be used to instantiate a fake object. Only used for tests. Any
+     * attempt to actually use an object constructed this way will fail as there is no
+     * connected Rust object.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    constructor(noHandle: NoHandle) {
+        this.handle = 0
+        this.cleanable = null
+    }
+
+    protected val handle: Long
+    protected val cleanable: UniffiCleaner.Cleanable?
+
+    private val wasDestroyed = AtomicBoolean(false)
+    private val callCounter = AtomicLong(1)
+
+    /**
+     * Whether the current object has been destroyed and its reference is gone in the Rust side.
+     */
+    val uniffiIsDestroyed: Boolean get() = wasDestroyed.get()
+
+    override fun destroy() {
+        // Only allow a single call to this method.
+        // TODO: maybe we should log a warning if called more than once?
+        if (this.wasDestroyed.compareAndSet(false, true)) {
+            // This decrement always matches the initial count of 1 given at creation time.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable?.clean()
+            }
+        }
+    }
+
+    @Synchronized
+    override fun close() {
+        this.destroy()
+    }
+
+    internal inline fun <R> callWithHandle(block: (handle: Long) -> R): R {
+        // Check and increment the call counter, to keep the object alive.
+        // This needs a compare-and-set retry loop in case of concurrent updates.
+        do {
+            val c = this.callCounter.get()
+            if (c == 0L) {
+                throw IllegalStateException("${this.javaClass.simpleName} object has already been destroyed")
+            }
+            if (c == Long.MAX_VALUE) {
+                throw IllegalStateException("${this.javaClass.simpleName} call counter would overflow")
+            }
+        } while (! this.callCounter.compareAndSet(c, c + 1L))
+        // Now we can safely do the method call without the handle being freed concurrently.
+        try {
+            return block(this.uniffiCloneHandle())
+        } finally {
+            // This decrement always matches the increment we performed above.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable?.clean()
+            }
+        }
+    }
+
+    // Use a static inner class instead of a closure so as not to accidentally
+    // capture `this` as part of the cleanable's action.
+    private class UniffiCleanAction(private val handle: Long) : Runnable {
+        override fun run() {
+            if (handle == 0.toLong()) {
+                // Fake object created with `NoHandle`, don't try to free.
+                return;
+            }
+            uniffiRustCall { status ->
+                UniffiLib.uniffi_annoda_mobile_ffi_fn_free_syncsession(handle, status)
+            }
+        }
+    }
+
+    /**
+     * @suppress
+     */
+    fun uniffiCloneHandle(): Long {
+        if (handle == 0.toLong()) {
+            throw InternalException("uniffiCloneHandle() called on NoHandle object");
+        }
+        return uniffiRustCall() { status ->
+            UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_syncsession(handle, status)
+        }
+    }
+
+    override fun `cancel`()
+        =
+    callWithHandle {
+    uniffiRustCall() { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_syncsession_cancel(
+        it,
+        _status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `isFinished`(): kotlin.Boolean {
+            return FfiConverterBoolean.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_syncsession_is_finished(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `waitResult`(`timeoutMs`: kotlin.ULong): FfiSyncReport? {
+            return FfiConverterOptionalTypeFfiSyncReport.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_syncsession_wait_result(
+        it,
+
+        FfiConverterULong.lower(`timeoutMs`),_status)
+}
+    }
+    )
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * @suppress
+     */
+    companion object
+
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeSyncSession: FfiConverter<SyncSession, Long> {
+    override fun lower(value: SyncSession): Long {
+        return value.uniffiCloneHandle()
+    }
+
+    override fun lift(value: Long): SyncSession {
+        return SyncSession(UniffiWithHandle, value)
+    }
+
+    override fun read(buf: ByteBuffer): SyncSession {
+        return lift(buf.getLong())
+    }
+
+    override fun allocationSize(value: SyncSession) = 8UL
+
+    override fun write(value: SyncSession, buf: ByteBuffer) {
+        buf.putLong(lower(value))
+    }
+}
+
+
+
+data class FfiAuthorizedReplica (
+    var `profile`: kotlin.ByteArray
+    ,
+    var `ownerCredential`: kotlin.ByteArray
+    ,
+    var `photos`: List<FfiAuthorizedReplicaPhoto>
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiAuthorizedReplica: FfiConverterRustBuffer<FfiAuthorizedReplica> {
+    override fun read(buf: ByteBuffer): FfiAuthorizedReplica {
+        return FfiAuthorizedReplica(
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiAuthorizedReplica) = (
+            FfiConverterByteArray.allocationSize(value.`profile`) +
+            FfiConverterByteArray.allocationSize(value.`ownerCredential`) +
+            FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto.allocationSize(value.`photos`)
+    )
+
+    override fun write(value: FfiAuthorizedReplica, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`profile`, buf)
+            FfiConverterByteArray.write(value.`ownerCredential`, buf)
+            FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto.write(value.`photos`, buf)
+    }
+}
+
+
+
+data class FfiAuthorizedReplicaPhoto (
+    var `manifest`: kotlin.ByteArray
+    ,
+    var `lease`: kotlin.ByteArray
+    ,
+    var `bytes`: kotlin.ByteArray
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiAuthorizedReplicaPhoto: FfiConverterRustBuffer<FfiAuthorizedReplicaPhoto> {
+    override fun read(buf: ByteBuffer): FfiAuthorizedReplicaPhoto {
+        return FfiAuthorizedReplicaPhoto(
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiAuthorizedReplicaPhoto) = (
+            FfiConverterByteArray.allocationSize(value.`manifest`) +
+            FfiConverterByteArray.allocationSize(value.`lease`) +
+            FfiConverterByteArray.allocationSize(value.`bytes`)
+    )
+
+    override fun write(value: FfiAuthorizedReplicaPhoto, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`manifest`, buf)
+            FfiConverterByteArray.write(value.`lease`, buf)
+            FfiConverterByteArray.write(value.`bytes`, buf)
+    }
+}
+
+
+
+data class FfiHostConditions (
+    var `wifiAvailable`: kotlin.Boolean?
+    ,
+    var `charging`: kotlin.Boolean?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiHostConditions: FfiConverterRustBuffer<FfiHostConditions> {
+    override fun read(buf: ByteBuffer): FfiHostConditions {
+        return FfiHostConditions(
+            FfiConverterOptionalBoolean.read(buf),
+            FfiConverterOptionalBoolean.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiHostConditions) = (
+            FfiConverterOptionalBoolean.allocationSize(value.`wifiAvailable`) +
+            FfiConverterOptionalBoolean.allocationSize(value.`charging`)
+    )
+
+    override fun write(value: FfiHostConditions, buf: ByteBuffer) {
+            FfiConverterOptionalBoolean.write(value.`wifiAvailable`, buf)
+            FfiConverterOptionalBoolean.write(value.`charging`, buf)
+    }
+}
+
+
+
+data class FfiNotificationEvent (
+    var `eventId`: kotlin.ByteArray
+    ,
+    var `kind`: FfiNotificationKind
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiNotificationEvent: FfiConverterRustBuffer<FfiNotificationEvent> {
+    override fun read(buf: ByteBuffer): FfiNotificationEvent {
+        return FfiNotificationEvent(
+            FfiConverterByteArray.read(buf),
+            FfiConverterTypeFfiNotificationKind.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiNotificationEvent) = (
+            FfiConverterByteArray.allocationSize(value.`eventId`) +
+            FfiConverterTypeFfiNotificationKind.allocationSize(value.`kind`)
+    )
+
+    override fun write(value: FfiNotificationEvent, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`eventId`, buf)
+            FfiConverterTypeFfiNotificationKind.write(value.`kind`, buf)
+    }
+}
+
+
+
+data class FfiNotificationPreferences (
+    var `likesEnabled`: kotlin.Boolean
+    ,
+    var `matchesEnabled`: kotlin.Boolean
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiNotificationPreferences: FfiConverterRustBuffer<FfiNotificationPreferences> {
+    override fun read(buf: ByteBuffer): FfiNotificationPreferences {
+        return FfiNotificationPreferences(
+            FfiConverterBoolean.read(buf),
+            FfiConverterBoolean.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiNotificationPreferences) = (
+            FfiConverterBoolean.allocationSize(value.`likesEnabled`) +
+            FfiConverterBoolean.allocationSize(value.`matchesEnabled`)
+    )
+
+    override fun write(value: FfiNotificationPreferences, buf: ByteBuffer) {
+            FfiConverterBoolean.write(value.`likesEnabled`, buf)
+            FfiConverterBoolean.write(value.`matchesEnabled`, buf)
+    }
+}
+
+
+
+data class FfiPeerContributionPolicy (
+    var `enabled`: kotlin.Boolean
+    ,
+    var `wifiOnly`: kotlin.Boolean
+    ,
+    var `chargingOnly`: kotlin.Boolean
+    ,
+    var `maxStorageBytes`: kotlin.ULong
+    ,
+    var `maxTransferBytes`: kotlin.ULong
+    ,
+    var `maxDurationMs`: kotlin.ULong
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiPeerContributionPolicy: FfiConverterRustBuffer<FfiPeerContributionPolicy> {
+    override fun read(buf: ByteBuffer): FfiPeerContributionPolicy {
+        return FfiPeerContributionPolicy(
+            FfiConverterBoolean.read(buf),
+            FfiConverterBoolean.read(buf),
+            FfiConverterBoolean.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterULong.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiPeerContributionPolicy) = (
+            FfiConverterBoolean.allocationSize(value.`enabled`) +
+            FfiConverterBoolean.allocationSize(value.`wifiOnly`) +
+            FfiConverterBoolean.allocationSize(value.`chargingOnly`) +
+            FfiConverterULong.allocationSize(value.`maxStorageBytes`) +
+            FfiConverterULong.allocationSize(value.`maxTransferBytes`) +
+            FfiConverterULong.allocationSize(value.`maxDurationMs`)
+    )
+
+    override fun write(value: FfiPeerContributionPolicy, buf: ByteBuffer) {
+            FfiConverterBoolean.write(value.`enabled`, buf)
+            FfiConverterBoolean.write(value.`wifiOnly`, buf)
+            FfiConverterBoolean.write(value.`chargingOnly`, buf)
+            FfiConverterULong.write(value.`maxStorageBytes`, buf)
+            FfiConverterULong.write(value.`maxTransferBytes`, buf)
+            FfiConverterULong.write(value.`maxDurationMs`, buf)
+    }
+}
+
+
 
 data class FfiRankingScore (
     var `probability`: kotlin.Double
-    
+
 ){
-    
 
-    
 
-    
+
+
+
     companion object
 }
 
@@ -1499,37 +2532,365 @@ public object FfiConverterTypeFfiRankingScore: FfiConverterRustBuffer<FfiRanking
 
 
 
+data class FfiSyncBudget (
+    var `maxDurationMs`: kotlin.ULong
+    ,
+    var `maxDownloadBytes`: kotlin.ULong
+    ,
+    var `maxUploadBytes`: kotlin.ULong
+    ,
+    var `maxPeers`: kotlin.UShort
+    ,
+    var `maxMailboxItems`: kotlin.UShort
+    ,
+    var `maxConcurrentRequests`: kotlin.UShort
+    ,
+    var `retries`: kotlin.UShort
+    ,
+    var `requestTimeoutMs`: kotlin.ULong
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiSyncBudget: FfiConverterRustBuffer<FfiSyncBudget> {
+    override fun read(buf: ByteBuffer): FfiSyncBudget {
+        return FfiSyncBudget(
+            FfiConverterULong.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterUShort.read(buf),
+            FfiConverterUShort.read(buf),
+            FfiConverterUShort.read(buf),
+            FfiConverterUShort.read(buf),
+            FfiConverterULong.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiSyncBudget) = (
+            FfiConverterULong.allocationSize(value.`maxDurationMs`) +
+            FfiConverterULong.allocationSize(value.`maxDownloadBytes`) +
+            FfiConverterULong.allocationSize(value.`maxUploadBytes`) +
+            FfiConverterUShort.allocationSize(value.`maxPeers`) +
+            FfiConverterUShort.allocationSize(value.`maxMailboxItems`) +
+            FfiConverterUShort.allocationSize(value.`maxConcurrentRequests`) +
+            FfiConverterUShort.allocationSize(value.`retries`) +
+            FfiConverterULong.allocationSize(value.`requestTimeoutMs`)
+    )
+
+    override fun write(value: FfiSyncBudget, buf: ByteBuffer) {
+            FfiConverterULong.write(value.`maxDurationMs`, buf)
+            FfiConverterULong.write(value.`maxDownloadBytes`, buf)
+            FfiConverterULong.write(value.`maxUploadBytes`, buf)
+            FfiConverterUShort.write(value.`maxPeers`, buf)
+            FfiConverterUShort.write(value.`maxMailboxItems`, buf)
+            FfiConverterUShort.write(value.`maxConcurrentRequests`, buf)
+            FfiConverterUShort.write(value.`retries`, buf)
+            FfiConverterULong.write(value.`requestTimeoutMs`, buf)
+    }
+}
+
+
+
+data class FfiSyncPeer (
+    var `peerId`: kotlin.String
+    ,
+    var `address`: kotlin.String
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiSyncPeer: FfiConverterRustBuffer<FfiSyncPeer> {
+    override fun read(buf: ByteBuffer): FfiSyncPeer {
+        return FfiSyncPeer(
+            FfiConverterString.read(buf),
+            FfiConverterString.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiSyncPeer) = (
+            FfiConverterString.allocationSize(value.`peerId`) +
+            FfiConverterString.allocationSize(value.`address`)
+    )
+
+    override fun write(value: FfiSyncPeer, buf: ByteBuffer) {
+            FfiConverterString.write(value.`peerId`, buf)
+            FfiConverterString.write(value.`address`, buf)
+    }
+}
+
+
+
+data class FfiSyncReport (
+    var `status`: FfiSyncStatus
+    ,
+    var `verifiedItems`: kotlin.UInt
+    ,
+    var `rejectedItems`: kotlin.UInt
+    ,
+    var `downloadedBytes`: kotlin.ULong
+    ,
+    var `uploadedBytes`: kotlin.ULong
+    ,
+    var `contactedPeers`: List<kotlin.String>
+    ,
+    var `newEvents`: List<FfiNotificationEvent>
+    ,
+    var `confirmedReplicas`: kotlin.UInt
+    ,
+    var `deferredReasons`: List<FfiSyncDeferredReason>
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiSyncReport: FfiConverterRustBuffer<FfiSyncReport> {
+    override fun read(buf: ByteBuffer): FfiSyncReport {
+        return FfiSyncReport(
+            FfiConverterTypeFfiSyncStatus.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterSequenceString.read(buf),
+            FfiConverterSequenceTypeFfiNotificationEvent.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterSequenceTypeFfiSyncDeferredReason.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiSyncReport) = (
+            FfiConverterTypeFfiSyncStatus.allocationSize(value.`status`) +
+            FfiConverterUInt.allocationSize(value.`verifiedItems`) +
+            FfiConverterUInt.allocationSize(value.`rejectedItems`) +
+            FfiConverterULong.allocationSize(value.`downloadedBytes`) +
+            FfiConverterULong.allocationSize(value.`uploadedBytes`) +
+            FfiConverterSequenceString.allocationSize(value.`contactedPeers`) +
+            FfiConverterSequenceTypeFfiNotificationEvent.allocationSize(value.`newEvents`) +
+            FfiConverterUInt.allocationSize(value.`confirmedReplicas`) +
+            FfiConverterSequenceTypeFfiSyncDeferredReason.allocationSize(value.`deferredReasons`)
+    )
+
+    override fun write(value: FfiSyncReport, buf: ByteBuffer) {
+            FfiConverterTypeFfiSyncStatus.write(value.`status`, buf)
+            FfiConverterUInt.write(value.`verifiedItems`, buf)
+            FfiConverterUInt.write(value.`rejectedItems`, buf)
+            FfiConverterULong.write(value.`downloadedBytes`, buf)
+            FfiConverterULong.write(value.`uploadedBytes`, buf)
+            FfiConverterSequenceString.write(value.`contactedPeers`, buf)
+            FfiConverterSequenceTypeFfiNotificationEvent.write(value.`newEvents`, buf)
+            FfiConverterUInt.write(value.`confirmedReplicas`, buf)
+            FfiConverterSequenceTypeFfiSyncDeferredReason.write(value.`deferredReasons`, buf)
+    }
+}
+
+
+
+data class FfiSyncRequest (
+    /**
+     * Postcard-encoded signed public credential; account secret material never enters this DTO.
+     */
+    var `credential`: kotlin.ByteArray
+    ,
+    var `trustedIssuerKeys`: List<kotlin.ByteArray>
+    ,
+    var `revokedSerials`: List<kotlin.ByteArray>
+    ,
+    var `peers`: List<FfiSyncPeer>
+    ,
+    var `budget`: FfiSyncBudget
+    ,
+    var `contributionPolicy`: FfiPeerContributionPolicy
+    ,
+    var `hostConditions`: FfiHostConditions
+    ,
+    var `authorizedReplicas`: List<FfiAuthorizedReplica>
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiSyncRequest: FfiConverterRustBuffer<FfiSyncRequest> {
+    override fun read(buf: ByteBuffer): FfiSyncRequest {
+        return FfiSyncRequest(
+            FfiConverterByteArray.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceTypeFfiSyncPeer.read(buf),
+            FfiConverterTypeFfiSyncBudget.read(buf),
+            FfiConverterTypeFfiPeerContributionPolicy.read(buf),
+            FfiConverterTypeFfiHostConditions.read(buf),
+            FfiConverterSequenceTypeFfiAuthorizedReplica.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiSyncRequest) = (
+            FfiConverterByteArray.allocationSize(value.`credential`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`trustedIssuerKeys`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`revokedSerials`) +
+            FfiConverterSequenceTypeFfiSyncPeer.allocationSize(value.`peers`) +
+            FfiConverterTypeFfiSyncBudget.allocationSize(value.`budget`) +
+            FfiConverterTypeFfiPeerContributionPolicy.allocationSize(value.`contributionPolicy`) +
+            FfiConverterTypeFfiHostConditions.allocationSize(value.`hostConditions`) +
+            FfiConverterSequenceTypeFfiAuthorizedReplica.allocationSize(value.`authorizedReplicas`)
+    )
+
+    override fun write(value: FfiSyncRequest, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`credential`, buf)
+            FfiConverterSequenceByteArray.write(value.`trustedIssuerKeys`, buf)
+            FfiConverterSequenceByteArray.write(value.`revokedSerials`, buf)
+            FfiConverterSequenceTypeFfiSyncPeer.write(value.`peers`, buf)
+            FfiConverterTypeFfiSyncBudget.write(value.`budget`, buf)
+            FfiConverterTypeFfiPeerContributionPolicy.write(value.`contributionPolicy`, buf)
+            FfiConverterTypeFfiHostConditions.write(value.`hostConditions`, buf)
+            FfiConverterSequenceTypeFfiAuthorizedReplica.write(value.`authorizedReplicas`, buf)
+    }
+}
+
+
+
 
 
 sealed class FfiException: kotlin.Exception() {
-    
+
     class InvalidInput(
         ) : FfiException() {
         override val message
             get() = ""
     }
-    
+
     class IncompatibleModel(
         ) : FfiException() {
         override val message
             get() = ""
     }
-    
+
     class Internal(
         ) : FfiException() {
         override val message
             get() = ""
     }
-    
 
-    
+    class AccountMissing(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class AccountLocked(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class AccountBusy(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class AccountInaccessible(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class AuthenticationFailed(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class CorruptVault(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class UnsupportedVaultVersion(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class AccountAlreadyExists(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class StorageFull(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class StorageUnavailable(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class Unauthorized(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class NetworkUnavailable(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class Cancelled(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+
+
 
 
     companion object ErrorHandler : UniffiRustCallStatusErrorHandler<FfiException> {
         override fun lift(error_buf: RustBuffer.ByValue): FfiException = FfiConverterTypeFfiError.lift(error_buf)
     }
 
-    
+
 }
 
 /**
@@ -1537,12 +2898,25 @@ sealed class FfiException: kotlin.Exception() {
  */
 public object FfiConverterTypeFfiError : FfiConverterRustBuffer<FfiException> {
     override fun read(buf: ByteBuffer): FfiException {
-        
+
 
         return when(buf.getInt()) {
             1 -> FfiException.InvalidInput()
             2 -> FfiException.IncompatibleModel()
             3 -> FfiException.Internal()
+            4 -> FfiException.AccountMissing()
+            5 -> FfiException.AccountLocked()
+            6 -> FfiException.AccountBusy()
+            7 -> FfiException.AccountInaccessible()
+            8 -> FfiException.AuthenticationFailed()
+            9 -> FfiException.CorruptVault()
+            10 -> FfiException.UnsupportedVaultVersion()
+            11 -> FfiException.AccountAlreadyExists()
+            12 -> FfiException.StorageFull()
+            13 -> FfiException.StorageUnavailable()
+            14 -> FfiException.Unauthorized()
+            15 -> FfiException.NetworkUnavailable()
+            16 -> FfiException.Cancelled()
             else -> throw RuntimeException("invalid error enum value, something is very wrong!!")
         }
     }
@@ -1558,6 +2932,58 @@ public object FfiConverterTypeFfiError : FfiConverterRustBuffer<FfiException> {
                 4UL
             )
             is FfiException.Internal -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.AccountMissing -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.AccountLocked -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.AccountBusy -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.AccountInaccessible -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.AuthenticationFailed -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.CorruptVault -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.UnsupportedVaultVersion -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.AccountAlreadyExists -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.StorageFull -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.StorageUnavailable -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.Unauthorized -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.NetworkUnavailable -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.Cancelled -> (
                 // Add the size for the Int that specifies the variant plus the size needed for all fields
                 4UL
             )
@@ -1578,9 +3004,234 @@ public object FfiConverterTypeFfiError : FfiConverterRustBuffer<FfiException> {
                 buf.putInt(3)
                 Unit
             }
+            is FfiException.AccountMissing -> {
+                buf.putInt(4)
+                Unit
+            }
+            is FfiException.AccountLocked -> {
+                buf.putInt(5)
+                Unit
+            }
+            is FfiException.AccountBusy -> {
+                buf.putInt(6)
+                Unit
+            }
+            is FfiException.AccountInaccessible -> {
+                buf.putInt(7)
+                Unit
+            }
+            is FfiException.AuthenticationFailed -> {
+                buf.putInt(8)
+                Unit
+            }
+            is FfiException.CorruptVault -> {
+                buf.putInt(9)
+                Unit
+            }
+            is FfiException.UnsupportedVaultVersion -> {
+                buf.putInt(10)
+                Unit
+            }
+            is FfiException.AccountAlreadyExists -> {
+                buf.putInt(11)
+                Unit
+            }
+            is FfiException.StorageFull -> {
+                buf.putInt(12)
+                Unit
+            }
+            is FfiException.StorageUnavailable -> {
+                buf.putInt(13)
+                Unit
+            }
+            is FfiException.Unauthorized -> {
+                buf.putInt(14)
+                Unit
+            }
+            is FfiException.NetworkUnavailable -> {
+                buf.putInt(15)
+                Unit
+            }
+            is FfiException.Cancelled -> {
+                buf.putInt(16)
+                Unit
+            }
         }.let { /* this makes the `when` an expression, which ensures it is exhaustive */ }
     }
 
+}
+
+
+
+
+enum class FfiNotificationKind {
+
+    NEW_LIKE,
+    NEW_MATCH;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiNotificationKind: FfiConverterRustBuffer<FfiNotificationKind> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiNotificationKind.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiNotificationKind) = 4UL
+
+    override fun write(value: FfiNotificationKind, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+enum class FfiSyncDeferredReason {
+
+    NO_PEERS,
+    NO_REACHABLE_PEERS,
+    UNSUPPORTED_PEER,
+    DEADLINE,
+    CONTRIBUTION_SKIPPED,
+    LOCAL_STORAGE_LIMIT;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiSyncDeferredReason: FfiConverterRustBuffer<FfiSyncDeferredReason> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiSyncDeferredReason.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiSyncDeferredReason) = 4UL
+
+    override fun write(value: FfiSyncDeferredReason, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+enum class FfiSyncStatus {
+
+    COMPLETE,
+    PARTIAL,
+    DEFERRED,
+    CANCELLED,
+    BUDGET_EXHAUSTED;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiSyncStatus: FfiConverterRustBuffer<FfiSyncStatus> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiSyncStatus.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiSyncStatus) = 4UL
+
+    override fun write(value: FfiSyncStatus, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterOptionalBoolean: FfiConverterRustBuffer<kotlin.Boolean?> {
+    override fun read(buf: ByteBuffer): kotlin.Boolean? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterBoolean.read(buf)
+    }
+
+    override fun allocationSize(value: kotlin.Boolean?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterBoolean.allocationSize(value)
+        }
+    }
+
+    override fun write(value: kotlin.Boolean?, buf: ByteBuffer) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterBoolean.write(value, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterOptionalTypeFfiSyncReport: FfiConverterRustBuffer<FfiSyncReport?> {
+    override fun read(buf: ByteBuffer): FfiSyncReport? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterTypeFfiSyncReport.read(buf)
+    }
+
+    override fun allocationSize(value: FfiSyncReport?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterTypeFfiSyncReport.allocationSize(value)
+        }
+    }
+
+    override fun write(value: FfiSyncReport?, buf: ByteBuffer) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterTypeFfiSyncReport.write(value, buf)
+        }
+    }
 }
 
 
@@ -1609,15 +3260,237 @@ public object FfiConverterSequenceDouble: FfiConverterRustBuffer<List<kotlin.Dou
             FfiConverterDouble.write(it, buf)
         }
     }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceString: FfiConverterRustBuffer<List<kotlin.String>> {
+    override fun read(buf: ByteBuffer): List<kotlin.String> {
+        val len = buf.getInt()
+        return List<kotlin.String>(len) {
+            FfiConverterString.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<kotlin.String>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterString.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<kotlin.String>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterString.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceByteArray: FfiConverterRustBuffer<List<kotlin.ByteArray>> {
+    override fun read(buf: ByteBuffer): List<kotlin.ByteArray> {
+        val len = buf.getInt()
+        return List<kotlin.ByteArray>(len) {
+            FfiConverterByteArray.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<kotlin.ByteArray>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterByteArray.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<kotlin.ByteArray>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterByteArray.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiAuthorizedReplica: FfiConverterRustBuffer<List<FfiAuthorizedReplica>> {
+    override fun read(buf: ByteBuffer): List<FfiAuthorizedReplica> {
+        val len = buf.getInt()
+        return List<FfiAuthorizedReplica>(len) {
+            FfiConverterTypeFfiAuthorizedReplica.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiAuthorizedReplica>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiAuthorizedReplica.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiAuthorizedReplica>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiAuthorizedReplica.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto: FfiConverterRustBuffer<List<FfiAuthorizedReplicaPhoto>> {
+    override fun read(buf: ByteBuffer): List<FfiAuthorizedReplicaPhoto> {
+        val len = buf.getInt()
+        return List<FfiAuthorizedReplicaPhoto>(len) {
+            FfiConverterTypeFfiAuthorizedReplicaPhoto.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiAuthorizedReplicaPhoto>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiAuthorizedReplicaPhoto.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiAuthorizedReplicaPhoto>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiAuthorizedReplicaPhoto.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiNotificationEvent: FfiConverterRustBuffer<List<FfiNotificationEvent>> {
+    override fun read(buf: ByteBuffer): List<FfiNotificationEvent> {
+        val len = buf.getInt()
+        return List<FfiNotificationEvent>(len) {
+            FfiConverterTypeFfiNotificationEvent.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiNotificationEvent>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiNotificationEvent.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiNotificationEvent>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiNotificationEvent.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiSyncPeer: FfiConverterRustBuffer<List<FfiSyncPeer>> {
+    override fun read(buf: ByteBuffer): List<FfiSyncPeer> {
+        val len = buf.getInt()
+        return List<FfiSyncPeer>(len) {
+            FfiConverterTypeFfiSyncPeer.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiSyncPeer>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiSyncPeer.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiSyncPeer>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiSyncPeer.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiSyncDeferredReason: FfiConverterRustBuffer<List<FfiSyncDeferredReason>> {
+    override fun read(buf: ByteBuffer): List<FfiSyncDeferredReason> {
+        val len = buf.getInt()
+        return List<FfiSyncDeferredReason>(len) {
+            FfiConverterTypeFfiSyncDeferredReason.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiSyncDeferredReason>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiSyncDeferredReason.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiSyncDeferredReason>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiSyncDeferredReason.write(it, buf)
+        }
+    }
 } fun `apiVersion`(): kotlin.String {
             return FfiConverterString.lift(
     uniffiRustCall() { _status ->
     UniffiLib.uniffi_annoda_mobile_ffi_fn_func_api_version(
-    
+
         _status)
 }
     )
     }
-    
+
+
+    @Throws(FfiException::class) fun `createAccount`(`directory`: kotlin.String, `passphrase`: kotlin.String): AccountHandle {
+            return FfiConverterTypeAccountHandle.lift(
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_account(
+
+
+        FfiConverterString.lower(`directory`),
+        FfiConverterString.lower(`passphrase`),_status)
+}
+    )
+    }
+
+
+    @Throws(FfiException::class) fun `openAccount`(`directory`: kotlin.String, `passphrase`: kotlin.String): AccountHandle {
+            return FfiConverterTypeAccountHandle.lift(
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_account(
+
+
+        FfiConverterString.lower(`directory`),
+        FfiConverterString.lower(`passphrase`),_status)
+}
+    )
+    }
+
 
 

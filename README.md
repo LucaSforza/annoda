@@ -35,6 +35,20 @@ python3 crates/mobile-ffi/tests/python_ffi_smoke.py target/debug/libannoda_mobil
 
 The network demo is a local test topology. Production peers must be configured with trusted issuer public keys; the synthetic evaluator and development issuer use fixtures only.
 
+Exercise the encrypted account vault, including a fresh-process restore, verification of the existing credential, and decryption of an old sealed message, with:
+
+```sh
+cargo test --locked -p annoda-core key_store::tests -- --test-threads=1
+```
+
+Background synchronization is a bounded Rust service shared by foreground and host-scheduled execution. Its real-loopback acceptance test is:
+
+```sh
+cargo test --locked -p annoda-network --test sync_loopback -- --nocapture
+```
+
+`PortableAccountVault` always encrypts account keys and requires an explicit create or unlock call with caller-supplied authorization. The volunteer node has a separate filesystem-protected plaintext transport identity in its private data directory so restarts retain the same PeerId; protect that directory and its storage volume. See [key management](docs/key-management.md) for permissions and recovery limits.
+
 To start a volunteer node, set a real trusted issuer public key as 64 hexadecimal characters, then configure the listen address and resource bounds. Add `--bootstrap "$PEER_ID@$MULTIADDR"` when joining an existing network; omit it for the first node.
 
 ```sh

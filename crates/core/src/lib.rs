@@ -1,11 +1,14 @@
 #![forbid(unsafe_code)]
 
 pub mod identity;
+pub mod key_store;
 pub mod matching;
+pub mod notifications;
 pub mod protocol;
 pub mod storage;
 
 pub use identity::{DeviceKeyPair, VerifiedCredential};
+pub use key_store::{AccountKeyStore, AccountKeyStoreError, PortableAccountVault, UnlockedAccount};
 pub use protocol::{ContentHash, MessageEnvelope, ProfileId, PublicProfile};
 
 #[derive(Debug, thiserror::Error)]

@@ -246,6 +246,7 @@ async fn local_swarms_replicate_photos_and_deliver_private_likes_and_contacts() 
 
     // Restart the replica from SQLite to retain its photo and queued parcels.
     bob_node.shutdown().await;
+    let volunteer_b_peer_id = volunteer_b.peer_id();
     volunteer_b.shutdown().await;
     let volunteer_b = PeerNode::start(
         config(&volunteer_b_dir, clock.clone(), vec![]),
@@ -253,6 +254,11 @@ async fn local_swarms_replicate_photos_and_deliver_private_likes_and_contacts() 
     )
     .await
     .unwrap();
+    assert_eq!(
+        volunteer_b.peer_id(),
+        volunteer_b_peer_id,
+        "a volunteer must retain its transport identity after a full restart"
+    );
     let b_addr = volunteer_b.wait_for_listeners().await.unwrap()[0].clone();
     bob_node = PeerNode::start(
         config(

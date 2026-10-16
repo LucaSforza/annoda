@@ -8,7 +8,7 @@ use hpke::{
 use rand_chacha::ChaCha20Rng;
 use rand_chacha::rand_core::SeedableRng;
 use serde::{Deserialize, Serialize};
-use zeroize::Zeroizing;
+use zeroize::{Zeroize, Zeroizing};
 
 use crate::{Error, Result, protocol::ProfileId};
 
@@ -103,6 +103,15 @@ impl DevelopmentIssuer {
 
     pub fn issuer_id(&self) -> [u8; 32] {
         self.keys.issuer_id()
+    }
+
+    pub fn public_key(&self) -> [u8; 32] {
+        self.keys.public_key()
+    }
+
+    #[cfg(test)]
+    pub(crate) fn test_public_key(&self) -> [u8; 32] {
+        self.keys.public_key()
     }
 
     pub fn trusted_issuers(&self) -> TrustedIssuers {
@@ -221,6 +230,31 @@ impl DeviceKeyPair {
 
     pub fn profile_id(&self) -> ProfileId {
         ProfileId::from_signing_key(&self.signing_public)
+    }
+
+    pub(crate) fn export_secret_material(&self) -> (Zeroizing<[u8; 32]>, Zeroizing<[u8; 32]>) {
+        let signing = Zeroizing::new(self.signing.to_bytes());
+        let mut serialized = self.encryption.to_bytes();
+        let mut encryption = Zeroizing::new([0u8; 32]);
+        encryption.copy_from_slice(serialized.as_slice());
+        serialized.zeroize();
+        (signing, encryption)
+    }
+
+    pub(crate) fn from_secret_material(
+        signing_secret: &[u8; 32],
+        encryption_secret: &[u8; 32],
+    ) -> Result<Self> {
+        let signing = SigningKey::from_bytes(signing_secret);
+        let encryption = <HpkeKem as KemTrait>::PrivateKey::from_bytes(encryption_secret)
+            .map_err(|_| Error::Crypto)?;
+        let encryption_public = HpkeKem::sk_to_pk(&encryption).to_bytes().to_vec();
+        Ok(Self {
+            signing_public: signing.verifying_key().to_bytes(),
+            encryption_public,
+            signing,
+            encryption,
+        })
     }
     pub fn signing_public_key(&self) -> [u8; 32] {
         self.signing_public

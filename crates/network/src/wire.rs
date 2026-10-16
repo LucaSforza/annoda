@@ -44,6 +44,15 @@ pub enum RpcRequest {
     ListProfiles {
         limit: u16,
     },
+    /// Added after all M1 variants to preserve their Postcard discriminants.
+    PollMailboxPage {
+        recipient: VerifiedCredential,
+        challenge: [u8; 32],
+        proof: Vec<u8>,
+        proof_time: u64,
+        cursor: Option<RpcMailboxCursor>,
+        limit: u16,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -54,7 +63,21 @@ pub enum RpcResponse {
     Profiles(Vec<PublicProfile>),
     Photo(Option<Vec<u8>>),
     Mailbox(Vec<MailboxParcel>),
-    Error { code: RpcErrorCode },
+    Error {
+        code: RpcErrorCode,
+    },
+    /// Additive paging capability; old peers return an unsupported/malformed RPC.
+    MailboxPage {
+        parcels: Vec<MailboxParcel>,
+        next_cursor: Option<RpcMailboxCursor>,
+        completed: bool,
+    },
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
+pub struct RpcMailboxCursor {
+    pub expires_at: u64,
+    pub parcel_id: [u8; 16],
 }
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]

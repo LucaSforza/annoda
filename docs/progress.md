@@ -1,4 +1,77 @@
-# Delivery progress — 2026-10-16
+# M2 implementation progress
+
+Branch `feat/m2-persistent-identities-sync`, base `976464d` on master (fetched origin/master, no divergence). Working tree initially clean. Existing AGPL license preserved. KB skill read; M2 contracts, ADRs and UML established before implementation. Baseline `CARGO_HOME=/tmp/annoda-cargo CCACHE_DISABLE=1 cargo test --locked --offline --workspace` passed all 39 tests, including real TCP loopback.
+
+M2 delivers a verified Rust-only prototype: exact persistent account keys, stable volunteer PeerId, finite real-TCP synchronization, transactional notification outbox and opt-in authorized replica forwarding. No central application or push server is introduced. Principal authored documentation; GPT-6 Luna/high agents authored all Rust, bindings, host examples and root integration changes.
+
+## Delivered components
+
+| Component / affected files | Verified behavior | Boundary |
+|---|---|---|
+| core `identity.rs`, `key_store.rs` | AccountKeyStore separates create/unlock; PortableAccountVault restores exact Ed25519 seed and actual HPKE private bytes; UnlockedAccount owns exclusive lease | Portable passphrase backend, not native Keychain/Keystore |
+| core `storage.rs`, `notifications.rs` | Additive M1-compatible SQLite tables; paged mailbox/cursors; atomic verified state/replay/event/checkpoint commits; prefs, bounded pending/history, explicit idempotent ack; private contact persistence | Client DB remains unencrypted; no exactly-once OS display claim |
+| network `node_identity.rs`, `node.rs` | Filesystem-protected persistent node key, initialized PeerId marker, explicit replacement, corruption/missing/busy errors; lock held until actor/swarm ends | Transport key is deliberately plaintext under operator permissions, distinct from encrypted account vault |
+| network `sync.rs`, `transfer.rs`, `wire.rs` | One `sync_once` service; finite temporary client swarm; allowlisted known peers, outbound-only RPC, bounded retries/paging/cancellation; raw TCP metering and optional combined-byte phase cap | No new bootstrap discovery, mobile inbound provider, parcel relay or indefinite daemon |
+| mobile-ffi `src/lib.rs`, generated Swift/Kotlin/Python | Opaque account/session handles; start/cancel/wait/report; durable event read/ack/preferences; bounded signed replica DTOs; shared Tokio runtime and serialized lock/drain | Full account/profile/swipe/contact UI facade remains future work |
+| mobile-ffi `examples/{android,ios}` | WorkManager unique periodic worker/factory and BGAppRefreshTask registration/expiration source examples; host authorization, 20-second chosen ceiling, permission-aware notifications | Native compilers/SDK/device tests unavailable; source examples only |
+| root README, AGENTS, `.gitignore` | Exact demos, KB workflow, explicit node-key exception; Python caches ignored and old tracked bytecode removed | Existing CI automatically exercises expanded workspace and Python smoke; no hosted CI success claimed here |
+
+Authoritative contracts: [key management](key-management.md), [sync](background-sync.md), [notifications](notifications.md), [contribution](peer-contribution.md), [mobile integration](mobile-integration.md). [ADRs 0004/0005](decisions/README.md), three M2 class diagrams and seven sequences in [M2 UML](uml/m2.md) preceded delegated implementation. Existing five domain class/twelve sequence diagrams remain intact.
+
+## Persistence and end-to-end evidence
+
+The seven serial vault tests passed before Phase C began. `persists_identity_and_reopens_in_a_fresh_process` creates and exits one child process, then another unlocks the vault, directly compares both public keys and credential subject/ProfileId, verifies the old credential under normal trust/time rules, and decrypts an earlier ciphertext. Another child holds the vault while its parent receives BusyLocked. Wrong authorization, tampering, unsupported costs, missing paths, mode checks, symlink target preservation and concurrent creation never generate replacement account keys.
+
+Vault v1 uses Argon2id v19 (64 MiB, three iterations, one lane), XChaCha20-Poly1305, fresh OS-random salt/nonce, purpose/header AAD, zeroizing temporary secrets, 0700/0600 paths, advisory locks and fsynced atomic non-clobber publication. Cargo resolved Argon2 0.6.0 and chacha20poly1305 0.11.0. Native wrapping and password/key recovery are not implemented.
+
+`sync_loopback` uses real TCP/Noise/Yamux and SQLite. Bob sends a signed recipient-sealed like through a real volunteer RPC while Alice's original vault is locked. A new restored Alice session polls it, persists Incoming and NewLike, then acknowledges the event. A second ordered sender exercises a one-item run and resumed paging; completed scans reset the cursor. Repeated scans do not recreate acknowledged events. Alice explicitly reciprocates through real RPC, both participants recognize the same match and owner-scoped NewMatch events, and a subsequent contact parcel persists through the match-gated checkpointed receive path without inventing another notification kind. This network test restores released keys in new account objects; the separate vault test proves complete process termination/restoration.
+
+`node_identity_process` launches fresh child processes and proves stable PeerId. Existing M1 real-loopback acceptance also verifies same PeerId after node-instance restart while serving previously authorized photographs and retaining the offline parcel. Principal additionally launched the built `annoda-node` executable twice from a previously absent nested directory, using loopback/ephemeral TCP and the same data directory: both SIGINT shutdowns exited 0, PeerId matched, directory/key modes were 0700/0600. No private key was printed; temporary files were removed.
+
+Eight `sync_limits` real-TCP tests cover unreachable peers, selected-peer/item limits, raw byte and short-deadline ceilings during a stalled Noise handshake, exactly one versus three requests for retry counts 0/2, cancellation after an earlier like/outbox commit and idempotent continuation, and cooperative disabled/tiny-storage/tiny-transfer/success paths. They also reject duplicate owners before optional transfer and report Partial when only some complete copies are acknowledged. Meter unit tests exercise concurrent connections and combined optional upload/download caps. RPC ingress regression proves a connected peer cannot make the sync client decode an unsolicited application request.
+
+General core tests cover invalid issuers, revocation, expiry, signatures, recipient binding, replayed likes, denied contacts, transactional outbox/checkpoint rollback, preference re-enable behavior, expired rejection cleanup, M1 database preservation and a bounded SQLite lock wait. The cancellation acceptance blocks a real TCP/Noise handshake after an earlier commit; adversarial partial-RPC-body/fuzz/physical-device crash matrices remain additional hardening work.
+
+## Commands and final results
+
+Principal ran these serially after the final Rust changes, on Rust 1.99.0:
+
+| Command | Result |
+|---|---|
+| `cargo fmt --all -- --check` | PASS |
+| `cargo clippy --locked --offline --workspace --all-targets -- -D warnings` | PASS |
+| `cargo test --locked --offline --workspace` | PASS: 78 tests, none failed/ignored; four doctest suites passed |
+| `cargo build --locked --offline --workspace` | PASS |
+| `python3 crates/mobile-ffi/tests/python_ffi_smoke.py target/debug/libannoda_mobile_ffi.so` | PASS against final rebuilt library |
+| Built `annoda-node` two-process loopback/SIGINT harness | PASS: fresh nested directory, stable PeerId, exit 0 and private modes |
+
+Breakdown: core 28, intelligence 17, mobile FFI 5, network library 14, binary parsers 2, M1 loopback 1, node process harness 2, sync limits 8, M2 loopback 1. Final M2 loopback ran in 8.41 seconds; timing varies and is not a mobile benchmark. Reproduce specific networking with `cargo test --locked -p annoda-network --test sync_loopback --test sync_limits --test node_identity_process -- --nocapture` and vault proof with `cargo test --locked -p annoda-core key_store::tests -- --test-threads=1`.
+
+Local sandbox required `CARGO_HOME=/tmp/annoda-cargo CCACHE_DISABLE=1`, reviewed loopback execution and an earlier reviewed dependency fetch. Python additionally used `PYTHONDONTWRITEBYTECODE=1 CARGO_NET_OFFLINE=true`. These environment workarounds do not change release behavior. Standard writable machines can use the README commands. CI already runs the required workspace checks and one-argument Python smoke; that smoke automatically creates a clearly synthetic encrypted-vault/public-credential fixture in a temporary directory.
+
+Swift/Kotlin/Python bindings were generated from the built shared library with UniFFI, with trailing-whitespace normalization only. Python ABI checks exercise ranker compatibility, create/open/lock, exact ProfileId, wrong-passphrase typed errors, persisted preferences, nonempty verified NewLike metadata and explicit ack/idempotent ack, and a valid no-peer session/report with cancellation request. No-peer completion can win the cancellation race; blocked-network cancellation is proved separately by Rust TCP tests. `swiftc` and `kotlinc` are absent, so generated bindings and host samples have not been compiled or executed on their native platforms.
+
+## Workflow evidence and remaining limits
+
+KB contracts/security/UML were established before implementation, and account plus transport persistence gates passed before sync implementation started. Initial vault/outbox code and tests were introduced together without a captured red run; strict fail-first chronology is not claimed for those original tests. Observed red-before-fix regressions include initialized transport key loss causing replacement, duplicate replica owners inflating count (2 versus 0), incomplete batches reporting Complete rather than Partial, and unsolicited sync RPC admission returning a decoded Unauthorized response instead of failing protocol negotiation. Final checks include those fixes; no temporary reverts were used to manufacture evidence.
+
+Remaining security/operational limits:
+
+- Weak passphrases, rollback/backup theft, same-user compromise, swap/core dumps and stalled filesystems remain risks. Rust needs decrypted keys in memory. Account vault encryption does not encrypt client SQLite. Node transport keys depend on operator filesystem/volume protection.
+- Budgets cap consumed raw TCP stream bytes, including transport/control overhead, not kernel buffering, packet headers or radio billing. Short CPU/SQLite finalization cannot be forcibly preempted. Optional storage allocation bounds authorized batch payload/cache size, not whole-process RAM or physical SQLite/WAL size.
+- Known reachable volunteers are required. NAT/firewalls, routing loss, peer overlap and OS scheduling can prevent work. Cooperation is finite outbound replica forwarding, not inbound mobile serving, autonomous repair, durable mobile availability, NAT traversal or circuit relay.
+- Notification delivery is at least once until host ack, with stable ids for coalescing; OS acceptance is not proof of visible display. Background authorization, Keychain/Keystore wrapping, Android/iOS packaging/permissions and physical-device lifecycle tests remain host work. The 20-second sample ceiling does not guarantee any OS execution time; neither scheduling nor force-quit behavior is promised.
+- Existing M1 production gaps remain: no real CIE adapter, fresh distributed revocation service, real image moderation/encoder, global deletion guarantee or independent security audit. Public images and direct IP/traffic metadata remain exposed by design; no centralized swipe graph or push server is added.
+
+Next: validate platform wrapping/authorization and scheduling on physical devices; add partial-frame/crash/filesystem-fault and adversarial parser tests; then harden abuse/physical quotas, bootstrap/NAT/repair and production issuer/revocation adapters. Full native applications remain outside this milestone.
+
+Final documentation verification: Mermaid parsed all 28 diagrams (including ten M2 additions), relative links resolved across all 32 KB Markdown files, the repository KB skill validator reported `Skill is valid!`, and `git diff --check` was clean after generated-source whitespace normalization. Temporary Mermaid tooling is not a project dependency.
+
+The following M1 report is a historical baseline. Its memory-only account/ephemeral transport limitations are superseded by the M2 delivery above.
+
+---
+
+# M1 delivery snapshot — 2026-10-16
 
 Annoda delivers an experimental local-network vertical slice. It is not a production dating service. Intended architecture elsewhere in this KB includes planned features; this page is the delivery/evidence authority.
 
