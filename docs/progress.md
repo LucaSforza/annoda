@@ -175,3 +175,20 @@ Observed fail-before-fix regressions include extreme regularization accepted whe
 ## Documentation verification
 
 Final validation: all relative links resolved across 25 KB Markdown files. Mermaid 11.17.2 parsed all 18 blocks (architecture + five classes + twelve sequences); final revalidation passed after the sealed-carrier changes. Temporary Mermaid/DOM tooling under `/tmp` adds no project runtime dependency. Parser caught semicolon issues in sequence messages, fixed and reparsed. Skill validator reports `Skill is valid!` for `docs/skills/annoda-kb`. Skill source is repository-contained because mounted `.agents`/`.codex` are read-only; invoke by explicit path.
+
+## Test source layout and Rust line counter
+
+All 16 inline Rust unit-test modules now live in separate `src/tests/*.rs` files, included under their original parent modules so tests retain access to private implementation details. Existing integration tests remain in their package `tests/` directories. No runtime behavior changed.
+
+The root `justfile` contains one recipe, `count-lines`. It counts physical lines across Rust files while excluding `target`, test directories, test-named files, test fixtures and the three-line test-module declarations. Blank and comment lines remain included in this raw line count.
+
+Verification on 2026-10-16:
+
+| Command | Result |
+|---|---|
+| `cargo fmt --all -- --check` | PASS |
+| `CARGO_HOME=/tmp/annoda-cargo CCACHE_DISABLE=1 cargo clippy --locked --offline --workspace --all-targets -- -D warnings` | PASS; compiles all targets including moved tests |
+| `CARGO_HOME=/tmp/annoda-cargo CCACHE_DISABLE=1 cargo build --locked --offline --workspace` | PASS |
+| `just count-lines` | PASS: 7,883 Rust source lines |
+
+Tests were not executed for this source-layout-only change; moved test targets compiled through Clippy's `--all-targets` check.
