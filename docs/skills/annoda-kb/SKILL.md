@@ -16,3 +16,5 @@ Write a failing regression/acceptance test before implementation. Follow reposit
 After implementation, run required checks from testing.md and actual network acceptance for network changes. Record exact verified behavior, commands, failures and deferred adapters in progress.md. Development credentials and deterministic classifiers must remain visibly nonproduction. A generated mobile binding is not proof of native runtime execution.
 
 When contradictions arise, inspect code/tests and decide whether implementation bug or proposed contract change; never silently rewrite KB to bless unsafe behavior. Preserve compatibility unless migration ADR defines transition.
+
+For the complete public application workflow, read `../../application-api.md`, `../../durable-operations.md` and ADR 0006 before changing client orchestration or UniFFI adapters. M3 diagrams live in `../../uml/m3.md`; every new diagram belongs in its own Markdown file. Never replace actual public-API network acceptance with low-level user actions in fixtures.

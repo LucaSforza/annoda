@@ -1,3 +1,72 @@
+# M3 implementation progress
+
+Branch `feat/m3-application-api` starts at merged master `59571a4`. Working tree was clean; existing licensing, M1/M2 behavior and four crates are preserved. The KB skill, application/operation contracts, ADR 0006 and individual M3 diagrams preceded implementation. Principal authored docs; GPT-6 Luna/high implementation agents authored Rust, bindings, fixtures and README changes. M3 delivers the local Rust application workflow; native production readiness remains outside this evidence.
+
+## Delivered application surface
+
+| Component / affected files | Behavior | Boundary |
+|---|---|---|
+| network `src/client.rs` | AnnodaClient create/open/close; stable public identity summary; import/persist/revalidate credentials; own-profile getter; publish/update; discover; validated fetch; like/pass; incoming/matches; explicit contact exchange; block; finite sync/recovery and operation inspection | Private keys, SQLite and libp2p remain behind service; known reachable volunteers only |
+| core `src/storage.rs` | Additive credential, peer-credential, owner binding, candidate/embedding, feedback/model, report, immutable outgoing work, acknowledgement/failure and rotating drain tables; existing FSM and notification transactions reused | Sensitive local DB remains filesystem-protected plaintext; vault encryption is unchanged |
+| intelligence `ranking.rs`, `safety.rs`; network `client/ranking_reporting.rs` | Validated versioned model snapshots; signed bounded local reports; private feedback/reset; cached embeddings; typed EncoderMode; persisted block/pass exclusions; deterministic score ties | No real encoder or NSFW model; synthetic backends require explicit opt-in, unavailable photo safety fails closed |
+| network `sync.rs` and client session plumbing | Outgoing replay and existing incoming verification share one temporary node, raw transport meter, cancellation token and deadline; short local transactions; expired/superseded/blocked work fails terminally | No distributed atomicity, recipient-delivery acknowledgement, guaranteed reachability or permanent client daemon |
+| mobile-ffi `src/application.rs`, `src/lib.rs`, generated bindings | Opaque ApplicationHandle; typed bounded records/errors; workflow operations; cancel-current-operation and sync sessions; notification read/ack/preferences; preserved M2 AccountHandle | Matching generated Swift/Kotlin/Python bindings must ship with library; no native runtime proof |
+| network `tests/application_client.rs`, `tests/application_security.rs`; FFI tests/examples | Public-API two-volunteer workflow, restart/partial/cancellation/resource/security regressions, public-key-only synthetic issuer fixture and full Python ABI network workflow | Synthetic identities and generated photographs; no CIE account, cloud or personal photograph |
+| docs, ADR 0006 and KB skill | Application/operation contracts, security/privacy/lifecycle updates and routing; one Mermaid diagram per file | Original aggregate UML pages remain compatibility indexes |
+
+Account persistence reuses the exact M2 encrypted vault, original account directory and `client-state.sqlite3`; opening never creates replacement keys. Both public keys must match an imported credential. Normal validity/revocation checks still apply after restoration. See [key management](key-management.md) for the established Argon2id/XChaCha20-Poly1305 format and its limitations; no new cryptography or plaintext account key store is added.
+
+A publication commits normalized photos, signed profile/leases and its immutable operation before network requests. Like intent, exact encrypted parcel and match/outbox effects commit together. Contacts remain recipient-encrypted and match-bound. Receipts distinguish local persistence, full distinct-peer retention acknowledgements and unknown recipient processing; per-item failures are safe typed categories. A rejected/blocked peer cannot be re-liked through a completed historical operation. Retry never randomizes an existing logical like.
+
+Discovery lists up to 50 profiles per selected known volunteer and caches at most 512 candidates. It verifies records, selects newest revisions, filters locally and sorts by private probability then ProfileId. Owner/query/model/candidate-snapshot-bound cursors reject changed snapshots explicitly. Potentially large inbox, match, report, operation and contact queries have bounded keyset/cursor paths; rotating pending scans prevent an unreachable first batch from starving later work. Fetch checks the newest known signed manifest, bounds bytes/decoding, tries alternate providers and classifies before returning display-ready bytes. A cached embedding is bound to the verified owner/manifest; missing embeddings use neutral 0.5 scores. Manual ranking hints never substitute for issuer verification.
+
+Operations are capped at 256 pending and 1024 total per owner, with at most 24 MiB + 64 KiB immutable payload each and the shared 256 MiB default logical storage ceiling. Capacity returns an error rather than silently deleting pending work. No automatic completed-operation compaction is claimed. SQLite/WAL physical size, OS buffering, radio billing, stalled filesystems and arbitrary injected inference CPU are not equivalent to these logical/network limits.
+
+## Executed acceptance
+
+Baseline on merged master: all **78** tests passed before changes. Initial public API tests failed until the new methods existed; the final own-profile regression explicitly failed compilation on missing `published_profile` before its implementation. Integration also exposed an incorrect account-directory fixture, fixed by using a newly created private child directory. Lint runs exposed argument/type/style warnings and generated trailing whitespace; these were corrected without weakening tests. Ordinary sandbox TCP binds were denied; actual network acceptance ran with permitted local TCP access.
+
+The application-client test provisions only volunteer infrastructure, clock and synthetic issuer at low level. All dating actions use AnnodaClient: create/import, publish three different photographs each with two full replica acknowledgements, discover without preknown candidate ids, validate photographs both ways, inspect Bob's authenticated Incoming before any match, reciprocate to the same match id, explicitly share different external contacts both ways, close/reopen with the same identity/credential/match/contacts, and block with discovery/contact/like denial. The blocked client explicitly rejects a new contact disclosure. A second publication replaces one photograph and reorders retained photographs, increases the signed revision and appears through both the own-profile getter and discovery. A cancelled like remains saved before remote completion; reopening and ordinary public sync recover it without duplicate intent. The own published profile is readable before/after reopening through the facade.
+
+The partial publication case uses one online and one stopped real volunteer: one complete replica, Partial status, typed Unreachable failure and pending work. Known-volunteer zero-byte/item sessions report BudgetExhausted with zero counters; one-byte upload/download caps remain ≤1 byte and complete within the test's three-second tolerance for its two-second window. Existing M2 interrupted-transfer tests retain earlier commits and resume idempotently. The added renamed-encoder fixture tests prove description text cannot bypass typed development opt-in.
+
+The corrupt-photo regression mutates test-only SQLite blob bytes on two real volunteers: the public fetch skips a corrupt first replica and returns validated bytes from the second; if both are corrupt it returns NetworkUnavailable without image bytes. The literal pre-M3 SQLite migration test preserves matched/blocked records, mailbox data, pending and acknowledged notifications, preferences and synchronization checkpoints while adding account ownership and a credential. This fixture does not create its baseline through the new schema.
+
+Full Python ctypes ABI smoke starts two real Rust volunteer swarms and an explicit synthetic issuer accepting only public-key requests. Python uses ApplicationHandle for account creation, credential import, publication, discovery, validated JPEG retrieval, incoming likes, mutual matching, two-way contacts, own-profile reading, reopening and blocking. Operation pagination uses a one-item page and follows its cursor to a distinct next receipt; the Rust adapter regression rejects malformed cursors. Existing M2 account, session, notification acknowledgement and local-ranking checks remain in that same default smoke run. `--skip-network` is diagnostic only and was not used for final acceptance.
+
+## Commands and results
+
+Local Cargo commands used `CARGO_HOME=/tmp/annoda-cargo CCACHE_DISABLE=1` plus `--locked --offline`; the prefix selects available cached dependencies, not an alternative release implementation.
+
+| Command | Result |
+|---|---|
+| `cargo fmt --all -- --check` | Passed |
+| `cargo clippy --locked --offline --workspace --all-targets -- -D warnings` | Passed on final Rust sources, all targets |
+| `cargo test --locked --offline --workspace` | Passed: 100 tests, none failed or ignored; all four doctest suites passed |
+| `cargo build --locked --offline --workspace` | Passed on final Rust sources |
+| `python3 crates/mobile-ffi/tests/python_ffi_smoke.py target/debug/libannoda_mobile_ffi.so` | Full real-TCP ABI workflow passed against final rebuilt library and regenerated bindings |
+| Mermaid 11.17.2 / jsdom parser | All 39 KB diagrams parsed; all 27 original UML blocks preserved byte-for-byte |
+| KB relative targets / `git diff --check` | All 284 relative file targets resolved; diff check passed |
+
+Final test breakdown: core 35, intelligence 19, mobile FFI 6, network library 16, binary parsers 2, public application workflow 4, application security 6, M1 loopback 1, volunteer process restart 2, sync limits 8 and M2 loopback 1. Existing fresh-process account-vault and transport-identity tests remain in this run. Reproduce the M3 network cases with `cargo test --locked -p annoda-network --test application_client --test application_security -- --nocapture`; the README lists the full workspace and ABI commands.
+
+## UML organization and compatibility
+
+All 27 original UML blocks moved byte-for-byte into separate Markdown files: eight original class and nineteen original sequence files. The original `classes.md`, `sequences.md` and `m2.md` retain headings/anchors and forward to standalone diagrams. M3 adds two class and nine sequence files. There are 38 standalone UML files, plus the single architecture flowchart. [UML index](uml/README.md) and [M3 index](uml/m3.md) provide navigation; [KB skill](skills/annoda-kb/SKILL.md) now routes application changes to their authorities.
+
+## Deferred work and security limits
+
+- Real CIE integration, duplicate-account policy, signed fresh revocation distribution, production image moderation/embedding inference and remote moderation/report operations remain unimplemented. Reports are signed LocalOnly evidence. Production photo publication/display requires an actual safety backend; fixtures are not moderation.
+- No native Swift/Kotlin build or physical-device run was possible: swiftc, kotlinc, Xcode and Gradle are absent. Keychain/Keystore wrapping, host authorization, notification permissions and native packaging remain adapters. OS scheduling, force-quit behavior, simultaneous peers, NAT/firewalls and volunteer availability can prevent synchronization; no fixed Android/iOS execution timing is promised.
+- Public content remains harvestable; direct IP/timing and stable identifiers remain linkable. No anonymity, global deletion, automatic replica repair, worldwide discovery, hole punching, circuit relay, central push or internal chat is added. Profile replacement is supported; full deletion/tombstone semantics remain M4.
+- Account secrets require an unlocked in-process representation. Passphrase strength, same-user compromise, rollback and backup theft remain risks. SQLite profiles/contacts/preferences/reports are not encrypted by the vault. Volunteer transport keys remain deliberately filesystem-protected plaintext, as specified in M2.
+- Local transaction/idempotency guarantees do not create exactly-once network or notification display semantics. Native adapters must acknowledge after display and coalesce stable ids. Cancellation cannot recall already retained photos/parcels or disclosed contacts.
+- Optional cooperative replica forwarding remains available through the preserved M2 API; the new M3 facade primarily orchestrates its own publication/delivery workflow. No temporary phone is advertised as a durable always-online provider.
+
+Next milestones: M4 owner-authorized deletion/tombstones and replica lifecycle; adversarial parser/filesystem/crash and storage-compaction hardening; real inference/model provenance and operational reporting; then platform wrapping/background execution on physical devices and production identity/revocation adapters. These are release work, not claims that a production mobile dating app exists.
+
+---
+
 # M2 implementation progress
 
 Branch `feat/m2-persistent-identities-sync`, base `976464d` on master (fetched origin/master, no divergence). Working tree initially clean. Existing AGPL license preserved. KB skill read; M2 contracts, ADRs and UML established before implementation. Baseline `CARGO_HOME=/tmp/annoda-cargo CCACHE_DISABLE=1 cargo test --locked --offline --workspace` passed all 39 tests, including real TCP loopback.

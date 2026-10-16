@@ -681,6 +681,10 @@ internal object IntegrityCheckingUniffiLib {
     ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_func_open_account(
     ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_func_create_application(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_func_open_application(
+    ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification(
     ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_method_accounthandle_lock(
@@ -706,6 +710,66 @@ internal object IntegrityCheckingUniffiLib {
     external fun uniffi_annoda_mobile_ffi_checksum_method_syncsession_is_finished(
     ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_method_syncsession_wait_result(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_acknowledge_notification(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_block(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_cancel_current_operation(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_close(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_credential(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_disclose_contacts(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_discover(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_fetch_photo(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_identity_summary(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_import_credential(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_like(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports_page(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_matches(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_notification_preferences(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations_page(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pass(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pending_notifications(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_publish_profile(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_published_profile(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_rank_candidates(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_contacts(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_likes(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_record_feedback(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_recover_pending(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_report_profile(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_reset_learning(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_set_notification_preferences(
+    ): Int
+    external fun uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_start_sync_session(
     ): Int
     external fun uniffi_annoda_mobile_ffi_checksum_constructor_localpreferencemodel_new(
     ): Int
@@ -769,11 +833,79 @@ internal object UniffiLib {
     ): Byte
     external fun uniffi_annoda_mobile_ffi_fn_method_syncsession_wait_result(`ptr`: Long,`timeoutMs`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_clone_applicationhandle(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_free_applicationhandle(`handle`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_acknowledge_notification(`ptr`: Long,`eventId`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Byte
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_block(`ptr`: Long,`profileId`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_cancel_current_operation(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Byte
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_close(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_credential(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_disclose_contacts(`ptr`: Long,`matchId`: RustBuffer.ByValue,`contacts`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_discover(`ptr`: Long,`query`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_fetch_photo(`ptr`: Long,`owner`: RustBuffer.ByValue,`hash`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_identity_summary(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_import_credential(`ptr`: Long,`credential`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_like(`ptr`: Long,`profileId`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports(`ptr`: Long,`limit`: Byte,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports_page(`ptr`: Long,`pageSize`: Byte,`cursor`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_matches(`ptr`: Long,`pageSize`: Byte,`cursor`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_notification_preferences(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations(`ptr`: Long,`limit`: Byte,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations_page(`ptr`: Long,`pageSize`: Byte,`cursor`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pass(`ptr`: Long,`profileId`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pending_notifications(`ptr`: Long,`limit`: Byte,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_publish_profile(`ptr`: Long,`photos`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_published_profile(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_rank_candidates(`ptr`: Long,`candidates`: RustBuffer.ByValue,`filter`: RustBuffer.ByValue,`explorationFraction`: Double,`seed`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_contacts(`ptr`: Long,`matchId`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_likes(`ptr`: Long,`pageSize`: Byte,`cursor`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_record_feedback(`ptr`: Long,`profileId`: RustBuffer.ByValue,`embeddingVersion`: Short,`embeddingValues`: RustBuffer.ByValue,`liked`: Byte,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_recover_pending(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_report_profile(`ptr`: Long,`subject`: RustBuffer.ByValue,`policyReason`: Short,`evidenceHashes`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): RustBuffer.ByValue
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_reset_learning(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_set_notification_preferences(`ptr`: Long,`preferences`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Unit
+    external fun uniffi_annoda_mobile_ffi_fn_method_applicationhandle_start_sync_session(`ptr`: Long,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
     external fun uniffi_annoda_mobile_ffi_fn_func_api_version(uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
     external fun uniffi_annoda_mobile_ffi_fn_func_create_account(`directory`: RustBuffer.ByValue,`passphrase`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
     ): Long
     external fun uniffi_annoda_mobile_ffi_fn_func_open_account(`directory`: RustBuffer.ByValue,`passphrase`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_func_create_application(`config`: RustBuffer.ByValue,`passphrase`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
+    ): Long
+    external fun uniffi_annoda_mobile_ffi_fn_func_open_application(`config`: RustBuffer.ByValue,`passphrase`: RustBuffer.ByValue,uniffi_out_err: UniffiRustCallStatus,
     ): Long
     external fun ffi_annoda_mobile_ffi_rustbuffer_alloc(`size`: Long,uniffi_out_err: UniffiRustCallStatus,
     ): RustBuffer.ByValue
@@ -903,6 +1035,12 @@ private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
     if ((lib.uniffi_annoda_mobile_ffi_checksum_func_open_account() and 0xFFFF) != 32463) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_func_create_application() and 0xFFFF) != 25246) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_func_open_application() and 0xFFFF) != 20946) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
     if ((lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification() and 0xFFFF) != 64461) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
@@ -940,6 +1078,96 @@ private fun uniffiCheckApiChecksums(lib: IntegrityCheckingUniffiLib) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if ((lib.uniffi_annoda_mobile_ffi_checksum_method_syncsession_wait_result() and 0xFFFF) != 60845) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_acknowledge_notification() and 0xFFFF) != 48351) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_block() and 0xFFFF) != 19733) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_cancel_current_operation() and 0xFFFF) != 20755) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_close() and 0xFFFF) != 52459) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_credential() and 0xFFFF) != 1008) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_disclose_contacts() and 0xFFFF) != 47802) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_discover() and 0xFFFF) != 30765) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_fetch_photo() and 0xFFFF) != 48527) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_identity_summary() and 0xFFFF) != 1827) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_import_credential() and 0xFFFF) != 20259) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_like() and 0xFFFF) != 17837) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports() and 0xFFFF) != 21250) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports_page() and 0xFFFF) != 24985) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_matches() and 0xFFFF) != 22798) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_notification_preferences() and 0xFFFF) != 30353) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations() and 0xFFFF) != 19930) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations_page() and 0xFFFF) != 59487) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pass() and 0xFFFF) != 25106) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pending_notifications() and 0xFFFF) != 62991) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_publish_profile() and 0xFFFF) != 23058) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_published_profile() and 0xFFFF) != 31240) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_rank_candidates() and 0xFFFF) != 59682) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_contacts() and 0xFFFF) != 28429) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_likes() and 0xFFFF) != 56576) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_record_feedback() and 0xFFFF) != 7167) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_recover_pending() and 0xFFFF) != 24286) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_report_profile() and 0xFFFF) != 32678) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_reset_learning() and 0xFFFF) != 25247) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_set_notification_preferences() and 0xFFFF) != 30312) {
+        throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    }
+    if ((lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_start_sync_session() and 0xFFFF) != 11203) {
         throw RuntimeException("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     }
     if ((lib.uniffi_annoda_mobile_ffi_checksum_constructor_localpreferencemodel_new() and 0xFFFF) != 29728) {
@@ -1100,6 +1328,33 @@ private class JavaLangRefCleanable(
     val cleanable: java.lang.ref.Cleaner.Cleanable
 ) : UniffiCleaner.Cleanable {
     override fun clean() = cleanable.clean()
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterUByte: FfiConverter<UByte, Byte> {
+    override fun lift(value: Byte): UByte {
+        return value.toUByte()
+    }
+
+    fun lift(value: Int): UByte {
+        return value.toUByte()
+    }
+
+    override fun read(buf: ByteBuffer): UByte {
+        return lift(buf.get())
+    }
+
+    override fun lower(value: UByte): Byte {
+        return value.toByte()
+    }
+
+    override fun allocationSize(value: UByte) = 1UL
+
+    override fun write(value: UByte, buf: ByteBuffer) {
+        buf.put(value.toByte())
+    }
 }
 
 /**
@@ -1747,6 +2002,774 @@ public object FfiConverterTypeAccountHandle: FfiConverter<AccountHandle, Long> {
 //
 
 
+/**
+ * An account-owning adapter. All application calls serialize through one service instance.
+ */
+public interface ApplicationHandleInterface {
+
+    fun `acknowledgeNotification`(`eventId`: kotlin.ByteArray): kotlin.Boolean
+
+    fun `block`(`profileId`: kotlin.ByteArray)
+
+    /**
+     * Cancels the active bounded network operation, if one is running.
+     */
+    fun `cancelCurrentOperation`(): kotlin.Boolean
+
+    fun `close`()
+
+    fun `credential`(): kotlin.ByteArray
+
+    fun `discloseContacts`(`matchId`: kotlin.ByteArray, `contacts`: List<FfiContactHandle>): FfiOperationReceipt
+
+    fun `discover`(`query`: FfiDiscoveryQuery): FfiCandidatePage
+
+    fun `fetchPhoto`(`owner`: kotlin.ByteArray, `hash`: kotlin.ByteArray): FfiValidatedPhoto
+
+    fun `identitySummary`(): FfiIdentitySummary
+
+    /**
+     * Accepts a bounded serialized public credential. The application service verifies trust,
+     * validity, subject, and both account-key bindings before persisting it.
+     */
+    fun `importCredential`(`credential`: kotlin.ByteArray)
+
+    fun `like`(`profileId`: kotlin.ByteArray): FfiOperationReceipt
+
+    fun `localReports`(`limit`: kotlin.UByte): List<FfiProfileReport>
+
+    fun `localReportsPage`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiProfileReportPage
+
+    fun `matches`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiMatchPage
+
+    fun `notificationPreferences`(): FfiNotificationPreferences
+
+    fun `operations`(`limit`: kotlin.UByte): List<FfiOperationReceipt>
+
+    fun `operationsPage`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiOperationPage
+
+    fun `pass`(`profileId`: kotlin.ByteArray)
+
+    fun `pendingNotifications`(`limit`: kotlin.UByte): List<FfiNotificationEvent>
+
+    fun `publishProfile`(`photos`: List<kotlin.ByteArray>): FfiPublicationReceipt
+
+    fun `publishedProfile`(): FfiCandidateProfile?
+
+    fun `rankCandidates`(`candidates`: List<FfiRankingCandidate>, `filter`: FfiCandidateFilter, `explorationFraction`: kotlin.Double, `seed`: kotlin.ULong): List<FfiRankedCandidate>
+
+    fun `receivedContacts`(`matchId`: kotlin.ByteArray): List<FfiContactHandle>
+
+    fun `receivedLikes`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiIncomingLikePage
+
+    fun `recordFeedback`(`profileId`: kotlin.ByteArray, `embeddingVersion`: kotlin.UShort, `embeddingValues`: List<kotlin.Double>, `liked`: kotlin.Boolean)
+
+    fun `recoverPending`(): List<FfiOperationReceipt>
+
+    fun `reportProfile`(`subject`: kotlin.ByteArray, `policyReason`: kotlin.UShort, `evidenceHashes`: List<kotlin.ByteArray>): FfiProfileReport
+
+    fun `resetLearning`()
+
+    fun `setNotificationPreferences`(`preferences`: FfiNotificationPreferences)
+
+    fun `startSyncSession`(): SyncSession
+
+    companion object
+}
+
+/**
+ * An account-owning adapter. All application calls serialize through one service instance.
+ */
+open class ApplicationHandle: Disposable, AutoCloseable, ApplicationHandleInterface
+{
+
+    @Suppress("UNUSED_PARAMETER")
+    /**
+     * @suppress
+     */
+    constructor(withHandle: UniffiWithHandle, handle: Long) {
+        this.handle = handle
+        this.cleanable = UniffiLib.CLEANER.register(this, UniffiCleanAction(handle))
+    }
+
+    /**
+     * @suppress
+     *
+     * This constructor can be used to instantiate a fake object. Only used for tests. Any
+     * attempt to actually use an object constructed this way will fail as there is no
+     * connected Rust object.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    constructor(noHandle: NoHandle) {
+        this.handle = 0
+        this.cleanable = null
+    }
+
+    protected val handle: Long
+    protected val cleanable: UniffiCleaner.Cleanable?
+
+    private val wasDestroyed = AtomicBoolean(false)
+    private val callCounter = AtomicLong(1)
+
+    /**
+     * Whether the current object has been destroyed and its reference is gone in the Rust side.
+     */
+    val uniffiIsDestroyed: Boolean get() = wasDestroyed.get()
+
+    override fun destroy() {
+        // Only allow a single call to this method.
+        // TODO: maybe we should log a warning if called more than once?
+        if (this.wasDestroyed.compareAndSet(false, true)) {
+            // This decrement always matches the initial count of 1 given at creation time.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable?.clean()
+            }
+        }
+    }
+
+    @Synchronized
+    override fun close() {
+        this.destroy()
+    }
+
+    internal inline fun <R> callWithHandle(block: (handle: Long) -> R): R {
+        // Check and increment the call counter, to keep the object alive.
+        // This needs a compare-and-set retry loop in case of concurrent updates.
+        do {
+            val c = this.callCounter.get()
+            if (c == 0L) {
+                throw IllegalStateException("${this.javaClass.simpleName} object has already been destroyed")
+            }
+            if (c == Long.MAX_VALUE) {
+                throw IllegalStateException("${this.javaClass.simpleName} call counter would overflow")
+            }
+        } while (! this.callCounter.compareAndSet(c, c + 1L))
+        // Now we can safely do the method call without the handle being freed concurrently.
+        try {
+            return block(this.uniffiCloneHandle())
+        } finally {
+            // This decrement always matches the increment we performed above.
+            if (this.callCounter.decrementAndGet() == 0L) {
+                cleanable?.clean()
+            }
+        }
+    }
+
+    // Use a static inner class instead of a closure so as not to accidentally
+    // capture `this` as part of the cleanable's action.
+    private class UniffiCleanAction(private val handle: Long) : Runnable {
+        override fun run() {
+            if (handle == 0.toLong()) {
+                // Fake object created with `NoHandle`, don't try to free.
+                return;
+            }
+            uniffiRustCall { status ->
+                UniffiLib.uniffi_annoda_mobile_ffi_fn_free_applicationhandle(handle, status)
+            }
+        }
+    }
+
+    /**
+     * @suppress
+     */
+    fun uniffiCloneHandle(): Long {
+        if (handle == 0.toLong()) {
+            throw InternalException("uniffiCloneHandle() called on NoHandle object");
+        }
+        return uniffiRustCall() { status ->
+            UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_applicationhandle(handle, status)
+        }
+    }
+
+
+    @Throws(FfiException::class)override fun `acknowledgeNotification`(`eventId`: kotlin.ByteArray): kotlin.Boolean {
+            return FfiConverterBoolean.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_acknowledge_notification(
+        it,
+
+        FfiConverterByteArray.lower(`eventId`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `block`(`profileId`: kotlin.ByteArray)
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_block(
+        it,
+
+        FfiConverterByteArray.lower(`profileId`),_status)
+}
+    }
+
+
+
+
+    /**
+     * Cancels the active bounded network operation, if one is running.
+     */
+    @Throws(FfiException::class)override fun `cancelCurrentOperation`(): kotlin.Boolean {
+            return FfiConverterBoolean.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_cancel_current_operation(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `close`()
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_close(
+        it,
+        _status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `credential`(): kotlin.ByteArray {
+            return FfiConverterByteArray.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_credential(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `discloseContacts`(`matchId`: kotlin.ByteArray, `contacts`: List<FfiContactHandle>): FfiOperationReceipt {
+            return FfiConverterTypeFfiOperationReceipt.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_disclose_contacts(
+        it,
+
+        FfiConverterByteArray.lower(`matchId`),
+        FfiConverterSequenceTypeFfiContactHandle.lower(`contacts`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `discover`(`query`: FfiDiscoveryQuery): FfiCandidatePage {
+            return FfiConverterTypeFfiCandidatePage.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_discover(
+        it,
+
+        FfiConverterTypeFfiDiscoveryQuery.lower(`query`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `fetchPhoto`(`owner`: kotlin.ByteArray, `hash`: kotlin.ByteArray): FfiValidatedPhoto {
+            return FfiConverterTypeFfiValidatedPhoto.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_fetch_photo(
+        it,
+
+        FfiConverterByteArray.lower(`owner`),
+        FfiConverterByteArray.lower(`hash`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `identitySummary`(): FfiIdentitySummary {
+            return FfiConverterTypeFfiIdentitySummary.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_identity_summary(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    /**
+     * Accepts a bounded serialized public credential. The application service verifies trust,
+     * validity, subject, and both account-key bindings before persisting it.
+     */
+    @Throws(FfiException::class)override fun `importCredential`(`credential`: kotlin.ByteArray)
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_import_credential(
+        it,
+
+        FfiConverterByteArray.lower(`credential`),_status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `like`(`profileId`: kotlin.ByteArray): FfiOperationReceipt {
+            return FfiConverterTypeFfiOperationReceipt.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_like(
+        it,
+
+        FfiConverterByteArray.lower(`profileId`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `localReports`(`limit`: kotlin.UByte): List<FfiProfileReport> {
+            return FfiConverterSequenceTypeFfiProfileReport.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports(
+        it,
+
+        FfiConverterUByte.lower(`limit`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `localReportsPage`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiProfileReportPage {
+            return FfiConverterTypeFfiProfileReportPage.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports_page(
+        it,
+
+        FfiConverterUByte.lower(`pageSize`),
+        FfiConverterOptionalTypeFfiPageCursor.lower(`cursor`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `matches`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiMatchPage {
+            return FfiConverterTypeFfiMatchPage.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_matches(
+        it,
+
+        FfiConverterUByte.lower(`pageSize`),
+        FfiConverterOptionalTypeFfiPageCursor.lower(`cursor`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `notificationPreferences`(): FfiNotificationPreferences {
+            return FfiConverterTypeFfiNotificationPreferences.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_notification_preferences(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `operations`(`limit`: kotlin.UByte): List<FfiOperationReceipt> {
+            return FfiConverterSequenceTypeFfiOperationReceipt.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations(
+        it,
+
+        FfiConverterUByte.lower(`limit`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `operationsPage`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiOperationPage {
+            return FfiConverterTypeFfiOperationPage.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations_page(
+        it,
+
+        FfiConverterUByte.lower(`pageSize`),
+        FfiConverterOptionalTypeFfiPageCursor.lower(`cursor`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `pass`(`profileId`: kotlin.ByteArray)
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pass(
+        it,
+
+        FfiConverterByteArray.lower(`profileId`),_status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `pendingNotifications`(`limit`: kotlin.UByte): List<FfiNotificationEvent> {
+            return FfiConverterSequenceTypeFfiNotificationEvent.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pending_notifications(
+        it,
+
+        FfiConverterUByte.lower(`limit`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `publishProfile`(`photos`: List<kotlin.ByteArray>): FfiPublicationReceipt {
+            return FfiConverterTypeFfiPublicationReceipt.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_publish_profile(
+        it,
+
+        FfiConverterSequenceByteArray.lower(`photos`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `publishedProfile`(): FfiCandidateProfile? {
+            return FfiConverterOptionalTypeFfiCandidateProfile.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_published_profile(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `rankCandidates`(`candidates`: List<FfiRankingCandidate>, `filter`: FfiCandidateFilter, `explorationFraction`: kotlin.Double, `seed`: kotlin.ULong): List<FfiRankedCandidate> {
+            return FfiConverterSequenceTypeFfiRankedCandidate.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_rank_candidates(
+        it,
+
+        FfiConverterSequenceTypeFfiRankingCandidate.lower(`candidates`),
+        FfiConverterTypeFfiCandidateFilter.lower(`filter`),
+        FfiConverterDouble.lower(`explorationFraction`),
+        FfiConverterULong.lower(`seed`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `receivedContacts`(`matchId`: kotlin.ByteArray): List<FfiContactHandle> {
+            return FfiConverterSequenceTypeFfiContactHandle.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_contacts(
+        it,
+
+        FfiConverterByteArray.lower(`matchId`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `receivedLikes`(`pageSize`: kotlin.UByte, `cursor`: FfiPageCursor?): FfiIncomingLikePage {
+            return FfiConverterTypeFfiIncomingLikePage.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_likes(
+        it,
+
+        FfiConverterUByte.lower(`pageSize`),
+        FfiConverterOptionalTypeFfiPageCursor.lower(`cursor`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `recordFeedback`(`profileId`: kotlin.ByteArray, `embeddingVersion`: kotlin.UShort, `embeddingValues`: List<kotlin.Double>, `liked`: kotlin.Boolean)
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_record_feedback(
+        it,
+
+        FfiConverterByteArray.lower(`profileId`),
+        FfiConverterUShort.lower(`embeddingVersion`),
+        FfiConverterSequenceDouble.lower(`embeddingValues`),
+        FfiConverterBoolean.lower(`liked`),_status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `recoverPending`(): List<FfiOperationReceipt> {
+            return FfiConverterSequenceTypeFfiOperationReceipt.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_recover_pending(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `reportProfile`(`subject`: kotlin.ByteArray, `policyReason`: kotlin.UShort, `evidenceHashes`: List<kotlin.ByteArray>): FfiProfileReport {
+            return FfiConverterTypeFfiProfileReport.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_report_profile(
+        it,
+
+        FfiConverterByteArray.lower(`subject`),
+        FfiConverterUShort.lower(`policyReason`),
+        FfiConverterSequenceByteArray.lower(`evidenceHashes`),_status)
+}
+    }
+    )
+    }
+
+
+
+    @Throws(FfiException::class)override fun `resetLearning`()
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_reset_learning(
+        it,
+        _status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `setNotificationPreferences`(`preferences`: FfiNotificationPreferences)
+        =
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_set_notification_preferences(
+        it,
+
+        FfiConverterTypeFfiNotificationPreferences.lower(`preferences`),_status)
+}
+    }
+
+
+
+
+    @Throws(FfiException::class)override fun `startSyncSession`(): SyncSession {
+            return FfiConverterTypeSyncSession.lift(
+    callWithHandle {
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_start_sync_session(
+        it,
+        _status)
+}
+    }
+    )
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * @suppress
+     */
+    companion object
+
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeApplicationHandle: FfiConverter<ApplicationHandle, Long> {
+    override fun lower(value: ApplicationHandle): Long {
+        return value.uniffiCloneHandle()
+    }
+
+    override fun lift(value: Long): ApplicationHandle {
+        return ApplicationHandle(UniffiWithHandle, value)
+    }
+
+    override fun read(buf: ByteBuffer): ApplicationHandle {
+        return lift(buf.getLong())
+    }
+
+    override fun allocationSize(value: ApplicationHandle) = 8UL
+
+    override fun write(value: ApplicationHandle, buf: ByteBuffer) {
+        buf.putLong(lower(value))
+    }
+}
+
+
+// This template implements a class for working with a Rust struct via a handle
+// to the live Rust struct on the other side of the FFI.
+//
+// There's some subtlety here, because we have to be careful not to operate on a Rust
+// struct after it has been dropped, and because we must expose a public API for freeing
+// theq Kotlin wrapper object in lieu of reliable finalizers. The core requirements are:
+//
+//   * Each instance holds an opaque handle to the underlying Rust struct.
+//     Method calls need to read this handle from the object's state and pass it in to
+//     the Rust FFI.
+//
+//   * When an instance is no longer needed, its handle should be passed to a
+//     special destructor function provided by the Rust FFI, which will drop the
+//     underlying Rust struct.
+//
+//   * Given an instance, calling code is expected to call the special
+//     `destroy` method in order to free it after use, either by calling it explicitly
+//     or by using a higher-level helper like the `use` method. Failing to do so risks
+//     leaking the underlying Rust struct.
+//
+//   * We can't assume that calling code will do the right thing, and must be prepared
+//     to handle Kotlin method calls executing concurrently with or even after a call to
+//     `destroy`, and to handle multiple (possibly concurrent!) calls to `destroy`.
+//
+//   * We must never allow Rust code to operate on the underlying Rust struct after
+//     the destructor has been called, and must never call the destructor more than once.
+//     Doing so may trigger memory unsafety.
+//
+//   * To mitigate many of the risks of leaking memory and use-after-free unsafety, a `Cleaner`
+//     is implemented to call the destructor when the Kotlin object becomes unreachable.
+//     This is done in a background thread. This is not a panacea, and client code should be aware that
+//      1. the thread may starve if some there are objects that have poorly performing
+//     `drop` methods or do significant work in their `drop` methods.
+//      2. the thread is shared across the whole library. This can be tuned by using `android_cleaner = true`,
+//         or `android = true` in the [`kotlin` section of the `uniffi.toml` file](https://mozilla.github.io/uniffi-rs/kotlin/configuration.html).
+//
+// If we try to implement this with mutual exclusion on access to the handle, there is the
+// possibility of a race between a method call and a concurrent call to `destroy`:
+//
+//    * Thread A starts a method call, reads the value of the handle, but is interrupted
+//      before it can pass the handle over the FFI to Rust.
+//    * Thread B calls `destroy` and frees the underlying Rust struct.
+//    * Thread A resumes, passing the already-read handle value to Rust and triggering
+//      a use-after-free.
+//
+// One possible solution would be to use a `ReadWriteLock`, with each method call taking
+// a read lock (and thus allowed to run concurrently) and the special `destroy` method
+// taking a write lock (and thus blocking on live method calls). However, we aim not to
+// generate methods with any hidden blocking semantics, and a `destroy` method that might
+// block if called incorrectly seems to meet that bar.
+//
+// So, we achieve our goals by giving each instance an associated `AtomicLong` counter to track
+// the number of in-flight method calls, and an `AtomicBoolean` flag to indicate whether `destroy`
+// has been called. These are updated according to the following rules:
+//
+//    * The initial value of the counter is 1, indicating a live object with no in-flight calls.
+//      The initial value for the flag is false.
+//
+//    * At the start of each method call, we atomically check the counter.
+//      If it is 0 then the underlying Rust struct has already been destroyed and the call is aborted.
+//      If it is nonzero them we atomically increment it by 1 and proceed with the method call.
+//
+//    * At the end of each method call, we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+//    * When `destroy` is called, we atomically flip the flag from false to true.
+//      If the flag was already true we silently fail.
+//      Otherwise we atomically decrement and check the counter.
+//      If it has reached zero then we destroy the underlying Rust struct.
+//
+// Astute readers may observe that this all sounds very similar to the way that Rust's `Arc<T>` works,
+// and indeed it is, with the addition of a flag to guard against multiple calls to `destroy`.
+//
+// The overall effect is that the underlying Rust struct is destroyed only when `destroy` has been
+// called *and* all in-flight method calls have completed, avoiding violating any of the expectations
+// of the underlying Rust code.
+//
+// This makes a cleaner a better alternative to _not_ calling `destroy()` as
+// and when the object is finished with, but the abstraction is not perfect: if the Rust object's `drop`
+// method is slow, and/or there are many objects to cleanup, and it's on a low end Android device, then the cleaner
+// thread may be starved, and the app will leak memory.
+//
+// In this case, `destroy`ing manually may be a better solution.
+//
+// The cleaner can live side by side with the manual calling of `destroy`. In the order of responsiveness, uniffi objects
+// with Rust peers are reclaimed:
+//
+// 1. By calling the `destroy` method of the object, which calls `rustObject.free()`. If that doesn't happen:
+// 2. When the object becomes unreachable, AND the Cleaner thread gets to call `rustObject.free()`. If the thread is starved then:
+// 3. The memory is reclaimed when the process terminates.
+//
+// [1] https://stackoverflow.com/questions/24376768/can-java-finalize-an-object-when-it-is-still-in-scope/24380219
+//
+
+
 public interface LocalPreferenceModelInterface {
 
     fun `recordFeedback`(`version`: kotlin.UShort, `values`: List<kotlin.Double>, `liked`: kotlin.Boolean)
@@ -2241,6 +3264,75 @@ public object FfiConverterTypeSyncSession: FfiConverter<SyncSession, Long> {
 
 
 
+/**
+ * Public issuer and peer settings for one private application account.
+ */
+data class FfiApplicationConfig (
+    var `dataDirectory`: kotlin.String
+    ,
+    var `transportDataDirectory`: kotlin.String
+    ,
+    var `trustedIssuerKeys`: List<kotlin.ByteArray>
+    ,
+    var `revokedSerials`: List<kotlin.ByteArray>
+    ,
+    var `peers`: List<FfiSyncPeer>
+    ,
+    var `syncBudget`: FfiSyncBudget
+    ,
+    /**
+     * Enables only the deterministic safety fixture for local development and tests.
+     */
+    var `allowDevelopmentSafetyFixture`: kotlin.Boolean
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiApplicationConfig: FfiConverterRustBuffer<FfiApplicationConfig> {
+    override fun read(buf: ByteBuffer): FfiApplicationConfig {
+        return FfiApplicationConfig(
+            FfiConverterString.read(buf),
+            FfiConverterString.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceTypeFfiSyncPeer.read(buf),
+            FfiConverterTypeFfiSyncBudget.read(buf),
+            FfiConverterBoolean.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiApplicationConfig) = (
+            FfiConverterString.allocationSize(value.`dataDirectory`) +
+            FfiConverterString.allocationSize(value.`transportDataDirectory`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`trustedIssuerKeys`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`revokedSerials`) +
+            FfiConverterSequenceTypeFfiSyncPeer.allocationSize(value.`peers`) +
+            FfiConverterTypeFfiSyncBudget.allocationSize(value.`syncBudget`) +
+            FfiConverterBoolean.allocationSize(value.`allowDevelopmentSafetyFixture`)
+    )
+
+    override fun write(value: FfiApplicationConfig, buf: ByteBuffer) {
+            FfiConverterString.write(value.`dataDirectory`, buf)
+            FfiConverterString.write(value.`transportDataDirectory`, buf)
+            FfiConverterSequenceByteArray.write(value.`trustedIssuerKeys`, buf)
+            FfiConverterSequenceByteArray.write(value.`revokedSerials`, buf)
+            FfiConverterSequenceTypeFfiSyncPeer.write(value.`peers`, buf)
+            FfiConverterTypeFfiSyncBudget.write(value.`syncBudget`, buf)
+            FfiConverterBoolean.write(value.`allowDevelopmentSafetyFixture`, buf)
+    }
+}
+
+
+
 data class FfiAuthorizedReplica (
     var `profile`: kotlin.ByteArray
     ,
@@ -2327,6 +3419,304 @@ public object FfiConverterTypeFfiAuthorizedReplicaPhoto: FfiConverterRustBuffer<
 
 
 
+data class FfiCandidateFilter (
+    var `minimumAge`: kotlin.UByte
+    ,
+    var `maximumAge`: kotlin.UByte
+    ,
+    var `coarseRegion`: kotlin.String?
+    ,
+    var `blockedProfileIds`: List<kotlin.ByteArray>
+    ,
+    var `passedProfileIds`: List<kotlin.ByteArray>
+    ,
+    var `seenProfileIds`: List<kotlin.ByteArray>
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiCandidateFilter: FfiConverterRustBuffer<FfiCandidateFilter> {
+    override fun read(buf: ByteBuffer): FfiCandidateFilter {
+        return FfiCandidateFilter(
+            FfiConverterUByte.read(buf),
+            FfiConverterUByte.read(buf),
+            FfiConverterOptionalString.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiCandidateFilter) = (
+            FfiConverterUByte.allocationSize(value.`minimumAge`) +
+            FfiConverterUByte.allocationSize(value.`maximumAge`) +
+            FfiConverterOptionalString.allocationSize(value.`coarseRegion`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`blockedProfileIds`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`passedProfileIds`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`seenProfileIds`)
+    )
+
+    override fun write(value: FfiCandidateFilter, buf: ByteBuffer) {
+            FfiConverterUByte.write(value.`minimumAge`, buf)
+            FfiConverterUByte.write(value.`maximumAge`, buf)
+            FfiConverterOptionalString.write(value.`coarseRegion`, buf)
+            FfiConverterSequenceByteArray.write(value.`blockedProfileIds`, buf)
+            FfiConverterSequenceByteArray.write(value.`passedProfileIds`, buf)
+            FfiConverterSequenceByteArray.write(value.`seenProfileIds`, buf)
+    }
+}
+
+
+
+data class FfiCandidatePage (
+    var `items`: List<FfiCandidateProfile>
+    ,
+    var `nextCursor`: FfiPageCursor?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiCandidatePage: FfiConverterRustBuffer<FfiCandidatePage> {
+    override fun read(buf: ByteBuffer): FfiCandidatePage {
+        return FfiCandidatePage(
+            FfiConverterSequenceTypeFfiCandidateProfile.read(buf),
+            FfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiCandidatePage) = (
+            FfiConverterSequenceTypeFfiCandidateProfile.allocationSize(value.`items`) +
+            FfiConverterOptionalTypeFfiPageCursor.allocationSize(value.`nextCursor`)
+    )
+
+    override fun write(value: FfiCandidatePage, buf: ByteBuffer) {
+            FfiConverterSequenceTypeFfiCandidateProfile.write(value.`items`, buf)
+            FfiConverterOptionalTypeFfiPageCursor.write(value.`nextCursor`, buf)
+    }
+}
+
+
+
+data class FfiCandidateProfile (
+    var `profileId`: kotlin.ByteArray
+    ,
+    var `firstName`: kotlin.String
+    ,
+    var `ageAtIssue`: kotlin.UByte
+    ,
+    var `revision`: kotlin.ULong
+    ,
+    var `expiresAt`: kotlin.ULong
+    ,
+    var `photos`: List<FfiPhotoManifest>
+    ,
+    var `score`: kotlin.Double?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiCandidateProfile: FfiConverterRustBuffer<FfiCandidateProfile> {
+    override fun read(buf: ByteBuffer): FfiCandidateProfile {
+        return FfiCandidateProfile(
+            FfiConverterByteArray.read(buf),
+            FfiConverterString.read(buf),
+            FfiConverterUByte.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterSequenceTypeFfiPhotoManifest.read(buf),
+            FfiConverterOptionalDouble.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiCandidateProfile) = (
+            FfiConverterByteArray.allocationSize(value.`profileId`) +
+            FfiConverterString.allocationSize(value.`firstName`) +
+            FfiConverterUByte.allocationSize(value.`ageAtIssue`) +
+            FfiConverterULong.allocationSize(value.`revision`) +
+            FfiConverterULong.allocationSize(value.`expiresAt`) +
+            FfiConverterSequenceTypeFfiPhotoManifest.allocationSize(value.`photos`) +
+            FfiConverterOptionalDouble.allocationSize(value.`score`)
+    )
+
+    override fun write(value: FfiCandidateProfile, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`profileId`, buf)
+            FfiConverterString.write(value.`firstName`, buf)
+            FfiConverterUByte.write(value.`ageAtIssue`, buf)
+            FfiConverterULong.write(value.`revision`, buf)
+            FfiConverterULong.write(value.`expiresAt`, buf)
+            FfiConverterSequenceTypeFfiPhotoManifest.write(value.`photos`, buf)
+            FfiConverterOptionalDouble.write(value.`score`, buf)
+    }
+}
+
+
+
+data class FfiContactHandle (
+    var `service`: FfiContactService
+    ,
+    var `otherService`: kotlin.String?
+    ,
+    var `value`: kotlin.String
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiContactHandle: FfiConverterRustBuffer<FfiContactHandle> {
+    override fun read(buf: ByteBuffer): FfiContactHandle {
+        return FfiContactHandle(
+            FfiConverterTypeFfiContactService.read(buf),
+            FfiConverterOptionalString.read(buf),
+            FfiConverterString.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiContactHandle) = (
+            FfiConverterTypeFfiContactService.allocationSize(value.`service`) +
+            FfiConverterOptionalString.allocationSize(value.`otherService`) +
+            FfiConverterString.allocationSize(value.`value`)
+    )
+
+    override fun write(value: FfiContactHandle, buf: ByteBuffer) {
+            FfiConverterTypeFfiContactService.write(value.`service`, buf)
+            FfiConverterOptionalString.write(value.`otherService`, buf)
+            FfiConverterString.write(value.`value`, buf)
+    }
+}
+
+
+
+data class FfiDeliveryFailure (
+    var `peerId`: kotlin.String
+    ,
+    var `itemHash`: kotlin.ByteArray
+    ,
+    var `reason`: FfiDeliveryFailureReason
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiDeliveryFailure: FfiConverterRustBuffer<FfiDeliveryFailure> {
+    override fun read(buf: ByteBuffer): FfiDeliveryFailure {
+        return FfiDeliveryFailure(
+            FfiConverterString.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterTypeFfiDeliveryFailureReason.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiDeliveryFailure) = (
+            FfiConverterString.allocationSize(value.`peerId`) +
+            FfiConverterByteArray.allocationSize(value.`itemHash`) +
+            FfiConverterTypeFfiDeliveryFailureReason.allocationSize(value.`reason`)
+    )
+
+    override fun write(value: FfiDeliveryFailure, buf: ByteBuffer) {
+            FfiConverterString.write(value.`peerId`, buf)
+            FfiConverterByteArray.write(value.`itemHash`, buf)
+            FfiConverterTypeFfiDeliveryFailureReason.write(value.`reason`, buf)
+    }
+}
+
+
+
+data class FfiDiscoveryQuery (
+    var `minimumAge`: kotlin.UByte
+    ,
+    var `maximumAge`: kotlin.UByte
+    ,
+    var `pageSize`: kotlin.UByte
+    ,
+    var `cursor`: FfiPageCursor?
+    ,
+    var `coarseRegion`: kotlin.String?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiDiscoveryQuery: FfiConverterRustBuffer<FfiDiscoveryQuery> {
+    override fun read(buf: ByteBuffer): FfiDiscoveryQuery {
+        return FfiDiscoveryQuery(
+            FfiConverterUByte.read(buf),
+            FfiConverterUByte.read(buf),
+            FfiConverterUByte.read(buf),
+            FfiConverterOptionalTypeFfiPageCursor.read(buf),
+            FfiConverterOptionalString.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiDiscoveryQuery) = (
+            FfiConverterUByte.allocationSize(value.`minimumAge`) +
+            FfiConverterUByte.allocationSize(value.`maximumAge`) +
+            FfiConverterUByte.allocationSize(value.`pageSize`) +
+            FfiConverterOptionalTypeFfiPageCursor.allocationSize(value.`cursor`) +
+            FfiConverterOptionalString.allocationSize(value.`coarseRegion`)
+    )
+
+    override fun write(value: FfiDiscoveryQuery, buf: ByteBuffer) {
+            FfiConverterUByte.write(value.`minimumAge`, buf)
+            FfiConverterUByte.write(value.`maximumAge`, buf)
+            FfiConverterUByte.write(value.`pageSize`, buf)
+            FfiConverterOptionalTypeFfiPageCursor.write(value.`cursor`, buf)
+            FfiConverterOptionalString.write(value.`coarseRegion`, buf)
+    }
+}
+
+
+
 data class FfiHostConditions (
     var `wifiAvailable`: kotlin.Boolean?
     ,
@@ -2360,6 +3750,221 @@ public object FfiConverterTypeFfiHostConditions: FfiConverterRustBuffer<FfiHostC
     override fun write(value: FfiHostConditions, buf: ByteBuffer) {
             FfiConverterOptionalBoolean.write(value.`wifiAvailable`, buf)
             FfiConverterOptionalBoolean.write(value.`charging`, buf)
+    }
+}
+
+
+
+data class FfiIdentitySummary (
+    var `profileId`: kotlin.ByteArray
+    ,
+    var `signingPublicKey`: kotlin.ByteArray
+    ,
+    var `encryptionPublicKey`: kotlin.ByteArray
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiIdentitySummary: FfiConverterRustBuffer<FfiIdentitySummary> {
+    override fun read(buf: ByteBuffer): FfiIdentitySummary {
+        return FfiIdentitySummary(
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiIdentitySummary) = (
+            FfiConverterByteArray.allocationSize(value.`profileId`) +
+            FfiConverterByteArray.allocationSize(value.`signingPublicKey`) +
+            FfiConverterByteArray.allocationSize(value.`encryptionPublicKey`)
+    )
+
+    override fun write(value: FfiIdentitySummary, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`profileId`, buf)
+            FfiConverterByteArray.write(value.`signingPublicKey`, buf)
+            FfiConverterByteArray.write(value.`encryptionPublicKey`, buf)
+    }
+}
+
+
+
+data class FfiIncomingLike (
+    var `sender`: kotlin.ByteArray
+    ,
+    var `firstName`: kotlin.String
+    ,
+    var `ageAtIssue`: kotlin.UByte
+    ,
+    var `state`: FfiMatchState
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiIncomingLike: FfiConverterRustBuffer<FfiIncomingLike> {
+    override fun read(buf: ByteBuffer): FfiIncomingLike {
+        return FfiIncomingLike(
+            FfiConverterByteArray.read(buf),
+            FfiConverterString.read(buf),
+            FfiConverterUByte.read(buf),
+            FfiConverterTypeFfiMatchState.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiIncomingLike) = (
+            FfiConverterByteArray.allocationSize(value.`sender`) +
+            FfiConverterString.allocationSize(value.`firstName`) +
+            FfiConverterUByte.allocationSize(value.`ageAtIssue`) +
+            FfiConverterTypeFfiMatchState.allocationSize(value.`state`)
+    )
+
+    override fun write(value: FfiIncomingLike, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`sender`, buf)
+            FfiConverterString.write(value.`firstName`, buf)
+            FfiConverterUByte.write(value.`ageAtIssue`, buf)
+            FfiConverterTypeFfiMatchState.write(value.`state`, buf)
+    }
+}
+
+
+
+data class FfiIncomingLikePage (
+    var `items`: List<FfiIncomingLike>
+    ,
+    var `nextCursor`: FfiPageCursor?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiIncomingLikePage: FfiConverterRustBuffer<FfiIncomingLikePage> {
+    override fun read(buf: ByteBuffer): FfiIncomingLikePage {
+        return FfiIncomingLikePage(
+            FfiConverterSequenceTypeFfiIncomingLike.read(buf),
+            FfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiIncomingLikePage) = (
+            FfiConverterSequenceTypeFfiIncomingLike.allocationSize(value.`items`) +
+            FfiConverterOptionalTypeFfiPageCursor.allocationSize(value.`nextCursor`)
+    )
+
+    override fun write(value: FfiIncomingLikePage, buf: ByteBuffer) {
+            FfiConverterSequenceTypeFfiIncomingLike.write(value.`items`, buf)
+            FfiConverterOptionalTypeFfiPageCursor.write(value.`nextCursor`, buf)
+    }
+}
+
+
+
+data class FfiMatchPage (
+    var `items`: List<FfiMatchSummary>
+    ,
+    var `nextCursor`: FfiPageCursor?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiMatchPage: FfiConverterRustBuffer<FfiMatchPage> {
+    override fun read(buf: ByteBuffer): FfiMatchPage {
+        return FfiMatchPage(
+            FfiConverterSequenceTypeFfiMatchSummary.read(buf),
+            FfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiMatchPage) = (
+            FfiConverterSequenceTypeFfiMatchSummary.allocationSize(value.`items`) +
+            FfiConverterOptionalTypeFfiPageCursor.allocationSize(value.`nextCursor`)
+    )
+
+    override fun write(value: FfiMatchPage, buf: ByteBuffer) {
+            FfiConverterSequenceTypeFfiMatchSummary.write(value.`items`, buf)
+            FfiConverterOptionalTypeFfiPageCursor.write(value.`nextCursor`, buf)
+    }
+}
+
+
+
+data class FfiMatchSummary (
+    var `peer`: kotlin.ByteArray
+    ,
+    var `matchId`: kotlin.ByteArray
+    ,
+    var `firstName`: kotlin.String
+    ,
+    var `ageAtIssue`: kotlin.UByte
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiMatchSummary: FfiConverterRustBuffer<FfiMatchSummary> {
+    override fun read(buf: ByteBuffer): FfiMatchSummary {
+        return FfiMatchSummary(
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterString.read(buf),
+            FfiConverterUByte.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiMatchSummary) = (
+            FfiConverterByteArray.allocationSize(value.`peer`) +
+            FfiConverterByteArray.allocationSize(value.`matchId`) +
+            FfiConverterString.allocationSize(value.`firstName`) +
+            FfiConverterUByte.allocationSize(value.`ageAtIssue`)
+    )
+
+    override fun write(value: FfiMatchSummary, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`peer`, buf)
+            FfiConverterByteArray.write(value.`matchId`, buf)
+            FfiConverterString.write(value.`firstName`, buf)
+            FfiConverterUByte.write(value.`ageAtIssue`, buf)
     }
 }
 
@@ -2441,6 +4046,145 @@ public object FfiConverterTypeFfiNotificationPreferences: FfiConverterRustBuffer
 
 
 
+data class FfiOperationPage (
+    var `items`: List<FfiOperationReceipt>
+    ,
+    var `nextCursor`: FfiPageCursor?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiOperationPage: FfiConverterRustBuffer<FfiOperationPage> {
+    override fun read(buf: ByteBuffer): FfiOperationPage {
+        return FfiOperationPage(
+            FfiConverterSequenceTypeFfiOperationReceipt.read(buf),
+            FfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiOperationPage) = (
+            FfiConverterSequenceTypeFfiOperationReceipt.allocationSize(value.`items`) +
+            FfiConverterOptionalTypeFfiPageCursor.allocationSize(value.`nextCursor`)
+    )
+
+    override fun write(value: FfiOperationPage, buf: ByteBuffer) {
+            FfiConverterSequenceTypeFfiOperationReceipt.write(value.`items`, buf)
+            FfiConverterOptionalTypeFfiPageCursor.write(value.`nextCursor`, buf)
+    }
+}
+
+
+
+data class FfiOperationReceipt (
+    var `operationId`: kotlin.ByteArray
+    ,
+    var `kind`: FfiOperationKind
+    ,
+    var `status`: FfiOperationStatus
+    ,
+    var `acknowledgedPeers`: kotlin.UInt
+    ,
+    var `requiredAcknowledgements`: kotlin.UInt
+    ,
+    var `pendingItems`: List<kotlin.ByteArray>
+    ,
+    var `failures`: List<FfiDeliveryFailure>
+    ,
+    var `retryRecommended`: kotlin.Boolean
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiOperationReceipt: FfiConverterRustBuffer<FfiOperationReceipt> {
+    override fun read(buf: ByteBuffer): FfiOperationReceipt {
+        return FfiOperationReceipt(
+            FfiConverterByteArray.read(buf),
+            FfiConverterTypeFfiOperationKind.read(buf),
+            FfiConverterTypeFfiOperationStatus.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterSequenceTypeFfiDeliveryFailure.read(buf),
+            FfiConverterBoolean.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiOperationReceipt) = (
+            FfiConverterByteArray.allocationSize(value.`operationId`) +
+            FfiConverterTypeFfiOperationKind.allocationSize(value.`kind`) +
+            FfiConverterTypeFfiOperationStatus.allocationSize(value.`status`) +
+            FfiConverterUInt.allocationSize(value.`acknowledgedPeers`) +
+            FfiConverterUInt.allocationSize(value.`requiredAcknowledgements`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`pendingItems`) +
+            FfiConverterSequenceTypeFfiDeliveryFailure.allocationSize(value.`failures`) +
+            FfiConverterBoolean.allocationSize(value.`retryRecommended`)
+    )
+
+    override fun write(value: FfiOperationReceipt, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`operationId`, buf)
+            FfiConverterTypeFfiOperationKind.write(value.`kind`, buf)
+            FfiConverterTypeFfiOperationStatus.write(value.`status`, buf)
+            FfiConverterUInt.write(value.`acknowledgedPeers`, buf)
+            FfiConverterUInt.write(value.`requiredAcknowledgements`, buf)
+            FfiConverterSequenceByteArray.write(value.`pendingItems`, buf)
+            FfiConverterSequenceTypeFfiDeliveryFailure.write(value.`failures`, buf)
+            FfiConverterBoolean.write(value.`retryRecommended`, buf)
+    }
+}
+
+
+
+data class FfiPageCursor (
+    var `value`: kotlin.ByteArray
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiPageCursor: FfiConverterRustBuffer<FfiPageCursor> {
+    override fun read(buf: ByteBuffer): FfiPageCursor {
+        return FfiPageCursor(
+            FfiConverterByteArray.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiPageCursor) = (
+            FfiConverterByteArray.allocationSize(value.`value`)
+    )
+
+    override fun write(value: FfiPageCursor, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`value`, buf)
+    }
+}
+
+
+
 data class FfiPeerContributionPolicy (
     var `enabled`: kotlin.Boolean
     ,
@@ -2494,6 +4238,294 @@ public object FfiConverterTypeFfiPeerContributionPolicy: FfiConverterRustBuffer<
             FfiConverterULong.write(value.`maxStorageBytes`, buf)
             FfiConverterULong.write(value.`maxTransferBytes`, buf)
             FfiConverterULong.write(value.`maxDurationMs`, buf)
+    }
+}
+
+
+
+data class FfiPhotoManifest (
+    var `hash`: kotlin.ByteArray
+    ,
+    var `byteCount`: kotlin.UInt
+    ,
+    var `mediaType`: kotlin.String
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiPhotoManifest: FfiConverterRustBuffer<FfiPhotoManifest> {
+    override fun read(buf: ByteBuffer): FfiPhotoManifest {
+        return FfiPhotoManifest(
+            FfiConverterByteArray.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterString.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiPhotoManifest) = (
+            FfiConverterByteArray.allocationSize(value.`hash`) +
+            FfiConverterUInt.allocationSize(value.`byteCount`) +
+            FfiConverterString.allocationSize(value.`mediaType`)
+    )
+
+    override fun write(value: FfiPhotoManifest, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`hash`, buf)
+            FfiConverterUInt.write(value.`byteCount`, buf)
+            FfiConverterString.write(value.`mediaType`, buf)
+    }
+}
+
+
+
+data class FfiProfileReport (
+    var `reportId`: kotlin.ByteArray
+    ,
+    var `subject`: kotlin.ByteArray
+    ,
+    var `policyReason`: kotlin.UShort
+    ,
+    var `evidenceHashes`: List<kotlin.ByteArray>
+    ,
+    var `createdAt`: kotlin.ULong
+    ,
+    var `signature`: kotlin.ByteArray
+    ,
+    var `deliveryStatus`: FfiReportDeliveryStatus
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiProfileReport: FfiConverterRustBuffer<FfiProfileReport> {
+    override fun read(buf: ByteBuffer): FfiProfileReport {
+        return FfiProfileReport(
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterUShort.read(buf),
+            FfiConverterSequenceByteArray.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterTypeFfiReportDeliveryStatus.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiProfileReport) = (
+            FfiConverterByteArray.allocationSize(value.`reportId`) +
+            FfiConverterByteArray.allocationSize(value.`subject`) +
+            FfiConverterUShort.allocationSize(value.`policyReason`) +
+            FfiConverterSequenceByteArray.allocationSize(value.`evidenceHashes`) +
+            FfiConverterULong.allocationSize(value.`createdAt`) +
+            FfiConverterByteArray.allocationSize(value.`signature`) +
+            FfiConverterTypeFfiReportDeliveryStatus.allocationSize(value.`deliveryStatus`)
+    )
+
+    override fun write(value: FfiProfileReport, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`reportId`, buf)
+            FfiConverterByteArray.write(value.`subject`, buf)
+            FfiConverterUShort.write(value.`policyReason`, buf)
+            FfiConverterSequenceByteArray.write(value.`evidenceHashes`, buf)
+            FfiConverterULong.write(value.`createdAt`, buf)
+            FfiConverterByteArray.write(value.`signature`, buf)
+            FfiConverterTypeFfiReportDeliveryStatus.write(value.`deliveryStatus`, buf)
+    }
+}
+
+
+
+data class FfiProfileReportPage (
+    var `items`: List<FfiProfileReport>
+    ,
+    var `nextCursor`: FfiPageCursor?
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiProfileReportPage: FfiConverterRustBuffer<FfiProfileReportPage> {
+    override fun read(buf: ByteBuffer): FfiProfileReportPage {
+        return FfiProfileReportPage(
+            FfiConverterSequenceTypeFfiProfileReport.read(buf),
+            FfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiProfileReportPage) = (
+            FfiConverterSequenceTypeFfiProfileReport.allocationSize(value.`items`) +
+            FfiConverterOptionalTypeFfiPageCursor.allocationSize(value.`nextCursor`)
+    )
+
+    override fun write(value: FfiProfileReportPage, buf: ByteBuffer) {
+            FfiConverterSequenceTypeFfiProfileReport.write(value.`items`, buf)
+            FfiConverterOptionalTypeFfiPageCursor.write(value.`nextCursor`, buf)
+    }
+}
+
+
+
+data class FfiPublicationReceipt (
+    var `operation`: FfiOperationReceipt
+    ,
+    var `revision`: kotlin.ULong
+    ,
+    var `replicatedPeers`: kotlin.UInt
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiPublicationReceipt: FfiConverterRustBuffer<FfiPublicationReceipt> {
+    override fun read(buf: ByteBuffer): FfiPublicationReceipt {
+        return FfiPublicationReceipt(
+            FfiConverterTypeFfiOperationReceipt.read(buf),
+            FfiConverterULong.read(buf),
+            FfiConverterUInt.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiPublicationReceipt) = (
+            FfiConverterTypeFfiOperationReceipt.allocationSize(value.`operation`) +
+            FfiConverterULong.allocationSize(value.`revision`) +
+            FfiConverterUInt.allocationSize(value.`replicatedPeers`)
+    )
+
+    override fun write(value: FfiPublicationReceipt, buf: ByteBuffer) {
+            FfiConverterTypeFfiOperationReceipt.write(value.`operation`, buf)
+            FfiConverterULong.write(value.`revision`, buf)
+            FfiConverterUInt.write(value.`replicatedPeers`, buf)
+    }
+}
+
+
+
+data class FfiRankedCandidate (
+    var `profileId`: kotlin.ByteArray
+    ,
+    var `probability`: kotlin.Double
+    ,
+    var `explored`: kotlin.Boolean
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiRankedCandidate: FfiConverterRustBuffer<FfiRankedCandidate> {
+    override fun read(buf: ByteBuffer): FfiRankedCandidate {
+        return FfiRankedCandidate(
+            FfiConverterByteArray.read(buf),
+            FfiConverterDouble.read(buf),
+            FfiConverterBoolean.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiRankedCandidate) = (
+            FfiConverterByteArray.allocationSize(value.`profileId`) +
+            FfiConverterDouble.allocationSize(value.`probability`) +
+            FfiConverterBoolean.allocationSize(value.`explored`)
+    )
+
+    override fun write(value: FfiRankedCandidate, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`profileId`, buf)
+            FfiConverterDouble.write(value.`probability`, buf)
+            FfiConverterBoolean.write(value.`explored`, buf)
+    }
+}
+
+
+
+data class FfiRankingCandidate (
+    var `profileId`: kotlin.ByteArray
+    ,
+    var `verifiedAge`: kotlin.UByte
+    ,
+    var `adultCredentialValid`: kotlin.Boolean
+    ,
+    var `coarseRegion`: kotlin.String?
+    ,
+    var `embeddingVersion`: kotlin.UShort
+    ,
+    var `embeddingValues`: List<kotlin.Double>
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiRankingCandidate: FfiConverterRustBuffer<FfiRankingCandidate> {
+    override fun read(buf: ByteBuffer): FfiRankingCandidate {
+        return FfiRankingCandidate(
+            FfiConverterByteArray.read(buf),
+            FfiConverterUByte.read(buf),
+            FfiConverterBoolean.read(buf),
+            FfiConverterOptionalString.read(buf),
+            FfiConverterUShort.read(buf),
+            FfiConverterSequenceDouble.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiRankingCandidate) = (
+            FfiConverterByteArray.allocationSize(value.`profileId`) +
+            FfiConverterUByte.allocationSize(value.`verifiedAge`) +
+            FfiConverterBoolean.allocationSize(value.`adultCredentialValid`) +
+            FfiConverterOptionalString.allocationSize(value.`coarseRegion`) +
+            FfiConverterUShort.allocationSize(value.`embeddingVersion`) +
+            FfiConverterSequenceDouble.allocationSize(value.`embeddingValues`)
+    )
+
+    override fun write(value: FfiRankingCandidate, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`profileId`, buf)
+            FfiConverterUByte.write(value.`verifiedAge`, buf)
+            FfiConverterBoolean.write(value.`adultCredentialValid`, buf)
+            FfiConverterOptionalString.write(value.`coarseRegion`, buf)
+            FfiConverterUShort.write(value.`embeddingVersion`, buf)
+            FfiConverterSequenceDouble.write(value.`embeddingValues`, buf)
     }
 }
 
@@ -2782,6 +4814,131 @@ public object FfiConverterTypeFfiSyncRequest: FfiConverterRustBuffer<FfiSyncRequ
 
 
 
+data class FfiValidatedPhoto (
+    var `bytes`: kotlin.ByteArray
+    ,
+    var `hash`: kotlin.ByteArray
+    ,
+    var `mediaType`: kotlin.String
+    ,
+    var `width`: kotlin.UInt
+    ,
+    var `height`: kotlin.UInt
+
+){
+
+
+
+
+
+    companion object
+}
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiValidatedPhoto: FfiConverterRustBuffer<FfiValidatedPhoto> {
+    override fun read(buf: ByteBuffer): FfiValidatedPhoto {
+        return FfiValidatedPhoto(
+            FfiConverterByteArray.read(buf),
+            FfiConverterByteArray.read(buf),
+            FfiConverterString.read(buf),
+            FfiConverterUInt.read(buf),
+            FfiConverterUInt.read(buf),
+        )
+    }
+
+    override fun allocationSize(value: FfiValidatedPhoto) = (
+            FfiConverterByteArray.allocationSize(value.`bytes`) +
+            FfiConverterByteArray.allocationSize(value.`hash`) +
+            FfiConverterString.allocationSize(value.`mediaType`) +
+            FfiConverterUInt.allocationSize(value.`width`) +
+            FfiConverterUInt.allocationSize(value.`height`)
+    )
+
+    override fun write(value: FfiValidatedPhoto, buf: ByteBuffer) {
+            FfiConverterByteArray.write(value.`bytes`, buf)
+            FfiConverterByteArray.write(value.`hash`, buf)
+            FfiConverterString.write(value.`mediaType`, buf)
+            FfiConverterUInt.write(value.`width`, buf)
+            FfiConverterUInt.write(value.`height`, buf)
+    }
+}
+
+
+
+
+enum class FfiContactService {
+
+    INSTAGRAM,
+    TELEGRAM,
+    WHATS_APP,
+    OTHER;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiContactService: FfiConverterRustBuffer<FfiContactService> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiContactService.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiContactService) = 4UL
+
+    override fun write(value: FfiContactService, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+enum class FfiDeliveryFailureReason {
+
+    UNREACHABLE,
+    REJECTED,
+    BUDGET,
+    CANCELLED;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiDeliveryFailureReason: FfiConverterRustBuffer<FfiDeliveryFailureReason> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiDeliveryFailureReason.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiDeliveryFailureReason) = 4UL
+
+    override fun write(value: FfiDeliveryFailureReason, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
 
 
 sealed class FfiException: kotlin.Exception() {
@@ -2882,6 +5039,42 @@ sealed class FfiException: kotlin.Exception() {
             get() = ""
     }
 
+    class UntrustedIdentity(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class CredentialExpired(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class SafetyUnavailable(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class SafetyRejected(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class Pending(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
+    class Unsupported(
+        ) : FfiException() {
+        override val message
+            get() = ""
+    }
+
 
 
 
@@ -2917,6 +5110,12 @@ public object FfiConverterTypeFfiError : FfiConverterRustBuffer<FfiException> {
             14 -> FfiException.Unauthorized()
             15 -> FfiException.NetworkUnavailable()
             16 -> FfiException.Cancelled()
+            17 -> FfiException.UntrustedIdentity()
+            18 -> FfiException.CredentialExpired()
+            19 -> FfiException.SafetyUnavailable()
+            20 -> FfiException.SafetyRejected()
+            21 -> FfiException.Pending()
+            22 -> FfiException.Unsupported()
             else -> throw RuntimeException("invalid error enum value, something is very wrong!!")
         }
     }
@@ -2984,6 +5183,30 @@ public object FfiConverterTypeFfiError : FfiConverterRustBuffer<FfiException> {
                 4UL
             )
             is FfiException.Cancelled -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.UntrustedIdentity -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.CredentialExpired -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.SafetyUnavailable -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.SafetyRejected -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.Pending -> (
+                // Add the size for the Int that specifies the variant plus the size needed for all fields
+                4UL
+            )
+            is FfiException.Unsupported -> (
                 // Add the size for the Int that specifies the variant plus the size needed for all fields
                 4UL
             )
@@ -3056,10 +5279,72 @@ public object FfiConverterTypeFfiError : FfiConverterRustBuffer<FfiException> {
                 buf.putInt(16)
                 Unit
             }
+            is FfiException.UntrustedIdentity -> {
+                buf.putInt(17)
+                Unit
+            }
+            is FfiException.CredentialExpired -> {
+                buf.putInt(18)
+                Unit
+            }
+            is FfiException.SafetyUnavailable -> {
+                buf.putInt(19)
+                Unit
+            }
+            is FfiException.SafetyRejected -> {
+                buf.putInt(20)
+                Unit
+            }
+            is FfiException.Pending -> {
+                buf.putInt(21)
+                Unit
+            }
+            is FfiException.Unsupported -> {
+                buf.putInt(22)
+                Unit
+            }
         }.let { /* this makes the `when` an expression, which ensures it is exhaustive */ }
     }
 
 }
+
+
+
+
+enum class FfiMatchState {
+
+    NEUTRAL,
+    OUTGOING,
+    INCOMING,
+    MATCHED,
+    REJECTED,
+    BLOCKED;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiMatchState: FfiConverterRustBuffer<FfiMatchState> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiMatchState.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiMatchState) = 4UL
+
+    override fun write(value: FfiMatchState, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
 
 
 
@@ -3089,6 +5374,110 @@ public object FfiConverterTypeFfiNotificationKind: FfiConverterRustBuffer<FfiNot
     override fun allocationSize(value: FfiNotificationKind) = 4UL
 
     override fun write(value: FfiNotificationKind, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+enum class FfiOperationKind {
+
+    PUBLICATION,
+    LIKE,
+    CONTACT;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiOperationKind: FfiConverterRustBuffer<FfiOperationKind> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiOperationKind.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiOperationKind) = 4UL
+
+    override fun write(value: FfiOperationKind, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+enum class FfiOperationStatus {
+
+    PENDING,
+    PARTIAL,
+    COMPLETED,
+    FAILED;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiOperationStatus: FfiConverterRustBuffer<FfiOperationStatus> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiOperationStatus.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiOperationStatus) = 4UL
+
+    override fun write(value: FfiOperationStatus, buf: ByteBuffer) {
+        buf.putInt(value.ordinal + 1)
+    }
+}
+
+
+
+
+
+
+enum class FfiReportDeliveryStatus {
+
+    LOCAL_ONLY;
+
+
+
+
+    companion object
+}
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterTypeFfiReportDeliveryStatus: FfiConverterRustBuffer<FfiReportDeliveryStatus> {
+    override fun read(buf: ByteBuffer) = try {
+        FfiReportDeliveryStatus.values()[buf.getInt() - 1]
+    } catch (e: IndexOutOfBoundsException) {
+        throw RuntimeException("invalid enum value, something is very wrong!!", e)
+    }
+
+    override fun allocationSize(value: FfiReportDeliveryStatus) = 4UL
+
+    override fun write(value: FfiReportDeliveryStatus, buf: ByteBuffer) {
         buf.putInt(value.ordinal + 1)
     }
 }
@@ -3176,6 +5565,38 @@ public object FfiConverterTypeFfiSyncStatus: FfiConverterRustBuffer<FfiSyncStatu
 /**
  * @suppress
  */
+public object FfiConverterOptionalDouble: FfiConverterRustBuffer<kotlin.Double?> {
+    override fun read(buf: ByteBuffer): kotlin.Double? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterDouble.read(buf)
+    }
+
+    override fun allocationSize(value: kotlin.Double?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterDouble.allocationSize(value)
+        }
+    }
+
+    override fun write(value: kotlin.Double?, buf: ByteBuffer) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterDouble.write(value, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
 public object FfiConverterOptionalBoolean: FfiConverterRustBuffer<kotlin.Boolean?> {
     override fun read(buf: ByteBuffer): kotlin.Boolean? {
         if (buf.get().toInt() == 0) {
@@ -3198,6 +5619,102 @@ public object FfiConverterOptionalBoolean: FfiConverterRustBuffer<kotlin.Boolean
         } else {
             buf.put(1)
             FfiConverterBoolean.write(value, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterOptionalString: FfiConverterRustBuffer<kotlin.String?> {
+    override fun read(buf: ByteBuffer): kotlin.String? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterString.read(buf)
+    }
+
+    override fun allocationSize(value: kotlin.String?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterString.allocationSize(value)
+        }
+    }
+
+    override fun write(value: kotlin.String?, buf: ByteBuffer) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterString.write(value, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterOptionalTypeFfiCandidateProfile: FfiConverterRustBuffer<FfiCandidateProfile?> {
+    override fun read(buf: ByteBuffer): FfiCandidateProfile? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterTypeFfiCandidateProfile.read(buf)
+    }
+
+    override fun allocationSize(value: FfiCandidateProfile?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterTypeFfiCandidateProfile.allocationSize(value)
+        }
+    }
+
+    override fun write(value: FfiCandidateProfile?, buf: ByteBuffer) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterTypeFfiCandidateProfile.write(value, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterOptionalTypeFfiPageCursor: FfiConverterRustBuffer<FfiPageCursor?> {
+    override fun read(buf: ByteBuffer): FfiPageCursor? {
+        if (buf.get().toInt() == 0) {
+            return null
+        }
+        return FfiConverterTypeFfiPageCursor.read(buf)
+    }
+
+    override fun allocationSize(value: FfiPageCursor?): ULong {
+        if (value == null) {
+            return 1UL
+        } else {
+            return 1UL + FfiConverterTypeFfiPageCursor.allocationSize(value)
+        }
+    }
+
+    override fun write(value: FfiPageCursor?, buf: ByteBuffer) {
+        if (value == null) {
+            buf.put(0)
+        } else {
+            buf.put(1)
+            FfiConverterTypeFfiPageCursor.write(value, buf)
         }
     }
 }
@@ -3380,6 +5897,146 @@ public object FfiConverterSequenceTypeFfiAuthorizedReplicaPhoto: FfiConverterRus
 /**
  * @suppress
  */
+public object FfiConverterSequenceTypeFfiCandidateProfile: FfiConverterRustBuffer<List<FfiCandidateProfile>> {
+    override fun read(buf: ByteBuffer): List<FfiCandidateProfile> {
+        val len = buf.getInt()
+        return List<FfiCandidateProfile>(len) {
+            FfiConverterTypeFfiCandidateProfile.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiCandidateProfile>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiCandidateProfile.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiCandidateProfile>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiCandidateProfile.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiContactHandle: FfiConverterRustBuffer<List<FfiContactHandle>> {
+    override fun read(buf: ByteBuffer): List<FfiContactHandle> {
+        val len = buf.getInt()
+        return List<FfiContactHandle>(len) {
+            FfiConverterTypeFfiContactHandle.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiContactHandle>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiContactHandle.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiContactHandle>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiContactHandle.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiDeliveryFailure: FfiConverterRustBuffer<List<FfiDeliveryFailure>> {
+    override fun read(buf: ByteBuffer): List<FfiDeliveryFailure> {
+        val len = buf.getInt()
+        return List<FfiDeliveryFailure>(len) {
+            FfiConverterTypeFfiDeliveryFailure.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiDeliveryFailure>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiDeliveryFailure.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiDeliveryFailure>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiDeliveryFailure.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiIncomingLike: FfiConverterRustBuffer<List<FfiIncomingLike>> {
+    override fun read(buf: ByteBuffer): List<FfiIncomingLike> {
+        val len = buf.getInt()
+        return List<FfiIncomingLike>(len) {
+            FfiConverterTypeFfiIncomingLike.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiIncomingLike>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiIncomingLike.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiIncomingLike>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiIncomingLike.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiMatchSummary: FfiConverterRustBuffer<List<FfiMatchSummary>> {
+    override fun read(buf: ByteBuffer): List<FfiMatchSummary> {
+        val len = buf.getInt()
+        return List<FfiMatchSummary>(len) {
+            FfiConverterTypeFfiMatchSummary.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiMatchSummary>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiMatchSummary.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiMatchSummary>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiMatchSummary.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
 public object FfiConverterSequenceTypeFfiNotificationEvent: FfiConverterRustBuffer<List<FfiNotificationEvent>> {
     override fun read(buf: ByteBuffer): List<FfiNotificationEvent> {
         val len = buf.getInt()
@@ -3398,6 +6055,146 @@ public object FfiConverterSequenceTypeFfiNotificationEvent: FfiConverterRustBuff
         buf.putInt(value.size)
         value.iterator().forEach {
             FfiConverterTypeFfiNotificationEvent.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiOperationReceipt: FfiConverterRustBuffer<List<FfiOperationReceipt>> {
+    override fun read(buf: ByteBuffer): List<FfiOperationReceipt> {
+        val len = buf.getInt()
+        return List<FfiOperationReceipt>(len) {
+            FfiConverterTypeFfiOperationReceipt.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiOperationReceipt>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiOperationReceipt.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiOperationReceipt>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiOperationReceipt.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiPhotoManifest: FfiConverterRustBuffer<List<FfiPhotoManifest>> {
+    override fun read(buf: ByteBuffer): List<FfiPhotoManifest> {
+        val len = buf.getInt()
+        return List<FfiPhotoManifest>(len) {
+            FfiConverterTypeFfiPhotoManifest.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiPhotoManifest>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiPhotoManifest.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiPhotoManifest>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiPhotoManifest.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiProfileReport: FfiConverterRustBuffer<List<FfiProfileReport>> {
+    override fun read(buf: ByteBuffer): List<FfiProfileReport> {
+        val len = buf.getInt()
+        return List<FfiProfileReport>(len) {
+            FfiConverterTypeFfiProfileReport.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiProfileReport>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiProfileReport.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiProfileReport>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiProfileReport.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiRankedCandidate: FfiConverterRustBuffer<List<FfiRankedCandidate>> {
+    override fun read(buf: ByteBuffer): List<FfiRankedCandidate> {
+        val len = buf.getInt()
+        return List<FfiRankedCandidate>(len) {
+            FfiConverterTypeFfiRankedCandidate.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiRankedCandidate>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiRankedCandidate.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiRankedCandidate>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiRankedCandidate.write(it, buf)
+        }
+    }
+}
+
+
+
+
+/**
+ * @suppress
+ */
+public object FfiConverterSequenceTypeFfiRankingCandidate: FfiConverterRustBuffer<List<FfiRankingCandidate>> {
+    override fun read(buf: ByteBuffer): List<FfiRankingCandidate> {
+        val len = buf.getInt()
+        return List<FfiRankingCandidate>(len) {
+            FfiConverterTypeFfiRankingCandidate.read(buf)
+        }
+    }
+
+    override fun allocationSize(value: List<FfiRankingCandidate>): ULong {
+        val sizeForLength = 4UL
+        val sizeForItems = value.map { FfiConverterTypeFfiRankingCandidate.allocationSize(it) }.sum()
+        return sizeForLength + sizeForItems
+    }
+
+    override fun write(value: List<FfiRankingCandidate>, buf: ByteBuffer) {
+        buf.putInt(value.size)
+        value.iterator().forEach {
+            FfiConverterTypeFfiRankingCandidate.write(it, buf)
         }
     }
 }
@@ -3487,6 +6284,32 @@ public object FfiConverterSequenceTypeFfiSyncDeferredReason: FfiConverterRustBuf
 
 
         FfiConverterString.lower(`directory`),
+        FfiConverterString.lower(`passphrase`),_status)
+}
+    )
+    }
+
+
+    @Throws(FfiException::class) fun `createApplication`(`config`: FfiApplicationConfig, `passphrase`: kotlin.String): ApplicationHandle {
+            return FfiConverterTypeApplicationHandle.lift(
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_application(
+
+
+        FfiConverterTypeFfiApplicationConfig.lower(`config`),
+        FfiConverterString.lower(`passphrase`),_status)
+}
+    )
+    }
+
+
+    @Throws(FfiException::class) fun `openApplication`(`config`: FfiApplicationConfig, `passphrase`: kotlin.String): ApplicationHandle {
+            return FfiConverterTypeApplicationHandle.lift(
+    uniffiRustCallWithError(FfiException) { _status ->
+    UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_application(
+
+
+        FfiConverterTypeFfiApplicationConfig.lower(`config`),
         FfiConverterString.lower(`passphrase`),_status)
 }
     )

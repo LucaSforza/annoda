@@ -1,6 +1,7 @@
 use std::io::Cursor;
 
 use image::{DynamicImage, ImageFormat, ImageReader, Limits};
+use serde::{Deserialize, Serialize};
 use thiserror::Error;
 
 pub const MAX_PHOTO_BYTES: usize = 4 * 1024 * 1024;
@@ -219,7 +220,7 @@ impl PhotoSafetyClassifier for DeterministicSafetyFixture {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct ProfileReport {
     pub version: u16,
     pub report_id: [u8; 16],

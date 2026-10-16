@@ -78,6 +78,122 @@ fn portable_account_ffi_reopens_stable_identity_and_maps_wrong_passphrase() {
 }
 
 #[test]
+fn application_ffi_verifies_and_restores_credential_and_rejects_closed_handles() {
+    use annoda_core::identity::{DevelopmentIssuer, IdentityIssuer, IssuanceRequest};
+    use std::time::SystemTime;
+
+    let temporary = tempfile::tempdir().expect("account directory");
+    let issuer = DevelopmentIssuer::new().expect("fixture issuer");
+    let config = || FfiApplicationConfig {
+        data_directory: temporary
+            .path()
+            .join("account")
+            .to_string_lossy()
+            .into_owned(),
+        transport_data_directory: temporary
+            .path()
+            .join("transport")
+            .to_string_lossy()
+            .into_owned(),
+        trusted_issuer_keys: vec![issuer.public_key().to_vec()],
+        revoked_serials: Vec::new(),
+        peers: Vec::new(),
+        sync_budget: FfiSyncBudget {
+            max_duration_ms: 10_000,
+            max_download_bytes: 1024,
+            max_upload_bytes: 1024,
+            max_peers: 1,
+            max_mailbox_items: 4,
+            max_concurrent_requests: 1,
+            retries: 0,
+            request_timeout_ms: 1000,
+        },
+        allow_development_safety_fixture: false,
+    };
+    let app = create_application(config(), "test-only passphrase".to_owned())
+        .expect("create application");
+    assert_eq!(app.cancel_current_operation(), Ok(false));
+    let identity = app.identity_summary().expect("public identity");
+    assert_eq!(identity.profile_id.len(), 32);
+    assert_eq!(identity.signing_public_key.len(), 32);
+    assert!(!identity.encryption_public_key.is_empty());
+    assert_eq!(
+        app.import_credential(vec![0xff]),
+        Err(FfiError::InvalidInput)
+    );
+    assert_eq!(
+        app.fetch_photo(vec![0; 31], vec![0; 32]),
+        Err(FfiError::InvalidInput)
+    );
+
+    let now = SystemTime::now()
+        .duration_since(SystemTime::UNIX_EPOCH)
+        .expect("system time")
+        .as_secs();
+    let credential = issuer
+        .issue(IssuanceRequest {
+            signing_key: identity
+                .signing_public_key
+                .as_slice()
+                .try_into()
+                .expect("signing key"),
+            encryption_key: identity.encryption_public_key.clone(),
+            first_name: "Synthetic Fixture".to_owned(),
+            age_at_issue: 24,
+            issued_at: now.saturating_sub(1),
+            expires_at: now.saturating_add(3600),
+        })
+        .expect("fixture credential");
+    app.import_credential(postcard::to_allocvec(&credential).expect("credential encoding"))
+        .expect("verified credential import");
+    assert_eq!(
+        app.discover(FfiDiscoveryQuery {
+            minimum_age: 18,
+            maximum_age: 99,
+            page_size: 10,
+            cursor: Some(FfiPageCursor { value: vec![1] }),
+            coarse_region: None,
+        }),
+        Err(FfiError::InvalidInput)
+    );
+    assert_eq!(
+        app.discover(FfiDiscoveryQuery {
+            minimum_age: 18,
+            maximum_age: 99,
+            page_size: 10,
+            cursor: None,
+            coarse_region: Some("unknown region".to_owned()),
+        }),
+        Err(FfiError::Unsupported)
+    );
+    app.report_profile(vec![7; 32], 1, vec![vec![8; 32]])
+        .expect("store signed local report");
+    let reports = app.local_reports_page(10, None).expect("report page");
+    assert_eq!(reports.items.len(), 1);
+    assert_eq!(reports.items[0].subject, vec![7; 32]);
+    assert_eq!(reports.next_cursor, None);
+    assert_eq!(
+        app.operations_page(1, Some(FfiPageCursor { value: vec![0xff] })),
+        Err(FfiError::InvalidInput)
+    );
+    let credential_bytes = app.credential().expect("credential read");
+    app.close().expect("close application");
+    assert_eq!(app.cancel_current_operation(), Ok(false));
+    assert_eq!(app.identity_summary(), Err(FfiError::Unauthorized));
+
+    let reopened =
+        open_application(config(), "test-only passphrase".to_owned()).expect("reopen application");
+    assert_eq!(
+        reopened.identity_summary().expect("restored identity"),
+        identity
+    );
+    assert_eq!(
+        reopened.credential().expect("restored credential"),
+        credential_bytes
+    );
+}
+
+#[test]
 fn no_peer_sync_uses_valid_account_context_and_returns_a_deferred_report() {
     use annoda_core::{AccountKeyStore, PortableAccountVault, identity::DevelopmentIssuer};
     use std::time::SystemTime;

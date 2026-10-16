@@ -272,6 +272,10 @@ impl SyncCancellationToken {
     pub fn is_cancelled(&self) -> bool {
         self.0.is_cancelled()
     }
+
+    pub(crate) fn inner(&self) -> &CancellationToken {
+        &self.0
+    }
 }
 
 /// Runs one allowlisted P2P session and waits for all swarm work to stop before returning.
@@ -367,7 +371,7 @@ pub async fn sync_once(
 }
 
 #[allow(clippy::too_many_arguments)] // Keeps the session's borrowed resources explicit.
-async fn run_session(
+pub(crate) async fn run_session(
     account: &UnlockedAccount,
     context: &SyncContext,
     budget: &SyncBudget,
@@ -964,7 +968,10 @@ fn replica_batch_size(replicas: &[AuthorizedReplica]) -> Result<u64, CoreError> 
     Ok(bytes)
 }
 
-fn validate_budget(budget: &SyncBudget, policy: &PeerContributionPolicy) -> Result<(), SyncError> {
+pub(crate) fn validate_budget(
+    budget: &SyncBudget,
+    policy: &PeerContributionPolicy,
+) -> Result<(), SyncError> {
     if budget.max_duration.is_zero()
         || budget.max_duration > MAX_SESSION_DURATION
         || budget.max_download_bytes > MAX_SESSION_BYTES
@@ -1012,12 +1019,12 @@ fn is_transfer_exhausted(error: &NetworkError) -> bool {
         || matches!(error, NetworkError::BandwidthLimited)
 }
 
-struct AccountSyncLock {
+pub(crate) struct AccountSyncLock {
     _file: File,
 }
 
 impl AccountSyncLock {
-    fn acquire(state_path: &Path) -> Result<Self, SyncError> {
+    pub(crate) fn acquire(state_path: &Path) -> Result<Self, SyncError> {
         let lock_path = state_path.with_extension("sync.lock");
         let mut options = OpenOptions::new();
         options.read(true).write(true).create(true);

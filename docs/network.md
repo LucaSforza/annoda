@@ -11,3 +11,5 @@ NAT/DCUtR, relay reservation, AutoNAT and rendezvous are planned deployment adap
 [Network classes](uml/classes.md); [publication, retrieval and delivery sequences](uml/sequences.md).
 
 M2 persistent transport identity and temporary-session behavior are defined in [key management](key-management.md) and [background sync](background-sync.md). Stable PeerId requires the same protected node data directory; endpoint addresses may change. Temporary sessions meter actual TCP stream bytes and close their swarm before returning; a phone is not advertised as a permanent provider.
+
+M3 [application service](application-api.md) uses known volunteer profile listings for discovery without requiring candidate ids. Publication, discovery, fetch and outgoing mailbox replay use finite metered sessions and the same request/response authorization. Foreground execution does not bypass M2 peer/byte/time/concurrency bounds. A logical operation shares one budget across child requests; partial acknowledgement is durable, recipient processing remains independently verified. No global discovery/NAT/relay infrastructure is added.

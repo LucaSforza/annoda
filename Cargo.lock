@@ -90,6 +90,7 @@ dependencies = [
  "cpu-time",
  "image",
  "proptest",
+ "serde",
  "thiserror 2.0.21",
 ]
 
@@ -116,6 +117,7 @@ dependencies = [
  "annoda-core",
  "annoda-intelligence",
  "anyhow",
+ "blake3",
  "clap",
  "futures",
  "getrandom 0.3.4",
@@ -123,6 +125,7 @@ dependencies = [
  "libc",
  "libp2p",
  "postcard",
+ "rusqlite",
  "serde",
  "tempfile",
  "thiserror 2.0.21",

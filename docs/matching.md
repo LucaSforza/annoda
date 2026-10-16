@@ -25,3 +25,5 @@ ContactHandle supports Instagram, Telegram, WhatsApp and Other(service,value), v
 [Class model](uml/classes.md), [online/offline/match/disclosure sequences](uml/sequences.md).
 
 M2 emits [outbox events](notifications.md) only from verified new positive-intent transitions and creates them atomically with persisted state. Existing replay/block/reject/contact gates remain unchanged.
+
+M3 [application operations](application-api.md) reuse this FSM. Saving outgoing intent and its immutable encrypted delivery operation is atomic with local match/outbox effects. Incoming verification also stores authenticated sender identity for the visible received-like inbox. Blocking atomically terminates queued local likes/disclosures to the peer. No acknowledgement substitutes for either authenticated positive intent. [Operation recovery](durable-operations.md) preserves logical intent across restart.

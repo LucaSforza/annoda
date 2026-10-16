@@ -155,6 +155,38 @@ fn rejects_invalid_dimensions_ranges_and_non_finite_feedback() {
     );
 }
 
+#[test]
+fn preference_model_snapshot_restores_scores_and_rejects_invalid_state() {
+    let mut original = model();
+    let item = embedding(&[0.7, 0.2]);
+    assert!(original.update(&item, true).is_ok());
+    original.record_seen("candidate-a".into());
+    let expected = original.score(&item);
+    let restored = PreferenceModel::from_snapshot(original.snapshot());
+    assert_eq!(restored.map(|model| model.score(&item)), Ok(expected));
+
+    let mut invalid = original.snapshot();
+    invalid.weights[0] = f64::NAN;
+    assert_eq!(
+        PreferenceModel::from_snapshot(invalid).err(),
+        Some(RankingError::InvalidTrainingConfig)
+    );
+
+    let mut unsupported = original.snapshot();
+    unsupported.format_version = 2;
+    assert_eq!(
+        PreferenceModel::from_snapshot(unsupported).err(),
+        Some(RankingError::InvalidTrainingConfig)
+    );
+}
+
+#[test]
+fn deterministic_photo_encoder_is_typed_as_a_development_fixture() {
+    let encoder = DeterministicPhotoEncoder::development_fixture(2, 1)
+        .unwrap_or_else(|error| panic!("{error}"));
+    assert_eq!(encoder.mode(), EncoderMode::DevelopmentFixture);
+}
+
 proptest! {
     #[test]
     fn scores_are_finite_and_bounded_for_all_valid_embeddings(values in prop::collection::vec(-1.0f64..=1.0, 1..32)) {

@@ -27,3 +27,11 @@ Run existing 39-test baseline before changes. Write failing tests then minimal i
 9. UniFFI regenerate Swift/Kotlin/Python, extend actual Python ABI smoke for portable account restore, typed errors, sync cancellation/report and notifications. Native samples reference actual generated APIs; compile/device proof only if tools exist.
 
 Run all four workspace gates and all real-network tests plus Python ABI smoke. Additive schema migration must open existing M1 SQLite fixtures/records. Record fail-before-fix commands/results, platform limits and actual delivered mechanisms in progress.md.
+
+## M3 acceptance
+
+Baseline on merged master: all 78 tests passed before implementation. Add failing tests before behavior, retaining extracted `src/tests/` convention. Mandatory public-API Alice/Bob test uses two real persistent TCP libp2p volunteers; only infrastructure/issuer fixtures use low-level APIs. Create/import, publish three photos each with two acknowledgements, discover without IDs, validate fetched photo, expose Incoming before reciprocation, recognize identical mutual match, explicitly exchange contacts, close/reopen exact account with credential/match/contacts, block, and recover persisted outgoing work after interruption. Assert via AnnodaClient only.
+
+Focused acceptance covers key mismatch/expired/untrusted credentials, no classifier, invalid/corrupt photos and fallback, duplicate likes, private pass, unauthorized disclosure, stale revision, malformed/foreign cursor, bounded cancellation/unreachable peers/partial publication, operation recovery, exclusive account access and additive M2 DB migration. Extend real Python UniFFI smoke through the application facade; regenerate tracked bindings. Native compile/device proof must be recorded separately. All four workspace gates plus M1/M2 regression and real-network suites remain required.
+
+M3 migration proof must start from the literal pre-M3 SQLite schema, rather than creating a fresh database using the new library and calling it M2. Verify real preexisting matched/blocked state, notification acknowledgements and checkpoints after opening.

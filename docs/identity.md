@@ -13,3 +13,5 @@ Duplicate prevention is issuer-local: privately retain a keyed digest of authori
 See [registration and renewal sequences](uml/sequences.md) and [identity classes](uml/classes.md).
 
 M2 lifecycle and secure serialization authority: [key management](key-management.md). Restoring persisted private keys preserves subject binding; it never renews a credential or changes authoritative identity facts.
+
+M3 credential import is mediated by [AnnodaClient](application-api.md): verify the current issuer policy and both public key bindings before persistence. Restored accounts load the saved credential without regenerating keys; validity is rechecked for each relevant action. A public-key summary is sufficient for an authorized issuance adapter. Development fixtures can bind those public keys using `IdentityIssuer::issue`; private key export is neither needed nor permitted. Renewal reimports a fresh credential for the same keys; real CIE authorization remains deferred.

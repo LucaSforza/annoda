@@ -528,7 +528,11 @@ def _uniffi_check_api_checksums(lib):
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     if lib.uniffi_annoda_mobile_ffi_checksum_func_create_account() != 22263:
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_func_create_application() != 25246:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     if lib.uniffi_annoda_mobile_ffi_checksum_func_open_account() != 32463:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_func_open_application() != 20946:
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     if lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification() != 64461:
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
@@ -543,6 +547,66 @@ def _uniffi_check_api_checksums(lib):
     if lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_set_notification_preferences() != 6937:
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     if lib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_start_sync_session() != 58188:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_acknowledge_notification() != 48351:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_block() != 19733:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_cancel_current_operation() != 20755:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_close() != 52459:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_credential() != 1008:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_disclose_contacts() != 47802:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_discover() != 30765:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_fetch_photo() != 48527:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_identity_summary() != 1827:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_import_credential() != 20259:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_like() != 17837:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports() != 21250:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports_page() != 24985:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_matches() != 22798:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_notification_preferences() != 30353:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations() != 19930:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations_page() != 59487:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pass() != 25106:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pending_notifications() != 62991:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_publish_profile() != 23058:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_published_profile() != 31240:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_rank_candidates() != 59682:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_contacts() != 28429:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_likes() != 56576:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_record_feedback() != 7167:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_recover_pending() != 24286:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_report_profile() != 32678:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_reset_learning() != 25247:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_set_notification_preferences() != 30312:
+        raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
+    if lib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_start_sync_session() != 11203:
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
     if lib.uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_record_feedback() != 37686:
         raise InternalError("UniFFI API checksum mismatch: try cleaning and rebuilding your project")
@@ -593,9 +657,15 @@ _UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_api_version.restype = ctypes.c
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_create_account.argtypes = (
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_create_account.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_create_application.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_create_application.restype = ctypes.c_uint16
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_open_account.argtypes = (
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_open_account.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_open_application.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_func_open_application.restype = ctypes.c_uint16
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification.argtypes = (
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_acknowledge_notification.restype = ctypes.c_uint16
@@ -617,6 +687,96 @@ _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_set_notificati
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_start_sync_session.argtypes = (
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_accounthandle_start_sync_session.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_acknowledge_notification.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_acknowledge_notification.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_block.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_block.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_cancel_current_operation.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_cancel_current_operation.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_close.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_close.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_credential.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_credential.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_disclose_contacts.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_disclose_contacts.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_discover.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_discover.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_fetch_photo.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_fetch_photo.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_identity_summary.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_identity_summary.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_import_credential.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_import_credential.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_like.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_like.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports_page.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_local_reports_page.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_matches.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_matches.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_notification_preferences.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_notification_preferences.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations_page.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_operations_page.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pass.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pass.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pending_notifications.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_pending_notifications.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_publish_profile.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_publish_profile.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_published_profile.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_published_profile.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_rank_candidates.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_rank_candidates.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_contacts.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_contacts.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_likes.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_received_likes.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_record_feedback.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_record_feedback.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_recover_pending.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_recover_pending.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_report_profile.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_report_profile.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_reset_learning.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_reset_learning.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_set_notification_preferences.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_set_notification_preferences.restype = ctypes.c_uint16
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_start_sync_session.argtypes = (
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_applicationhandle_start_sync_session.restype = ctypes.c_uint16
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_record_feedback.argtypes = (
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_checksum_method_localpreferencemodel_record_feedback.restype = ctypes.c_uint16
@@ -648,12 +808,24 @@ _UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_account.argtypes = (
     ctypes.POINTER(_UniffiRustCallStatus),
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_account.restype = ctypes.c_uint64
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_application.argtypes = (
+    _UniffiRustBuffer,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_application.restype = ctypes.c_uint64
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_account.argtypes = (
     _UniffiRustBuffer,
     _UniffiRustBuffer,
     ctypes.POINTER(_UniffiRustCallStatus),
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_account.restype = ctypes.c_uint64
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_application.argtypes = (
+    _UniffiRustBuffer,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_application.restype = ctypes.c_uint64
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_acknowledge_notification.argtypes = (
     ctypes.c_uint64,
     _UniffiRustBuffer,
@@ -693,6 +865,191 @@ _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_start_sync_session.a
     ctypes.POINTER(_UniffiRustCallStatus),
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_accounthandle_start_sync_session.restype = ctypes.c_uint64
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_acknowledge_notification.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_acknowledge_notification.restype = ctypes.c_int8
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_block.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_block.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_cancel_current_operation.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_cancel_current_operation.restype = ctypes.c_int8
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_close.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_close.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_credential.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_credential.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_disclose_contacts.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_disclose_contacts.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_discover.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_discover.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_fetch_photo.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_fetch_photo.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_identity_summary.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_identity_summary.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_import_credential.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_import_credential.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_like.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_like.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports_page.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports_page.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_matches.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_matches.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_notification_preferences.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_notification_preferences.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations_page.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations_page.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pass.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pass.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pending_notifications.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pending_notifications.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_publish_profile.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_publish_profile.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_published_profile.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_published_profile.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_rank_candidates.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    _UniffiRustBuffer,
+    ctypes.c_double,
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_rank_candidates.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_contacts.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_contacts.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_likes.argtypes = (
+    ctypes.c_uint64,
+    ctypes.c_uint8,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_likes.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_record_feedback.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.c_uint16,
+    _UniffiRustBuffer,
+    ctypes.c_int8,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_record_feedback.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_recover_pending.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_recover_pending.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_report_profile.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.c_uint16,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_report_profile.restype = _UniffiRustBuffer
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_reset_learning.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_reset_learning.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_set_notification_preferences.argtypes = (
+    ctypes.c_uint64,
+    _UniffiRustBuffer,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_set_notification_preferences.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_start_sync_session.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_start_sync_session.restype = ctypes.c_uint64
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_localpreferencemodel_record_feedback.argtypes = (
     ctypes.c_uint64,
     ctypes.c_uint16,
@@ -745,6 +1102,16 @@ _UniffiLib.uniffi_annoda_mobile_ffi_fn_free_accounthandle.argtypes = (
     ctypes.POINTER(_UniffiRustCallStatus),
 )
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_free_accounthandle.restype = None
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_applicationhandle.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_applicationhandle.restype = ctypes.c_uint64
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_free_applicationhandle.argtypes = (
+    ctypes.c_uint64,
+    ctypes.POINTER(_UniffiRustCallStatus),
+)
+_UniffiLib.uniffi_annoda_mobile_ffi_fn_free_applicationhandle.restype = None
 _UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_localpreferencemodel.argtypes = (
     ctypes.c_uint64,
     ctypes.POINTER(_UniffiRustCallStatus),
@@ -774,6 +1141,38 @@ _uniffi_check_contract_api_version(_UniffiLib)
 # Public interface members begin here.
 
 
+class _UniffiFfiConverterString:
+    @staticmethod
+    def check_lower(value):
+        if not isinstance(value, str):
+            raise TypeError("argument must be str, not {}".format(type(value).__name__))
+        return value
+
+    @staticmethod
+    def read(buf):
+        size = buf.read_i32()
+        if size < 0:
+            raise InternalError("Unexpected negative string length")
+        utf8_bytes = buf.read(size)
+        return utf8_bytes.decode("utf-8")
+
+    @staticmethod
+    def write(value, buf):
+        utf8_bytes = value.encode("utf-8")
+        buf.write_i32(len(utf8_bytes))
+        buf.write(utf8_bytes)
+
+    @staticmethod
+    def lift(buf):
+        with buf.consume_with_stream() as stream:
+            return stream.read(stream.remaining()).decode("utf-8")
+
+    @staticmethod
+    def lower(value):
+        with _UniffiRustBuffer.alloc_with_builder() as builder:
+            builder.write(value.encode("utf-8"))
+            return builder.finalize()
+
 class _UniffiFfiConverterBytes(_UniffiConverterRustBuffer):
     @staticmethod
     def read(buf):
@@ -793,6 +1192,276 @@ class _UniffiFfiConverterBytes(_UniffiConverterRustBuffer):
     def write(value, buf):
         buf.write_i32(len(value))
         buf.write(value)
+
+class _UniffiFfiConverterSequenceBytes(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterBytes.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterBytes.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterBytes.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiSyncPeer:
+    def __init__(self, *, peer_id:str, address:str):
+        self.peer_id = peer_id
+        self.address = address
+
+
+
+
+    def __str__(self):
+        return "FfiSyncPeer(peer_id={}, address={})".format(self.peer_id, self.address)
+    def __eq__(self, other):
+        if self.peer_id != other.peer_id:
+            return False
+        if self.address != other.address:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiSyncPeer(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiSyncPeer(
+            peer_id=_UniffiFfiConverterString.read(buf),
+            address=_UniffiFfiConverterString.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterString.check_lower(value.peer_id)
+        _UniffiFfiConverterString.check_lower(value.address)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterString.write(value.peer_id, buf)
+        _UniffiFfiConverterString.write(value.address, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiSyncPeer(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiSyncPeer.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiSyncPeer.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiSyncPeer.read(buf) for i in range(count)
+        ]
+
+class _UniffiFfiConverterUInt64(_UniffiConverterPrimitiveInt):
+    CLASS_NAME = "u64"
+    VALUE_MIN = 0
+    VALUE_MAX = 2**64
+
+    @staticmethod
+    def read(buf):
+        return buf.read_u64()
+
+    @staticmethod
+    def write(value, buf):
+        buf.write_u64(value)
+
+class _UniffiFfiConverterUInt16(_UniffiConverterPrimitiveInt):
+    CLASS_NAME = "u16"
+    VALUE_MIN = 0
+    VALUE_MAX = 2**16
+
+    @staticmethod
+    def read(buf):
+        return buf.read_u16()
+
+    @staticmethod
+    def write(value, buf):
+        buf.write_u16(value)
+
+@dataclass
+class FfiSyncBudget:
+    def __init__(self, *, max_duration_ms:int, max_download_bytes:int, max_upload_bytes:int, max_peers:int, max_mailbox_items:int, max_concurrent_requests:int, retries:int, request_timeout_ms:int):
+        self.max_duration_ms = max_duration_ms
+        self.max_download_bytes = max_download_bytes
+        self.max_upload_bytes = max_upload_bytes
+        self.max_peers = max_peers
+        self.max_mailbox_items = max_mailbox_items
+        self.max_concurrent_requests = max_concurrent_requests
+        self.retries = retries
+        self.request_timeout_ms = request_timeout_ms
+
+
+
+
+    def __str__(self):
+        return "FfiSyncBudget(max_duration_ms={}, max_download_bytes={}, max_upload_bytes={}, max_peers={}, max_mailbox_items={}, max_concurrent_requests={}, retries={}, request_timeout_ms={})".format(self.max_duration_ms, self.max_download_bytes, self.max_upload_bytes, self.max_peers, self.max_mailbox_items, self.max_concurrent_requests, self.retries, self.request_timeout_ms)
+    def __eq__(self, other):
+        if self.max_duration_ms != other.max_duration_ms:
+            return False
+        if self.max_download_bytes != other.max_download_bytes:
+            return False
+        if self.max_upload_bytes != other.max_upload_bytes:
+            return False
+        if self.max_peers != other.max_peers:
+            return False
+        if self.max_mailbox_items != other.max_mailbox_items:
+            return False
+        if self.max_concurrent_requests != other.max_concurrent_requests:
+            return False
+        if self.retries != other.retries:
+            return False
+        if self.request_timeout_ms != other.request_timeout_ms:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiSyncBudget(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiSyncBudget(
+            max_duration_ms=_UniffiFfiConverterUInt64.read(buf),
+            max_download_bytes=_UniffiFfiConverterUInt64.read(buf),
+            max_upload_bytes=_UniffiFfiConverterUInt64.read(buf),
+            max_peers=_UniffiFfiConverterUInt16.read(buf),
+            max_mailbox_items=_UniffiFfiConverterUInt16.read(buf),
+            max_concurrent_requests=_UniffiFfiConverterUInt16.read(buf),
+            retries=_UniffiFfiConverterUInt16.read(buf),
+            request_timeout_ms=_UniffiFfiConverterUInt64.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterUInt64.check_lower(value.max_duration_ms)
+        _UniffiFfiConverterUInt64.check_lower(value.max_download_bytes)
+        _UniffiFfiConverterUInt64.check_lower(value.max_upload_bytes)
+        _UniffiFfiConverterUInt16.check_lower(value.max_peers)
+        _UniffiFfiConverterUInt16.check_lower(value.max_mailbox_items)
+        _UniffiFfiConverterUInt16.check_lower(value.max_concurrent_requests)
+        _UniffiFfiConverterUInt16.check_lower(value.retries)
+        _UniffiFfiConverterUInt64.check_lower(value.request_timeout_ms)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterUInt64.write(value.max_duration_ms, buf)
+        _UniffiFfiConverterUInt64.write(value.max_download_bytes, buf)
+        _UniffiFfiConverterUInt64.write(value.max_upload_bytes, buf)
+        _UniffiFfiConverterUInt16.write(value.max_peers, buf)
+        _UniffiFfiConverterUInt16.write(value.max_mailbox_items, buf)
+        _UniffiFfiConverterUInt16.write(value.max_concurrent_requests, buf)
+        _UniffiFfiConverterUInt16.write(value.retries, buf)
+        _UniffiFfiConverterUInt64.write(value.request_timeout_ms, buf)
+
+class _UniffiFfiConverterBoolean:
+    @classmethod
+    def check_lower(cls, value):
+        return not not value
+
+    @classmethod
+    def lower(cls, value):
+        return 1 if value else 0
+
+    @staticmethod
+    def lift(value):
+        return value != 0
+
+    @classmethod
+    def read(cls, buf):
+        return cls.lift(buf.read_u8())
+
+    @classmethod
+    def write(cls, value, buf):
+        buf.write_u8(value)
+
+@dataclass
+class FfiApplicationConfig:
+    """
+    Public issuer and peer settings for one private application account.
+"""
+    def __init__(self, *, data_directory:str, transport_data_directory:str, trusted_issuer_keys:typing.List[bytes], revoked_serials:typing.List[bytes], peers:typing.List[FfiSyncPeer], sync_budget:FfiSyncBudget, allow_development_safety_fixture:bool):
+        self.data_directory = data_directory
+        self.transport_data_directory = transport_data_directory
+        self.trusted_issuer_keys = trusted_issuer_keys
+        self.revoked_serials = revoked_serials
+        self.peers = peers
+        self.sync_budget = sync_budget
+        self.allow_development_safety_fixture = allow_development_safety_fixture
+
+
+
+
+    def __str__(self):
+        return "FfiApplicationConfig(data_directory={}, transport_data_directory={}, trusted_issuer_keys={}, revoked_serials={}, peers={}, sync_budget={}, allow_development_safety_fixture={})".format(self.data_directory, self.transport_data_directory, self.trusted_issuer_keys, self.revoked_serials, self.peers, self.sync_budget, self.allow_development_safety_fixture)
+    def __eq__(self, other):
+        if self.data_directory != other.data_directory:
+            return False
+        if self.transport_data_directory != other.transport_data_directory:
+            return False
+        if self.trusted_issuer_keys != other.trusted_issuer_keys:
+            return False
+        if self.revoked_serials != other.revoked_serials:
+            return False
+        if self.peers != other.peers:
+            return False
+        if self.sync_budget != other.sync_budget:
+            return False
+        if self.allow_development_safety_fixture != other.allow_development_safety_fixture:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiApplicationConfig(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiApplicationConfig(
+            data_directory=_UniffiFfiConverterString.read(buf),
+            transport_data_directory=_UniffiFfiConverterString.read(buf),
+            trusted_issuer_keys=_UniffiFfiConverterSequenceBytes.read(buf),
+            revoked_serials=_UniffiFfiConverterSequenceBytes.read(buf),
+            peers=_UniffiFfiConverterSequenceTypeFfiSyncPeer.read(buf),
+            sync_budget=_UniffiFfiConverterTypeFfiSyncBudget.read(buf),
+            allow_development_safety_fixture=_UniffiFfiConverterBoolean.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterString.check_lower(value.data_directory)
+        _UniffiFfiConverterString.check_lower(value.transport_data_directory)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.trusted_issuer_keys)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.revoked_serials)
+        _UniffiFfiConverterSequenceTypeFfiSyncPeer.check_lower(value.peers)
+        _UniffiFfiConverterTypeFfiSyncBudget.check_lower(value.sync_budget)
+        _UniffiFfiConverterBoolean.check_lower(value.allow_development_safety_fixture)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterString.write(value.data_directory, buf)
+        _UniffiFfiConverterString.write(value.transport_data_directory, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.trusted_issuer_keys, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.revoked_serials, buf)
+        _UniffiFfiConverterSequenceTypeFfiSyncPeer.write(value.peers, buf)
+        _UniffiFfiConverterTypeFfiSyncBudget.write(value.sync_budget, buf)
+        _UniffiFfiConverterBoolean.write(value.allow_development_safety_fixture, buf)
 
 @dataclass
 class FfiAuthorizedReplicaPhoto:
@@ -901,26 +1570,645 @@ class _UniffiFfiConverterTypeFfiAuthorizedReplica(_UniffiConverterRustBuffer):
         _UniffiFfiConverterBytes.write(value.owner_credential, buf)
         _UniffiFfiConverterSequenceTypeFfiAuthorizedReplicaPhoto.write(value.photos, buf)
 
-class _UniffiFfiConverterBoolean:
-    @classmethod
-    def check_lower(cls, value):
-        return not not value
-
-    @classmethod
-    def lower(cls, value):
-        return 1 if value else 0
+class _UniffiFfiConverterUInt8(_UniffiConverterPrimitiveInt):
+    CLASS_NAME = "u8"
+    VALUE_MIN = 0
+    VALUE_MAX = 2**8
 
     @staticmethod
-    def lift(value):
-        return value != 0
+    def read(buf):
+        return buf.read_u8()
 
+    @staticmethod
+    def write(value, buf):
+        buf.write_u8(value)
+
+class _UniffiFfiConverterOptionalString(_UniffiConverterRustBuffer):
     @classmethod
-    def read(cls, buf):
-        return cls.lift(buf.read_u8())
+    def check_lower(cls, value):
+        if value is not None:
+            _UniffiFfiConverterString.check_lower(value)
 
     @classmethod
     def write(cls, value, buf):
-        buf.write_u8(value)
+        if value is None:
+            buf.write_u8(0)
+            return
+
+        buf.write_u8(1)
+        _UniffiFfiConverterString.write(value, buf)
+
+    @classmethod
+    def read(cls, buf):
+        flag = buf.read_u8()
+        if flag == 0:
+            return None
+        elif flag == 1:
+            return _UniffiFfiConverterString.read(buf)
+        else:
+            raise InternalError("Unexpected flag byte for optional type")
+
+@dataclass
+class FfiCandidateFilter:
+    def __init__(self, *, minimum_age:int, maximum_age:int, coarse_region:typing.Optional[str], blocked_profile_ids:typing.List[bytes], passed_profile_ids:typing.List[bytes], seen_profile_ids:typing.List[bytes]):
+        self.minimum_age = minimum_age
+        self.maximum_age = maximum_age
+        self.coarse_region = coarse_region
+        self.blocked_profile_ids = blocked_profile_ids
+        self.passed_profile_ids = passed_profile_ids
+        self.seen_profile_ids = seen_profile_ids
+
+
+
+
+    def __str__(self):
+        return "FfiCandidateFilter(minimum_age={}, maximum_age={}, coarse_region={}, blocked_profile_ids={}, passed_profile_ids={}, seen_profile_ids={})".format(self.minimum_age, self.maximum_age, self.coarse_region, self.blocked_profile_ids, self.passed_profile_ids, self.seen_profile_ids)
+    def __eq__(self, other):
+        if self.minimum_age != other.minimum_age:
+            return False
+        if self.maximum_age != other.maximum_age:
+            return False
+        if self.coarse_region != other.coarse_region:
+            return False
+        if self.blocked_profile_ids != other.blocked_profile_ids:
+            return False
+        if self.passed_profile_ids != other.passed_profile_ids:
+            return False
+        if self.seen_profile_ids != other.seen_profile_ids:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiCandidateFilter(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiCandidateFilter(
+            minimum_age=_UniffiFfiConverterUInt8.read(buf),
+            maximum_age=_UniffiFfiConverterUInt8.read(buf),
+            coarse_region=_UniffiFfiConverterOptionalString.read(buf),
+            blocked_profile_ids=_UniffiFfiConverterSequenceBytes.read(buf),
+            passed_profile_ids=_UniffiFfiConverterSequenceBytes.read(buf),
+            seen_profile_ids=_UniffiFfiConverterSequenceBytes.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterUInt8.check_lower(value.minimum_age)
+        _UniffiFfiConverterUInt8.check_lower(value.maximum_age)
+        _UniffiFfiConverterOptionalString.check_lower(value.coarse_region)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.blocked_profile_ids)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.passed_profile_ids)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.seen_profile_ids)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterUInt8.write(value.minimum_age, buf)
+        _UniffiFfiConverterUInt8.write(value.maximum_age, buf)
+        _UniffiFfiConverterOptionalString.write(value.coarse_region, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.blocked_profile_ids, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.passed_profile_ids, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.seen_profile_ids, buf)
+
+class _UniffiFfiConverterUInt32(_UniffiConverterPrimitiveInt):
+    CLASS_NAME = "u32"
+    VALUE_MIN = 0
+    VALUE_MAX = 2**32
+
+    @staticmethod
+    def read(buf):
+        return buf.read_u32()
+
+    @staticmethod
+    def write(value, buf):
+        buf.write_u32(value)
+
+@dataclass
+class FfiPhotoManifest:
+    def __init__(self, *, hash:bytes, byte_count:int, media_type:str):
+        self.hash = hash
+        self.byte_count = byte_count
+        self.media_type = media_type
+
+
+
+
+    def __str__(self):
+        return "FfiPhotoManifest(hash={}, byte_count={}, media_type={})".format(self.hash, self.byte_count, self.media_type)
+    def __eq__(self, other):
+        if self.hash != other.hash:
+            return False
+        if self.byte_count != other.byte_count:
+            return False
+        if self.media_type != other.media_type:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiPhotoManifest(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiPhotoManifest(
+            hash=_UniffiFfiConverterBytes.read(buf),
+            byte_count=_UniffiFfiConverterUInt32.read(buf),
+            media_type=_UniffiFfiConverterString.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.hash)
+        _UniffiFfiConverterUInt32.check_lower(value.byte_count)
+        _UniffiFfiConverterString.check_lower(value.media_type)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.hash, buf)
+        _UniffiFfiConverterUInt32.write(value.byte_count, buf)
+        _UniffiFfiConverterString.write(value.media_type, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiPhotoManifest(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiPhotoManifest.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiPhotoManifest.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiPhotoManifest.read(buf) for i in range(count)
+        ]
+
+class _UniffiFfiConverterFloat64(_UniffiConverterPrimitiveFloat):
+    @staticmethod
+    def read(buf):
+        return buf.read_double()
+
+    @staticmethod
+    def write(value, buf):
+        buf.write_double(value)
+
+class _UniffiFfiConverterOptionalFloat64(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        if value is not None:
+            _UniffiFfiConverterFloat64.check_lower(value)
+
+    @classmethod
+    def write(cls, value, buf):
+        if value is None:
+            buf.write_u8(0)
+            return
+
+        buf.write_u8(1)
+        _UniffiFfiConverterFloat64.write(value, buf)
+
+    @classmethod
+    def read(cls, buf):
+        flag = buf.read_u8()
+        if flag == 0:
+            return None
+        elif flag == 1:
+            return _UniffiFfiConverterFloat64.read(buf)
+        else:
+            raise InternalError("Unexpected flag byte for optional type")
+
+@dataclass
+class FfiCandidateProfile:
+    def __init__(self, *, profile_id:bytes, first_name:str, age_at_issue:int, revision:int, expires_at:int, photos:typing.List[FfiPhotoManifest], score:typing.Optional[float]):
+        self.profile_id = profile_id
+        self.first_name = first_name
+        self.age_at_issue = age_at_issue
+        self.revision = revision
+        self.expires_at = expires_at
+        self.photos = photos
+        self.score = score
+
+
+
+
+    def __str__(self):
+        return "FfiCandidateProfile(profile_id={}, first_name={}, age_at_issue={}, revision={}, expires_at={}, photos={}, score={})".format(self.profile_id, self.first_name, self.age_at_issue, self.revision, self.expires_at, self.photos, self.score)
+    def __eq__(self, other):
+        if self.profile_id != other.profile_id:
+            return False
+        if self.first_name != other.first_name:
+            return False
+        if self.age_at_issue != other.age_at_issue:
+            return False
+        if self.revision != other.revision:
+            return False
+        if self.expires_at != other.expires_at:
+            return False
+        if self.photos != other.photos:
+            return False
+        if self.score != other.score:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiCandidateProfile(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiCandidateProfile(
+            profile_id=_UniffiFfiConverterBytes.read(buf),
+            first_name=_UniffiFfiConverterString.read(buf),
+            age_at_issue=_UniffiFfiConverterUInt8.read(buf),
+            revision=_UniffiFfiConverterUInt64.read(buf),
+            expires_at=_UniffiFfiConverterUInt64.read(buf),
+            photos=_UniffiFfiConverterSequenceTypeFfiPhotoManifest.read(buf),
+            score=_UniffiFfiConverterOptionalFloat64.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.profile_id)
+        _UniffiFfiConverterString.check_lower(value.first_name)
+        _UniffiFfiConverterUInt8.check_lower(value.age_at_issue)
+        _UniffiFfiConverterUInt64.check_lower(value.revision)
+        _UniffiFfiConverterUInt64.check_lower(value.expires_at)
+        _UniffiFfiConverterSequenceTypeFfiPhotoManifest.check_lower(value.photos)
+        _UniffiFfiConverterOptionalFloat64.check_lower(value.score)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.profile_id, buf)
+        _UniffiFfiConverterString.write(value.first_name, buf)
+        _UniffiFfiConverterUInt8.write(value.age_at_issue, buf)
+        _UniffiFfiConverterUInt64.write(value.revision, buf)
+        _UniffiFfiConverterUInt64.write(value.expires_at, buf)
+        _UniffiFfiConverterSequenceTypeFfiPhotoManifest.write(value.photos, buf)
+        _UniffiFfiConverterOptionalFloat64.write(value.score, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiCandidateProfile(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiCandidateProfile.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiCandidateProfile.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiCandidateProfile.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiPageCursor:
+    def __init__(self, *, value:bytes):
+        self.value = value
+
+
+
+
+    def __str__(self):
+        return "FfiPageCursor(value={})".format(self.value)
+    def __eq__(self, other):
+        if self.value != other.value:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiPageCursor(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiPageCursor(
+            value=_UniffiFfiConverterBytes.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.value)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.value, buf)
+
+class _UniffiFfiConverterOptionalTypeFfiPageCursor(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        if value is not None:
+            _UniffiFfiConverterTypeFfiPageCursor.check_lower(value)
+
+    @classmethod
+    def write(cls, value, buf):
+        if value is None:
+            buf.write_u8(0)
+            return
+
+        buf.write_u8(1)
+        _UniffiFfiConverterTypeFfiPageCursor.write(value, buf)
+
+    @classmethod
+    def read(cls, buf):
+        flag = buf.read_u8()
+        if flag == 0:
+            return None
+        elif flag == 1:
+            return _UniffiFfiConverterTypeFfiPageCursor.read(buf)
+        else:
+            raise InternalError("Unexpected flag byte for optional type")
+
+@dataclass
+class FfiCandidatePage:
+    def __init__(self, *, items:typing.List[FfiCandidateProfile], next_cursor:typing.Optional[FfiPageCursor]):
+        self.items = items
+        self.next_cursor = next_cursor
+
+
+
+
+    def __str__(self):
+        return "FfiCandidatePage(items={}, next_cursor={})".format(self.items, self.next_cursor)
+    def __eq__(self, other):
+        if self.items != other.items:
+            return False
+        if self.next_cursor != other.next_cursor:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiCandidatePage(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiCandidatePage(
+            items=_UniffiFfiConverterSequenceTypeFfiCandidateProfile.read(buf),
+            next_cursor=_UniffiFfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterSequenceTypeFfiCandidateProfile.check_lower(value.items)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(value.next_cursor)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterSequenceTypeFfiCandidateProfile.write(value.items, buf)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.write(value.next_cursor, buf)
+
+
+
+
+
+
+class FfiContactService(enum.Enum):
+
+    INSTAGRAM = 0
+
+    TELEGRAM = 1
+
+    WHATS_APP = 2
+
+    OTHER = 3
+
+
+
+class _UniffiFfiConverterTypeFfiContactService(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        variant = buf.read_i32()
+        if variant == 1:
+            return FfiContactService.INSTAGRAM
+        if variant == 2:
+            return FfiContactService.TELEGRAM
+        if variant == 3:
+            return FfiContactService.WHATS_APP
+        if variant == 4:
+            return FfiContactService.OTHER
+        raise InternalError("Raw enum value doesn't match any cases")
+
+    @staticmethod
+    def check_lower(value):
+        if value == FfiContactService.INSTAGRAM:
+            return
+        if value == FfiContactService.TELEGRAM:
+            return
+        if value == FfiContactService.WHATS_APP:
+            return
+        if value == FfiContactService.OTHER:
+            return
+        raise ValueError(value)
+
+    @staticmethod
+    def write(value, buf):
+        if value == FfiContactService.INSTAGRAM:
+            buf.write_i32(1)
+        if value == FfiContactService.TELEGRAM:
+            buf.write_i32(2)
+        if value == FfiContactService.WHATS_APP:
+            buf.write_i32(3)
+        if value == FfiContactService.OTHER:
+            buf.write_i32(4)
+
+
+
+@dataclass
+class FfiContactHandle:
+    def __init__(self, *, service:FfiContactService, other_service:typing.Optional[str], value:str):
+        self.service = service
+        self.other_service = other_service
+        self.value = value
+
+
+
+
+    def __str__(self):
+        return "FfiContactHandle(service={}, other_service={}, value={})".format(self.service, self.other_service, self.value)
+    def __eq__(self, other):
+        if self.service != other.service:
+            return False
+        if self.other_service != other.other_service:
+            return False
+        if self.value != other.value:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiContactHandle(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiContactHandle(
+            service=_UniffiFfiConverterTypeFfiContactService.read(buf),
+            other_service=_UniffiFfiConverterOptionalString.read(buf),
+            value=_UniffiFfiConverterString.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterTypeFfiContactService.check_lower(value.service)
+        _UniffiFfiConverterOptionalString.check_lower(value.other_service)
+        _UniffiFfiConverterString.check_lower(value.value)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterTypeFfiContactService.write(value.service, buf)
+        _UniffiFfiConverterOptionalString.write(value.other_service, buf)
+        _UniffiFfiConverterString.write(value.value, buf)
+
+
+
+
+
+
+class FfiDeliveryFailureReason(enum.Enum):
+
+    UNREACHABLE = 0
+
+    REJECTED = 1
+
+    BUDGET = 2
+
+    CANCELLED = 3
+
+
+
+class _UniffiFfiConverterTypeFfiDeliveryFailureReason(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        variant = buf.read_i32()
+        if variant == 1:
+            return FfiDeliveryFailureReason.UNREACHABLE
+        if variant == 2:
+            return FfiDeliveryFailureReason.REJECTED
+        if variant == 3:
+            return FfiDeliveryFailureReason.BUDGET
+        if variant == 4:
+            return FfiDeliveryFailureReason.CANCELLED
+        raise InternalError("Raw enum value doesn't match any cases")
+
+    @staticmethod
+    def check_lower(value):
+        if value == FfiDeliveryFailureReason.UNREACHABLE:
+            return
+        if value == FfiDeliveryFailureReason.REJECTED:
+            return
+        if value == FfiDeliveryFailureReason.BUDGET:
+            return
+        if value == FfiDeliveryFailureReason.CANCELLED:
+            return
+        raise ValueError(value)
+
+    @staticmethod
+    def write(value, buf):
+        if value == FfiDeliveryFailureReason.UNREACHABLE:
+            buf.write_i32(1)
+        if value == FfiDeliveryFailureReason.REJECTED:
+            buf.write_i32(2)
+        if value == FfiDeliveryFailureReason.BUDGET:
+            buf.write_i32(3)
+        if value == FfiDeliveryFailureReason.CANCELLED:
+            buf.write_i32(4)
+
+
+
+@dataclass
+class FfiDeliveryFailure:
+    def __init__(self, *, peer_id:str, item_hash:bytes, reason:FfiDeliveryFailureReason):
+        self.peer_id = peer_id
+        self.item_hash = item_hash
+        self.reason = reason
+
+
+
+
+    def __str__(self):
+        return "FfiDeliveryFailure(peer_id={}, item_hash={}, reason={})".format(self.peer_id, self.item_hash, self.reason)
+    def __eq__(self, other):
+        if self.peer_id != other.peer_id:
+            return False
+        if self.item_hash != other.item_hash:
+            return False
+        if self.reason != other.reason:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiDeliveryFailure(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiDeliveryFailure(
+            peer_id=_UniffiFfiConverterString.read(buf),
+            item_hash=_UniffiFfiConverterBytes.read(buf),
+            reason=_UniffiFfiConverterTypeFfiDeliveryFailureReason.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterString.check_lower(value.peer_id)
+        _UniffiFfiConverterBytes.check_lower(value.item_hash)
+        _UniffiFfiConverterTypeFfiDeliveryFailureReason.check_lower(value.reason)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterString.write(value.peer_id, buf)
+        _UniffiFfiConverterBytes.write(value.item_hash, buf)
+        _UniffiFfiConverterTypeFfiDeliveryFailureReason.write(value.reason, buf)
+
+@dataclass
+class FfiDiscoveryQuery:
+    def __init__(self, *, minimum_age:int, maximum_age:int, page_size:int, cursor:typing.Optional[FfiPageCursor], coarse_region:typing.Optional[str]):
+        self.minimum_age = minimum_age
+        self.maximum_age = maximum_age
+        self.page_size = page_size
+        self.cursor = cursor
+        self.coarse_region = coarse_region
+
+
+
+
+    def __str__(self):
+        return "FfiDiscoveryQuery(minimum_age={}, maximum_age={}, page_size={}, cursor={}, coarse_region={})".format(self.minimum_age, self.maximum_age, self.page_size, self.cursor, self.coarse_region)
+    def __eq__(self, other):
+        if self.minimum_age != other.minimum_age:
+            return False
+        if self.maximum_age != other.maximum_age:
+            return False
+        if self.page_size != other.page_size:
+            return False
+        if self.cursor != other.cursor:
+            return False
+        if self.coarse_region != other.coarse_region:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiDiscoveryQuery(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiDiscoveryQuery(
+            minimum_age=_UniffiFfiConverterUInt8.read(buf),
+            maximum_age=_UniffiFfiConverterUInt8.read(buf),
+            page_size=_UniffiFfiConverterUInt8.read(buf),
+            cursor=_UniffiFfiConverterOptionalTypeFfiPageCursor.read(buf),
+            coarse_region=_UniffiFfiConverterOptionalString.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterUInt8.check_lower(value.minimum_age)
+        _UniffiFfiConverterUInt8.check_lower(value.maximum_age)
+        _UniffiFfiConverterUInt8.check_lower(value.page_size)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(value.cursor)
+        _UniffiFfiConverterOptionalString.check_lower(value.coarse_region)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterUInt8.write(value.minimum_age, buf)
+        _UniffiFfiConverterUInt8.write(value.maximum_age, buf)
+        _UniffiFfiConverterUInt8.write(value.page_size, buf)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.write(value.cursor, buf)
+        _UniffiFfiConverterOptionalString.write(value.coarse_region, buf)
 
 class _UniffiFfiConverterOptionalBoolean(_UniffiConverterRustBuffer):
     @classmethod
@@ -982,6 +2270,334 @@ class _UniffiFfiConverterTypeFfiHostConditions(_UniffiConverterRustBuffer):
     def write(value, buf):
         _UniffiFfiConverterOptionalBoolean.write(value.wifi_available, buf)
         _UniffiFfiConverterOptionalBoolean.write(value.charging, buf)
+
+@dataclass
+class FfiIdentitySummary:
+    def __init__(self, *, profile_id:bytes, signing_public_key:bytes, encryption_public_key:bytes):
+        self.profile_id = profile_id
+        self.signing_public_key = signing_public_key
+        self.encryption_public_key = encryption_public_key
+
+
+
+
+    def __str__(self):
+        return "FfiIdentitySummary(profile_id={}, signing_public_key={}, encryption_public_key={})".format(self.profile_id, self.signing_public_key, self.encryption_public_key)
+    def __eq__(self, other):
+        if self.profile_id != other.profile_id:
+            return False
+        if self.signing_public_key != other.signing_public_key:
+            return False
+        if self.encryption_public_key != other.encryption_public_key:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiIdentitySummary(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiIdentitySummary(
+            profile_id=_UniffiFfiConverterBytes.read(buf),
+            signing_public_key=_UniffiFfiConverterBytes.read(buf),
+            encryption_public_key=_UniffiFfiConverterBytes.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.profile_id)
+        _UniffiFfiConverterBytes.check_lower(value.signing_public_key)
+        _UniffiFfiConverterBytes.check_lower(value.encryption_public_key)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.profile_id, buf)
+        _UniffiFfiConverterBytes.write(value.signing_public_key, buf)
+        _UniffiFfiConverterBytes.write(value.encryption_public_key, buf)
+
+
+
+
+
+
+class FfiMatchState(enum.Enum):
+
+    NEUTRAL = 0
+
+    OUTGOING = 1
+
+    INCOMING = 2
+
+    MATCHED = 3
+
+    REJECTED = 4
+
+    BLOCKED = 5
+
+
+
+class _UniffiFfiConverterTypeFfiMatchState(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        variant = buf.read_i32()
+        if variant == 1:
+            return FfiMatchState.NEUTRAL
+        if variant == 2:
+            return FfiMatchState.OUTGOING
+        if variant == 3:
+            return FfiMatchState.INCOMING
+        if variant == 4:
+            return FfiMatchState.MATCHED
+        if variant == 5:
+            return FfiMatchState.REJECTED
+        if variant == 6:
+            return FfiMatchState.BLOCKED
+        raise InternalError("Raw enum value doesn't match any cases")
+
+    @staticmethod
+    def check_lower(value):
+        if value == FfiMatchState.NEUTRAL:
+            return
+        if value == FfiMatchState.OUTGOING:
+            return
+        if value == FfiMatchState.INCOMING:
+            return
+        if value == FfiMatchState.MATCHED:
+            return
+        if value == FfiMatchState.REJECTED:
+            return
+        if value == FfiMatchState.BLOCKED:
+            return
+        raise ValueError(value)
+
+    @staticmethod
+    def write(value, buf):
+        if value == FfiMatchState.NEUTRAL:
+            buf.write_i32(1)
+        if value == FfiMatchState.OUTGOING:
+            buf.write_i32(2)
+        if value == FfiMatchState.INCOMING:
+            buf.write_i32(3)
+        if value == FfiMatchState.MATCHED:
+            buf.write_i32(4)
+        if value == FfiMatchState.REJECTED:
+            buf.write_i32(5)
+        if value == FfiMatchState.BLOCKED:
+            buf.write_i32(6)
+
+
+
+@dataclass
+class FfiIncomingLike:
+    def __init__(self, *, sender:bytes, first_name:str, age_at_issue:int, state:FfiMatchState):
+        self.sender = sender
+        self.first_name = first_name
+        self.age_at_issue = age_at_issue
+        self.state = state
+
+
+
+
+    def __str__(self):
+        return "FfiIncomingLike(sender={}, first_name={}, age_at_issue={}, state={})".format(self.sender, self.first_name, self.age_at_issue, self.state)
+    def __eq__(self, other):
+        if self.sender != other.sender:
+            return False
+        if self.first_name != other.first_name:
+            return False
+        if self.age_at_issue != other.age_at_issue:
+            return False
+        if self.state != other.state:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiIncomingLike(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiIncomingLike(
+            sender=_UniffiFfiConverterBytes.read(buf),
+            first_name=_UniffiFfiConverterString.read(buf),
+            age_at_issue=_UniffiFfiConverterUInt8.read(buf),
+            state=_UniffiFfiConverterTypeFfiMatchState.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.sender)
+        _UniffiFfiConverterString.check_lower(value.first_name)
+        _UniffiFfiConverterUInt8.check_lower(value.age_at_issue)
+        _UniffiFfiConverterTypeFfiMatchState.check_lower(value.state)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.sender, buf)
+        _UniffiFfiConverterString.write(value.first_name, buf)
+        _UniffiFfiConverterUInt8.write(value.age_at_issue, buf)
+        _UniffiFfiConverterTypeFfiMatchState.write(value.state, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiIncomingLike(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiIncomingLike.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiIncomingLike.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiIncomingLike.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiIncomingLikePage:
+    def __init__(self, *, items:typing.List[FfiIncomingLike], next_cursor:typing.Optional[FfiPageCursor]):
+        self.items = items
+        self.next_cursor = next_cursor
+
+
+
+
+    def __str__(self):
+        return "FfiIncomingLikePage(items={}, next_cursor={})".format(self.items, self.next_cursor)
+    def __eq__(self, other):
+        if self.items != other.items:
+            return False
+        if self.next_cursor != other.next_cursor:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiIncomingLikePage(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiIncomingLikePage(
+            items=_UniffiFfiConverterSequenceTypeFfiIncomingLike.read(buf),
+            next_cursor=_UniffiFfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterSequenceTypeFfiIncomingLike.check_lower(value.items)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(value.next_cursor)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterSequenceTypeFfiIncomingLike.write(value.items, buf)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.write(value.next_cursor, buf)
+
+@dataclass
+class FfiMatchSummary:
+    def __init__(self, *, peer:bytes, match_id:bytes, first_name:str, age_at_issue:int):
+        self.peer = peer
+        self.match_id = match_id
+        self.first_name = first_name
+        self.age_at_issue = age_at_issue
+
+
+
+
+    def __str__(self):
+        return "FfiMatchSummary(peer={}, match_id={}, first_name={}, age_at_issue={})".format(self.peer, self.match_id, self.first_name, self.age_at_issue)
+    def __eq__(self, other):
+        if self.peer != other.peer:
+            return False
+        if self.match_id != other.match_id:
+            return False
+        if self.first_name != other.first_name:
+            return False
+        if self.age_at_issue != other.age_at_issue:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiMatchSummary(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiMatchSummary(
+            peer=_UniffiFfiConverterBytes.read(buf),
+            match_id=_UniffiFfiConverterBytes.read(buf),
+            first_name=_UniffiFfiConverterString.read(buf),
+            age_at_issue=_UniffiFfiConverterUInt8.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.peer)
+        _UniffiFfiConverterBytes.check_lower(value.match_id)
+        _UniffiFfiConverterString.check_lower(value.first_name)
+        _UniffiFfiConverterUInt8.check_lower(value.age_at_issue)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.peer, buf)
+        _UniffiFfiConverterBytes.write(value.match_id, buf)
+        _UniffiFfiConverterString.write(value.first_name, buf)
+        _UniffiFfiConverterUInt8.write(value.age_at_issue, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiMatchSummary(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiMatchSummary.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiMatchSummary.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiMatchSummary.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiMatchPage:
+    def __init__(self, *, items:typing.List[FfiMatchSummary], next_cursor:typing.Optional[FfiPageCursor]):
+        self.items = items
+        self.next_cursor = next_cursor
+
+
+
+
+    def __str__(self):
+        return "FfiMatchPage(items={}, next_cursor={})".format(self.items, self.next_cursor)
+    def __eq__(self, other):
+        if self.items != other.items:
+            return False
+        if self.next_cursor != other.next_cursor:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiMatchPage(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiMatchPage(
+            items=_UniffiFfiConverterSequenceTypeFfiMatchSummary.read(buf),
+            next_cursor=_UniffiFfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterSequenceTypeFfiMatchSummary.check_lower(value.items)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(value.next_cursor)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterSequenceTypeFfiMatchSummary.write(value.items, buf)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.write(value.next_cursor, buf)
 
 
 
@@ -1095,18 +2711,263 @@ class _UniffiFfiConverterTypeFfiNotificationPreferences(_UniffiConverterRustBuff
         _UniffiFfiConverterBoolean.write(value.likes_enabled, buf)
         _UniffiFfiConverterBoolean.write(value.matches_enabled, buf)
 
-class _UniffiFfiConverterUInt64(_UniffiConverterPrimitiveInt):
-    CLASS_NAME = "u64"
-    VALUE_MIN = 0
-    VALUE_MAX = 2**64
 
+
+
+
+
+class FfiOperationKind(enum.Enum):
+
+    PUBLICATION = 0
+
+    LIKE = 1
+
+    CONTACT = 2
+
+
+
+class _UniffiFfiConverterTypeFfiOperationKind(_UniffiConverterRustBuffer):
     @staticmethod
     def read(buf):
-        return buf.read_u64()
+        variant = buf.read_i32()
+        if variant == 1:
+            return FfiOperationKind.PUBLICATION
+        if variant == 2:
+            return FfiOperationKind.LIKE
+        if variant == 3:
+            return FfiOperationKind.CONTACT
+        raise InternalError("Raw enum value doesn't match any cases")
+
+    @staticmethod
+    def check_lower(value):
+        if value == FfiOperationKind.PUBLICATION:
+            return
+        if value == FfiOperationKind.LIKE:
+            return
+        if value == FfiOperationKind.CONTACT:
+            return
+        raise ValueError(value)
 
     @staticmethod
     def write(value, buf):
-        buf.write_u64(value)
+        if value == FfiOperationKind.PUBLICATION:
+            buf.write_i32(1)
+        if value == FfiOperationKind.LIKE:
+            buf.write_i32(2)
+        if value == FfiOperationKind.CONTACT:
+            buf.write_i32(3)
+
+
+
+
+
+
+
+
+class FfiOperationStatus(enum.Enum):
+
+    PENDING = 0
+
+    PARTIAL = 1
+
+    COMPLETED = 2
+
+    FAILED = 3
+
+
+
+class _UniffiFfiConverterTypeFfiOperationStatus(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        variant = buf.read_i32()
+        if variant == 1:
+            return FfiOperationStatus.PENDING
+        if variant == 2:
+            return FfiOperationStatus.PARTIAL
+        if variant == 3:
+            return FfiOperationStatus.COMPLETED
+        if variant == 4:
+            return FfiOperationStatus.FAILED
+        raise InternalError("Raw enum value doesn't match any cases")
+
+    @staticmethod
+    def check_lower(value):
+        if value == FfiOperationStatus.PENDING:
+            return
+        if value == FfiOperationStatus.PARTIAL:
+            return
+        if value == FfiOperationStatus.COMPLETED:
+            return
+        if value == FfiOperationStatus.FAILED:
+            return
+        raise ValueError(value)
+
+    @staticmethod
+    def write(value, buf):
+        if value == FfiOperationStatus.PENDING:
+            buf.write_i32(1)
+        if value == FfiOperationStatus.PARTIAL:
+            buf.write_i32(2)
+        if value == FfiOperationStatus.COMPLETED:
+            buf.write_i32(3)
+        if value == FfiOperationStatus.FAILED:
+            buf.write_i32(4)
+
+
+
+class _UniffiFfiConverterSequenceTypeFfiDeliveryFailure(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiDeliveryFailure.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiDeliveryFailure.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiDeliveryFailure.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiOperationReceipt:
+    def __init__(self, *, operation_id:bytes, kind:FfiOperationKind, status:FfiOperationStatus, acknowledged_peers:int, required_acknowledgements:int, pending_items:typing.List[bytes], failures:typing.List[FfiDeliveryFailure], retry_recommended:bool):
+        self.operation_id = operation_id
+        self.kind = kind
+        self.status = status
+        self.acknowledged_peers = acknowledged_peers
+        self.required_acknowledgements = required_acknowledgements
+        self.pending_items = pending_items
+        self.failures = failures
+        self.retry_recommended = retry_recommended
+
+
+
+
+    def __str__(self):
+        return "FfiOperationReceipt(operation_id={}, kind={}, status={}, acknowledged_peers={}, required_acknowledgements={}, pending_items={}, failures={}, retry_recommended={})".format(self.operation_id, self.kind, self.status, self.acknowledged_peers, self.required_acknowledgements, self.pending_items, self.failures, self.retry_recommended)
+    def __eq__(self, other):
+        if self.operation_id != other.operation_id:
+            return False
+        if self.kind != other.kind:
+            return False
+        if self.status != other.status:
+            return False
+        if self.acknowledged_peers != other.acknowledged_peers:
+            return False
+        if self.required_acknowledgements != other.required_acknowledgements:
+            return False
+        if self.pending_items != other.pending_items:
+            return False
+        if self.failures != other.failures:
+            return False
+        if self.retry_recommended != other.retry_recommended:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiOperationReceipt(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiOperationReceipt(
+            operation_id=_UniffiFfiConverterBytes.read(buf),
+            kind=_UniffiFfiConverterTypeFfiOperationKind.read(buf),
+            status=_UniffiFfiConverterTypeFfiOperationStatus.read(buf),
+            acknowledged_peers=_UniffiFfiConverterUInt32.read(buf),
+            required_acknowledgements=_UniffiFfiConverterUInt32.read(buf),
+            pending_items=_UniffiFfiConverterSequenceBytes.read(buf),
+            failures=_UniffiFfiConverterSequenceTypeFfiDeliveryFailure.read(buf),
+            retry_recommended=_UniffiFfiConverterBoolean.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.operation_id)
+        _UniffiFfiConverterTypeFfiOperationKind.check_lower(value.kind)
+        _UniffiFfiConverterTypeFfiOperationStatus.check_lower(value.status)
+        _UniffiFfiConverterUInt32.check_lower(value.acknowledged_peers)
+        _UniffiFfiConverterUInt32.check_lower(value.required_acknowledgements)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.pending_items)
+        _UniffiFfiConverterSequenceTypeFfiDeliveryFailure.check_lower(value.failures)
+        _UniffiFfiConverterBoolean.check_lower(value.retry_recommended)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.operation_id, buf)
+        _UniffiFfiConverterTypeFfiOperationKind.write(value.kind, buf)
+        _UniffiFfiConverterTypeFfiOperationStatus.write(value.status, buf)
+        _UniffiFfiConverterUInt32.write(value.acknowledged_peers, buf)
+        _UniffiFfiConverterUInt32.write(value.required_acknowledgements, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.pending_items, buf)
+        _UniffiFfiConverterSequenceTypeFfiDeliveryFailure.write(value.failures, buf)
+        _UniffiFfiConverterBoolean.write(value.retry_recommended, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiOperationReceipt(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiOperationReceipt.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiOperationReceipt.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiOperationReceipt.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiOperationPage:
+    def __init__(self, *, items:typing.List[FfiOperationReceipt], next_cursor:typing.Optional[FfiPageCursor]):
+        self.items = items
+        self.next_cursor = next_cursor
+
+
+
+
+    def __str__(self):
+        return "FfiOperationPage(items={}, next_cursor={})".format(self.items, self.next_cursor)
+    def __eq__(self, other):
+        if self.items != other.items:
+            return False
+        if self.next_cursor != other.next_cursor:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiOperationPage(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiOperationPage(
+            items=_UniffiFfiConverterSequenceTypeFfiOperationReceipt.read(buf),
+            next_cursor=_UniffiFfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterSequenceTypeFfiOperationReceipt.check_lower(value.items)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(value.next_cursor)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterSequenceTypeFfiOperationReceipt.write(value.items, buf)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.write(value.next_cursor, buf)
 
 @dataclass
 class FfiPeerContributionPolicy:
@@ -1168,14 +3029,329 @@ class _UniffiFfiConverterTypeFfiPeerContributionPolicy(_UniffiConverterRustBuffe
         _UniffiFfiConverterUInt64.write(value.max_transfer_bytes, buf)
         _UniffiFfiConverterUInt64.write(value.max_duration_ms, buf)
 
-class _UniffiFfiConverterFloat64(_UniffiConverterPrimitiveFloat):
+
+
+
+
+
+class FfiReportDeliveryStatus(enum.Enum):
+
+    LOCAL_ONLY = 0
+
+
+
+class _UniffiFfiConverterTypeFfiReportDeliveryStatus(_UniffiConverterRustBuffer):
     @staticmethod
     def read(buf):
-        return buf.read_double()
+        variant = buf.read_i32()
+        if variant == 1:
+            return FfiReportDeliveryStatus.LOCAL_ONLY
+        raise InternalError("Raw enum value doesn't match any cases")
+
+    @staticmethod
+    def check_lower(value):
+        if value == FfiReportDeliveryStatus.LOCAL_ONLY:
+            return
+        raise ValueError(value)
 
     @staticmethod
     def write(value, buf):
-        buf.write_double(value)
+        if value == FfiReportDeliveryStatus.LOCAL_ONLY:
+            buf.write_i32(1)
+
+
+
+@dataclass
+class FfiProfileReport:
+    def __init__(self, *, report_id:bytes, subject:bytes, policy_reason:int, evidence_hashes:typing.List[bytes], created_at:int, signature:bytes, delivery_status:FfiReportDeliveryStatus):
+        self.report_id = report_id
+        self.subject = subject
+        self.policy_reason = policy_reason
+        self.evidence_hashes = evidence_hashes
+        self.created_at = created_at
+        self.signature = signature
+        self.delivery_status = delivery_status
+
+
+
+
+    def __str__(self):
+        return "FfiProfileReport(report_id={}, subject={}, policy_reason={}, evidence_hashes={}, created_at={}, signature={}, delivery_status={})".format(self.report_id, self.subject, self.policy_reason, self.evidence_hashes, self.created_at, self.signature, self.delivery_status)
+    def __eq__(self, other):
+        if self.report_id != other.report_id:
+            return False
+        if self.subject != other.subject:
+            return False
+        if self.policy_reason != other.policy_reason:
+            return False
+        if self.evidence_hashes != other.evidence_hashes:
+            return False
+        if self.created_at != other.created_at:
+            return False
+        if self.signature != other.signature:
+            return False
+        if self.delivery_status != other.delivery_status:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiProfileReport(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiProfileReport(
+            report_id=_UniffiFfiConverterBytes.read(buf),
+            subject=_UniffiFfiConverterBytes.read(buf),
+            policy_reason=_UniffiFfiConverterUInt16.read(buf),
+            evidence_hashes=_UniffiFfiConverterSequenceBytes.read(buf),
+            created_at=_UniffiFfiConverterUInt64.read(buf),
+            signature=_UniffiFfiConverterBytes.read(buf),
+            delivery_status=_UniffiFfiConverterTypeFfiReportDeliveryStatus.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.report_id)
+        _UniffiFfiConverterBytes.check_lower(value.subject)
+        _UniffiFfiConverterUInt16.check_lower(value.policy_reason)
+        _UniffiFfiConverterSequenceBytes.check_lower(value.evidence_hashes)
+        _UniffiFfiConverterUInt64.check_lower(value.created_at)
+        _UniffiFfiConverterBytes.check_lower(value.signature)
+        _UniffiFfiConverterTypeFfiReportDeliveryStatus.check_lower(value.delivery_status)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.report_id, buf)
+        _UniffiFfiConverterBytes.write(value.subject, buf)
+        _UniffiFfiConverterUInt16.write(value.policy_reason, buf)
+        _UniffiFfiConverterSequenceBytes.write(value.evidence_hashes, buf)
+        _UniffiFfiConverterUInt64.write(value.created_at, buf)
+        _UniffiFfiConverterBytes.write(value.signature, buf)
+        _UniffiFfiConverterTypeFfiReportDeliveryStatus.write(value.delivery_status, buf)
+
+class _UniffiFfiConverterSequenceTypeFfiProfileReport(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiProfileReport.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiProfileReport.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiProfileReport.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiProfileReportPage:
+    def __init__(self, *, items:typing.List[FfiProfileReport], next_cursor:typing.Optional[FfiPageCursor]):
+        self.items = items
+        self.next_cursor = next_cursor
+
+
+
+
+    def __str__(self):
+        return "FfiProfileReportPage(items={}, next_cursor={})".format(self.items, self.next_cursor)
+    def __eq__(self, other):
+        if self.items != other.items:
+            return False
+        if self.next_cursor != other.next_cursor:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiProfileReportPage(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiProfileReportPage(
+            items=_UniffiFfiConverterSequenceTypeFfiProfileReport.read(buf),
+            next_cursor=_UniffiFfiConverterOptionalTypeFfiPageCursor.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterSequenceTypeFfiProfileReport.check_lower(value.items)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(value.next_cursor)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterSequenceTypeFfiProfileReport.write(value.items, buf)
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.write(value.next_cursor, buf)
+
+@dataclass
+class FfiPublicationReceipt:
+    def __init__(self, *, operation:FfiOperationReceipt, revision:int, replicated_peers:int):
+        self.operation = operation
+        self.revision = revision
+        self.replicated_peers = replicated_peers
+
+
+
+
+    def __str__(self):
+        return "FfiPublicationReceipt(operation={}, revision={}, replicated_peers={})".format(self.operation, self.revision, self.replicated_peers)
+    def __eq__(self, other):
+        if self.operation != other.operation:
+            return False
+        if self.revision != other.revision:
+            return False
+        if self.replicated_peers != other.replicated_peers:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiPublicationReceipt(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiPublicationReceipt(
+            operation=_UniffiFfiConverterTypeFfiOperationReceipt.read(buf),
+            revision=_UniffiFfiConverterUInt64.read(buf),
+            replicated_peers=_UniffiFfiConverterUInt32.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterTypeFfiOperationReceipt.check_lower(value.operation)
+        _UniffiFfiConverterUInt64.check_lower(value.revision)
+        _UniffiFfiConverterUInt32.check_lower(value.replicated_peers)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterTypeFfiOperationReceipt.write(value.operation, buf)
+        _UniffiFfiConverterUInt64.write(value.revision, buf)
+        _UniffiFfiConverterUInt32.write(value.replicated_peers, buf)
+
+@dataclass
+class FfiRankedCandidate:
+    def __init__(self, *, profile_id:bytes, probability:float, explored:bool):
+        self.profile_id = profile_id
+        self.probability = probability
+        self.explored = explored
+
+
+
+
+    def __str__(self):
+        return "FfiRankedCandidate(profile_id={}, probability={}, explored={})".format(self.profile_id, self.probability, self.explored)
+    def __eq__(self, other):
+        if self.profile_id != other.profile_id:
+            return False
+        if self.probability != other.probability:
+            return False
+        if self.explored != other.explored:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiRankedCandidate(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiRankedCandidate(
+            profile_id=_UniffiFfiConverterBytes.read(buf),
+            probability=_UniffiFfiConverterFloat64.read(buf),
+            explored=_UniffiFfiConverterBoolean.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.profile_id)
+        _UniffiFfiConverterFloat64.check_lower(value.probability)
+        _UniffiFfiConverterBoolean.check_lower(value.explored)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.profile_id, buf)
+        _UniffiFfiConverterFloat64.write(value.probability, buf)
+        _UniffiFfiConverterBoolean.write(value.explored, buf)
+
+class _UniffiFfiConverterSequenceFloat64(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterFloat64.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterFloat64.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterFloat64.read(buf) for i in range(count)
+        ]
+
+@dataclass
+class FfiRankingCandidate:
+    def __init__(self, *, profile_id:bytes, verified_age:int, adult_credential_valid:bool, coarse_region:typing.Optional[str], embedding_version:int, embedding_values:typing.List[float]):
+        self.profile_id = profile_id
+        self.verified_age = verified_age
+        self.adult_credential_valid = adult_credential_valid
+        self.coarse_region = coarse_region
+        self.embedding_version = embedding_version
+        self.embedding_values = embedding_values
+
+
+
+
+    def __str__(self):
+        return "FfiRankingCandidate(profile_id={}, verified_age={}, adult_credential_valid={}, coarse_region={}, embedding_version={}, embedding_values={})".format(self.profile_id, self.verified_age, self.adult_credential_valid, self.coarse_region, self.embedding_version, self.embedding_values)
+    def __eq__(self, other):
+        if self.profile_id != other.profile_id:
+            return False
+        if self.verified_age != other.verified_age:
+            return False
+        if self.adult_credential_valid != other.adult_credential_valid:
+            return False
+        if self.coarse_region != other.coarse_region:
+            return False
+        if self.embedding_version != other.embedding_version:
+            return False
+        if self.embedding_values != other.embedding_values:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiRankingCandidate(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiRankingCandidate(
+            profile_id=_UniffiFfiConverterBytes.read(buf),
+            verified_age=_UniffiFfiConverterUInt8.read(buf),
+            adult_credential_valid=_UniffiFfiConverterBoolean.read(buf),
+            coarse_region=_UniffiFfiConverterOptionalString.read(buf),
+            embedding_version=_UniffiFfiConverterUInt16.read(buf),
+            embedding_values=_UniffiFfiConverterSequenceFloat64.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.profile_id)
+        _UniffiFfiConverterUInt8.check_lower(value.verified_age)
+        _UniffiFfiConverterBoolean.check_lower(value.adult_credential_valid)
+        _UniffiFfiConverterOptionalString.check_lower(value.coarse_region)
+        _UniffiFfiConverterUInt16.check_lower(value.embedding_version)
+        _UniffiFfiConverterSequenceFloat64.check_lower(value.embedding_values)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.profile_id, buf)
+        _UniffiFfiConverterUInt8.write(value.verified_age, buf)
+        _UniffiFfiConverterBoolean.write(value.adult_credential_valid, buf)
+        _UniffiFfiConverterOptionalString.write(value.coarse_region, buf)
+        _UniffiFfiConverterUInt16.write(value.embedding_version, buf)
+        _UniffiFfiConverterSequenceFloat64.write(value.embedding_values, buf)
 
 @dataclass
 class FfiRankingScore:
@@ -1206,159 +3382,6 @@ class _UniffiFfiConverterTypeFfiRankingScore(_UniffiConverterRustBuffer):
     @staticmethod
     def write(value, buf):
         _UniffiFfiConverterFloat64.write(value.probability, buf)
-
-class _UniffiFfiConverterUInt16(_UniffiConverterPrimitiveInt):
-    CLASS_NAME = "u16"
-    VALUE_MIN = 0
-    VALUE_MAX = 2**16
-
-    @staticmethod
-    def read(buf):
-        return buf.read_u16()
-
-    @staticmethod
-    def write(value, buf):
-        buf.write_u16(value)
-
-@dataclass
-class FfiSyncBudget:
-    def __init__(self, *, max_duration_ms:int, max_download_bytes:int, max_upload_bytes:int, max_peers:int, max_mailbox_items:int, max_concurrent_requests:int, retries:int, request_timeout_ms:int):
-        self.max_duration_ms = max_duration_ms
-        self.max_download_bytes = max_download_bytes
-        self.max_upload_bytes = max_upload_bytes
-        self.max_peers = max_peers
-        self.max_mailbox_items = max_mailbox_items
-        self.max_concurrent_requests = max_concurrent_requests
-        self.retries = retries
-        self.request_timeout_ms = request_timeout_ms
-
-
-
-
-    def __str__(self):
-        return "FfiSyncBudget(max_duration_ms={}, max_download_bytes={}, max_upload_bytes={}, max_peers={}, max_mailbox_items={}, max_concurrent_requests={}, retries={}, request_timeout_ms={})".format(self.max_duration_ms, self.max_download_bytes, self.max_upload_bytes, self.max_peers, self.max_mailbox_items, self.max_concurrent_requests, self.retries, self.request_timeout_ms)
-    def __eq__(self, other):
-        if self.max_duration_ms != other.max_duration_ms:
-            return False
-        if self.max_download_bytes != other.max_download_bytes:
-            return False
-        if self.max_upload_bytes != other.max_upload_bytes:
-            return False
-        if self.max_peers != other.max_peers:
-            return False
-        if self.max_mailbox_items != other.max_mailbox_items:
-            return False
-        if self.max_concurrent_requests != other.max_concurrent_requests:
-            return False
-        if self.retries != other.retries:
-            return False
-        if self.request_timeout_ms != other.request_timeout_ms:
-            return False
-        return True
-
-class _UniffiFfiConverterTypeFfiSyncBudget(_UniffiConverterRustBuffer):
-    @staticmethod
-    def read(buf):
-        return FfiSyncBudget(
-            max_duration_ms=_UniffiFfiConverterUInt64.read(buf),
-            max_download_bytes=_UniffiFfiConverterUInt64.read(buf),
-            max_upload_bytes=_UniffiFfiConverterUInt64.read(buf),
-            max_peers=_UniffiFfiConverterUInt16.read(buf),
-            max_mailbox_items=_UniffiFfiConverterUInt16.read(buf),
-            max_concurrent_requests=_UniffiFfiConverterUInt16.read(buf),
-            retries=_UniffiFfiConverterUInt16.read(buf),
-            request_timeout_ms=_UniffiFfiConverterUInt64.read(buf),
-        )
-
-    @staticmethod
-    def check_lower(value):
-        _UniffiFfiConverterUInt64.check_lower(value.max_duration_ms)
-        _UniffiFfiConverterUInt64.check_lower(value.max_download_bytes)
-        _UniffiFfiConverterUInt64.check_lower(value.max_upload_bytes)
-        _UniffiFfiConverterUInt16.check_lower(value.max_peers)
-        _UniffiFfiConverterUInt16.check_lower(value.max_mailbox_items)
-        _UniffiFfiConverterUInt16.check_lower(value.max_concurrent_requests)
-        _UniffiFfiConverterUInt16.check_lower(value.retries)
-        _UniffiFfiConverterUInt64.check_lower(value.request_timeout_ms)
-
-    @staticmethod
-    def write(value, buf):
-        _UniffiFfiConverterUInt64.write(value.max_duration_ms, buf)
-        _UniffiFfiConverterUInt64.write(value.max_download_bytes, buf)
-        _UniffiFfiConverterUInt64.write(value.max_upload_bytes, buf)
-        _UniffiFfiConverterUInt16.write(value.max_peers, buf)
-        _UniffiFfiConverterUInt16.write(value.max_mailbox_items, buf)
-        _UniffiFfiConverterUInt16.write(value.max_concurrent_requests, buf)
-        _UniffiFfiConverterUInt16.write(value.retries, buf)
-        _UniffiFfiConverterUInt64.write(value.request_timeout_ms, buf)
-
-class _UniffiFfiConverterString:
-    @staticmethod
-    def check_lower(value):
-        if not isinstance(value, str):
-            raise TypeError("argument must be str, not {}".format(type(value).__name__))
-        return value
-
-    @staticmethod
-    def read(buf):
-        size = buf.read_i32()
-        if size < 0:
-            raise InternalError("Unexpected negative string length")
-        utf8_bytes = buf.read(size)
-        return utf8_bytes.decode("utf-8")
-
-    @staticmethod
-    def write(value, buf):
-        utf8_bytes = value.encode("utf-8")
-        buf.write_i32(len(utf8_bytes))
-        buf.write(utf8_bytes)
-
-    @staticmethod
-    def lift(buf):
-        with buf.consume_with_stream() as stream:
-            return stream.read(stream.remaining()).decode("utf-8")
-
-    @staticmethod
-    def lower(value):
-        with _UniffiRustBuffer.alloc_with_builder() as builder:
-            builder.write(value.encode("utf-8"))
-            return builder.finalize()
-
-@dataclass
-class FfiSyncPeer:
-    def __init__(self, *, peer_id:str, address:str):
-        self.peer_id = peer_id
-        self.address = address
-
-
-
-
-    def __str__(self):
-        return "FfiSyncPeer(peer_id={}, address={})".format(self.peer_id, self.address)
-    def __eq__(self, other):
-        if self.peer_id != other.peer_id:
-            return False
-        if self.address != other.address:
-            return False
-        return True
-
-class _UniffiFfiConverterTypeFfiSyncPeer(_UniffiConverterRustBuffer):
-    @staticmethod
-    def read(buf):
-        return FfiSyncPeer(
-            peer_id=_UniffiFfiConverterString.read(buf),
-            address=_UniffiFfiConverterString.read(buf),
-        )
-
-    @staticmethod
-    def check_lower(value):
-        _UniffiFfiConverterString.check_lower(value.peer_id)
-        _UniffiFfiConverterString.check_lower(value.address)
-
-    @staticmethod
-    def write(value, buf):
-        _UniffiFfiConverterString.write(value.peer_id, buf)
-        _UniffiFfiConverterString.write(value.address, buf)
 
 
 
@@ -1423,19 +3446,6 @@ class _UniffiFfiConverterTypeFfiSyncStatus(_UniffiConverterRustBuffer):
             buf.write_i32(5)
 
 
-
-class _UniffiFfiConverterUInt32(_UniffiConverterPrimitiveInt):
-    CLASS_NAME = "u32"
-    VALUE_MIN = 0
-    VALUE_MAX = 2**32
-
-    @staticmethod
-    def read(buf):
-        return buf.read_u32()
-
-    @staticmethod
-    def write(value, buf):
-        buf.write_u32(value)
 
 class _UniffiFfiConverterSequenceString(_UniffiConverterRustBuffer):
     @classmethod
@@ -1656,52 +3666,6 @@ class _UniffiFfiConverterTypeFfiSyncReport(_UniffiConverterRustBuffer):
         _UniffiFfiConverterUInt32.write(value.confirmed_replicas, buf)
         _UniffiFfiConverterSequenceTypeFfiSyncDeferredReason.write(value.deferred_reasons, buf)
 
-class _UniffiFfiConverterSequenceBytes(_UniffiConverterRustBuffer):
-    @classmethod
-    def check_lower(cls, value):
-        for item in value:
-            _UniffiFfiConverterBytes.check_lower(item)
-
-    @classmethod
-    def write(cls, value, buf):
-        items = len(value)
-        buf.write_i32(items)
-        for item in value:
-            _UniffiFfiConverterBytes.write(item, buf)
-
-    @classmethod
-    def read(cls, buf):
-        count = buf.read_i32()
-        if count < 0:
-            raise InternalError("Unexpected negative sequence length")
-
-        return [
-            _UniffiFfiConverterBytes.read(buf) for i in range(count)
-        ]
-
-class _UniffiFfiConverterSequenceTypeFfiSyncPeer(_UniffiConverterRustBuffer):
-    @classmethod
-    def check_lower(cls, value):
-        for item in value:
-            _UniffiFfiConverterTypeFfiSyncPeer.check_lower(item)
-
-    @classmethod
-    def write(cls, value, buf):
-        items = len(value)
-        buf.write_i32(items)
-        for item in value:
-            _UniffiFfiConverterTypeFfiSyncPeer.write(item, buf)
-
-    @classmethod
-    def read(cls, buf):
-        count = buf.read_i32()
-        if count < 0:
-            raise InternalError("Unexpected negative sequence length")
-
-        return [
-            _UniffiFfiConverterTypeFfiSyncPeer.read(buf) for i in range(count)
-        ]
-
 class _UniffiFfiConverterSequenceTypeFfiAuthorizedReplica(_UniffiConverterRustBuffer):
     @classmethod
     def check_lower(cls, value):
@@ -1796,6 +3760,60 @@ class _UniffiFfiConverterTypeFfiSyncRequest(_UniffiConverterRustBuffer):
         _UniffiFfiConverterTypeFfiPeerContributionPolicy.write(value.contribution_policy, buf)
         _UniffiFfiConverterTypeFfiHostConditions.write(value.host_conditions, buf)
         _UniffiFfiConverterSequenceTypeFfiAuthorizedReplica.write(value.authorized_replicas, buf)
+
+@dataclass
+class FfiValidatedPhoto:
+    def __init__(self, *, bytes:bytes, hash:bytes, media_type:str, width:int, height:int):
+        self.bytes = bytes
+        self.hash = hash
+        self.media_type = media_type
+        self.width = width
+        self.height = height
+
+
+
+
+    def __str__(self):
+        return "FfiValidatedPhoto(bytes={}, hash={}, media_type={}, width={}, height={})".format(self.bytes, self.hash, self.media_type, self.width, self.height)
+    def __eq__(self, other):
+        if self.bytes != other.bytes:
+            return False
+        if self.hash != other.hash:
+            return False
+        if self.media_type != other.media_type:
+            return False
+        if self.width != other.width:
+            return False
+        if self.height != other.height:
+            return False
+        return True
+
+class _UniffiFfiConverterTypeFfiValidatedPhoto(_UniffiConverterRustBuffer):
+    @staticmethod
+    def read(buf):
+        return FfiValidatedPhoto(
+            bytes=_UniffiFfiConverterBytes.read(buf),
+            hash=_UniffiFfiConverterBytes.read(buf),
+            media_type=_UniffiFfiConverterString.read(buf),
+            width=_UniffiFfiConverterUInt32.read(buf),
+            height=_UniffiFfiConverterUInt32.read(buf),
+        )
+
+    @staticmethod
+    def check_lower(value):
+        _UniffiFfiConverterBytes.check_lower(value.bytes)
+        _UniffiFfiConverterBytes.check_lower(value.hash)
+        _UniffiFfiConverterString.check_lower(value.media_type)
+        _UniffiFfiConverterUInt32.check_lower(value.width)
+        _UniffiFfiConverterUInt32.check_lower(value.height)
+
+    @staticmethod
+    def write(value, buf):
+        _UniffiFfiConverterBytes.write(value.bytes, buf)
+        _UniffiFfiConverterBytes.write(value.hash, buf)
+        _UniffiFfiConverterString.write(value.media_type, buf)
+        _UniffiFfiConverterUInt32.write(value.width, buf)
+        _UniffiFfiConverterUInt32.write(value.height, buf)
 
 
 
@@ -1940,6 +3958,54 @@ class FfiError:  # type: ignore
         def __repr__(self):
             return "FfiError.Cancelled({})".format(str(self))
     _UniffiTempFfiError.Cancelled = Cancelled # type: ignore
+    class UntrustedIdentity(_UniffiTempFfiError):
+
+        def __init__(self):
+            pass
+
+        def __repr__(self):
+            return "FfiError.UntrustedIdentity({})".format(str(self))
+    _UniffiTempFfiError.UntrustedIdentity = UntrustedIdentity # type: ignore
+    class CredentialExpired(_UniffiTempFfiError):
+
+        def __init__(self):
+            pass
+
+        def __repr__(self):
+            return "FfiError.CredentialExpired({})".format(str(self))
+    _UniffiTempFfiError.CredentialExpired = CredentialExpired # type: ignore
+    class SafetyUnavailable(_UniffiTempFfiError):
+
+        def __init__(self):
+            pass
+
+        def __repr__(self):
+            return "FfiError.SafetyUnavailable({})".format(str(self))
+    _UniffiTempFfiError.SafetyUnavailable = SafetyUnavailable # type: ignore
+    class SafetyRejected(_UniffiTempFfiError):
+
+        def __init__(self):
+            pass
+
+        def __repr__(self):
+            return "FfiError.SafetyRejected({})".format(str(self))
+    _UniffiTempFfiError.SafetyRejected = SafetyRejected # type: ignore
+    class Pending(_UniffiTempFfiError):
+
+        def __init__(self):
+            pass
+
+        def __repr__(self):
+            return "FfiError.Pending({})".format(str(self))
+    _UniffiTempFfiError.Pending = Pending # type: ignore
+    class Unsupported(_UniffiTempFfiError):
+
+        def __init__(self):
+            pass
+
+        def __repr__(self):
+            return "FfiError.Unsupported({})".format(str(self))
+    _UniffiTempFfiError.Unsupported = Unsupported # type: ignore
 
 FfiError = _UniffiTempFfiError # type: ignore
 del _UniffiTempFfiError
@@ -1997,6 +4063,24 @@ class _UniffiFfiConverterTypeFfiError(_UniffiConverterRustBuffer):
         if variant == 16:
             return FfiError.Cancelled(
             )
+        if variant == 17:
+            return FfiError.UntrustedIdentity(
+            )
+        if variant == 18:
+            return FfiError.CredentialExpired(
+            )
+        if variant == 19:
+            return FfiError.SafetyUnavailable(
+            )
+        if variant == 20:
+            return FfiError.SafetyRejected(
+            )
+        if variant == 21:
+            return FfiError.Pending(
+            )
+        if variant == 22:
+            return FfiError.Unsupported(
+            )
         raise InternalError("Raw enum value doesn't match any cases")
 
     @staticmethod
@@ -2033,6 +4117,18 @@ class _UniffiFfiConverterTypeFfiError(_UniffiConverterRustBuffer):
             return
         if isinstance(value, FfiError.Cancelled):
             return
+        if isinstance(value, FfiError.UntrustedIdentity):
+            return
+        if isinstance(value, FfiError.CredentialExpired):
+            return
+        if isinstance(value, FfiError.SafetyUnavailable):
+            return
+        if isinstance(value, FfiError.SafetyRejected):
+            return
+        if isinstance(value, FfiError.Pending):
+            return
+        if isinstance(value, FfiError.Unsupported):
+            return
 
     @staticmethod
     def write(value, buf):
@@ -2068,6 +4164,18 @@ class _UniffiFfiConverterTypeFfiError(_UniffiConverterRustBuffer):
             buf.write_i32(15)
         if isinstance(value, FfiError.Cancelled):
             buf.write_i32(16)
+        if isinstance(value, FfiError.UntrustedIdentity):
+            buf.write_i32(17)
+        if isinstance(value, FfiError.CredentialExpired):
+            buf.write_i32(18)
+        if isinstance(value, FfiError.SafetyUnavailable):
+            buf.write_i32(19)
+        if isinstance(value, FfiError.SafetyRejected):
+            buf.write_i32(20)
+        if isinstance(value, FfiError.Pending):
+            buf.write_i32(21)
+        if isinstance(value, FfiError.Unsupported):
+            buf.write_i32(22)
 
 class _UniffiFfiConverterOptionalTypeFfiSyncReport(_UniffiConverterRustBuffer):
     @classmethod
@@ -2365,18 +4473,18 @@ class _UniffiFfiConverterTypeAccountHandle:
     def write(cls, value: AccountHandle, buf: _UniffiRustBuffer):
         buf.write_u64(cls.lower(value))
 
-class _UniffiFfiConverterSequenceFloat64(_UniffiConverterRustBuffer):
+class _UniffiFfiConverterSequenceTypeFfiContactHandle(_UniffiConverterRustBuffer):
     @classmethod
     def check_lower(cls, value):
         for item in value:
-            _UniffiFfiConverterFloat64.check_lower(item)
+            _UniffiFfiConverterTypeFfiContactHandle.check_lower(item)
 
     @classmethod
     def write(cls, value, buf):
         items = len(value)
         buf.write_i32(items)
         for item in value:
-            _UniffiFfiConverterFloat64.write(item, buf)
+            _UniffiFfiConverterTypeFfiContactHandle.write(item, buf)
 
     @classmethod
     def read(cls, buf):
@@ -2385,8 +4493,682 @@ class _UniffiFfiConverterSequenceFloat64(_UniffiConverterRustBuffer):
             raise InternalError("Unexpected negative sequence length")
 
         return [
-            _UniffiFfiConverterFloat64.read(buf) for i in range(count)
+            _UniffiFfiConverterTypeFfiContactHandle.read(buf) for i in range(count)
         ]
+
+class _UniffiFfiConverterOptionalTypeFfiCandidateProfile(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        if value is not None:
+            _UniffiFfiConverterTypeFfiCandidateProfile.check_lower(value)
+
+    @classmethod
+    def write(cls, value, buf):
+        if value is None:
+            buf.write_u8(0)
+            return
+
+        buf.write_u8(1)
+        _UniffiFfiConverterTypeFfiCandidateProfile.write(value, buf)
+
+    @classmethod
+    def read(cls, buf):
+        flag = buf.read_u8()
+        if flag == 0:
+            return None
+        elif flag == 1:
+            return _UniffiFfiConverterTypeFfiCandidateProfile.read(buf)
+        else:
+            raise InternalError("Unexpected flag byte for optional type")
+
+class _UniffiFfiConverterSequenceTypeFfiRankingCandidate(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiRankingCandidate.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiRankingCandidate.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiRankingCandidate.read(buf) for i in range(count)
+        ]
+
+class _UniffiFfiConverterSequenceTypeFfiRankedCandidate(_UniffiConverterRustBuffer):
+    @classmethod
+    def check_lower(cls, value):
+        for item in value:
+            _UniffiFfiConverterTypeFfiRankedCandidate.check_lower(item)
+
+    @classmethod
+    def write(cls, value, buf):
+        items = len(value)
+        buf.write_i32(items)
+        for item in value:
+            _UniffiFfiConverterTypeFfiRankedCandidate.write(item, buf)
+
+    @classmethod
+    def read(cls, buf):
+        count = buf.read_i32()
+        if count < 0:
+            raise InternalError("Unexpected negative sequence length")
+
+        return [
+            _UniffiFfiConverterTypeFfiRankedCandidate.read(buf) for i in range(count)
+        ]
+
+
+class ApplicationHandleProtocol(typing.Protocol):
+    """
+    An account-owning adapter. All application calls serialize through one service instance.
+"""
+
+    def acknowledge_notification(self, event_id: bytes) -> bool:
+        raise NotImplementedError
+    def block(self, profile_id: bytes) -> None:
+        raise NotImplementedError
+    def cancel_current_operation(self, ) -> bool:
+        """
+        Cancels the active bounded network operation, if one is running.
+"""
+        raise NotImplementedError
+    def close(self, ) -> None:
+        raise NotImplementedError
+    def credential(self, ) -> bytes:
+        raise NotImplementedError
+    def disclose_contacts(self, match_id: bytes,contacts: typing.List[FfiContactHandle]) -> FfiOperationReceipt:
+        raise NotImplementedError
+    def discover(self, query: FfiDiscoveryQuery) -> FfiCandidatePage:
+        raise NotImplementedError
+    def fetch_photo(self, owner: bytes,hash: bytes) -> FfiValidatedPhoto:
+        raise NotImplementedError
+    def identity_summary(self, ) -> FfiIdentitySummary:
+        raise NotImplementedError
+    def import_credential(self, credential: bytes) -> None:
+        """
+        Accepts a bounded serialized public credential. The application service verifies trust,
+        validity, subject, and both account-key bindings before persisting it.
+"""
+        raise NotImplementedError
+    def like(self, profile_id: bytes) -> FfiOperationReceipt:
+        raise NotImplementedError
+    def local_reports(self, limit: int) -> typing.List[FfiProfileReport]:
+        raise NotImplementedError
+    def local_reports_page(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiProfileReportPage:
+        raise NotImplementedError
+    def matches(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiMatchPage:
+        raise NotImplementedError
+    def notification_preferences(self, ) -> FfiNotificationPreferences:
+        raise NotImplementedError
+    def operations(self, limit: int) -> typing.List[FfiOperationReceipt]:
+        raise NotImplementedError
+    def operations_page(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiOperationPage:
+        raise NotImplementedError
+    def _pass(self, profile_id: bytes) -> None:
+        raise NotImplementedError
+    def pending_notifications(self, limit: int) -> typing.List[FfiNotificationEvent]:
+        raise NotImplementedError
+    def publish_profile(self, photos: typing.List[bytes]) -> FfiPublicationReceipt:
+        raise NotImplementedError
+    def published_profile(self, ) -> typing.Optional[FfiCandidateProfile]:
+        raise NotImplementedError
+    def rank_candidates(self, candidates: typing.List[FfiRankingCandidate],filter: FfiCandidateFilter,exploration_fraction: float,seed: int) -> typing.List[FfiRankedCandidate]:
+        raise NotImplementedError
+    def received_contacts(self, match_id: bytes) -> typing.List[FfiContactHandle]:
+        raise NotImplementedError
+    def received_likes(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiIncomingLikePage:
+        raise NotImplementedError
+    def record_feedback(self, profile_id: bytes,embedding_version: int,embedding_values: typing.List[float],liked: bool) -> None:
+        raise NotImplementedError
+    def recover_pending(self, ) -> typing.List[FfiOperationReceipt]:
+        raise NotImplementedError
+    def report_profile(self, subject: bytes,policy_reason: int,evidence_hashes: typing.List[bytes]) -> FfiProfileReport:
+        raise NotImplementedError
+    def reset_learning(self, ) -> None:
+        raise NotImplementedError
+    def set_notification_preferences(self, preferences: FfiNotificationPreferences) -> None:
+        raise NotImplementedError
+    def start_sync_session(self, ) -> SyncSession:
+        raise NotImplementedError
+
+class ApplicationHandle(ApplicationHandleProtocol):
+    """
+    An account-owning adapter. All application calls serialize through one service instance.
+"""
+
+    _handle: ctypes.c_uint64
+
+    def __init__(self, *args, **kwargs):
+        raise ValueError("This class has no default constructor")
+
+    def __del__(self):
+        # In case of partial initialization of instances.
+        handle = getattr(self, "_handle", None)
+        if handle is not None:
+            _uniffi_rust_call(_UniffiLib.uniffi_annoda_mobile_ffi_fn_free_applicationhandle, handle)
+
+    def _uniffi_clone_handle(self):
+        return _uniffi_rust_call(_UniffiLib.uniffi_annoda_mobile_ffi_fn_clone_applicationhandle, self._handle)
+
+    # Used by alternative constructors or any methods which return this type.
+    @classmethod
+    def _uniffi_make_instance(cls, handle):
+        # Lightly yucky way to bypass the usual __init__ logic
+        # and just create a new instance with the required handle.
+        inst = cls.__new__(cls)
+        inst._handle = handle
+        return inst
+    def acknowledge_notification(self, event_id: bytes) -> bool:
+
+        _UniffiFfiConverterBytes.check_lower(event_id)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(event_id),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterBoolean.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_acknowledge_notification,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def block(self, profile_id: bytes) -> None:
+
+        _UniffiFfiConverterBytes.check_lower(profile_id)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(profile_id),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_block,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def cancel_current_operation(self, ) -> bool:
+        """
+        Cancels the active bounded network operation, if one is running.
+"""
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterBoolean.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_cancel_current_operation,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def close(self, ) -> None:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_close,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def credential(self, ) -> bytes:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterBytes.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_credential,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def disclose_contacts(self, match_id: bytes,contacts: typing.List[FfiContactHandle]) -> FfiOperationReceipt:
+
+        _UniffiFfiConverterBytes.check_lower(match_id)
+
+        _UniffiFfiConverterSequenceTypeFfiContactHandle.check_lower(contacts)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(match_id),
+            _UniffiFfiConverterSequenceTypeFfiContactHandle.lower(contacts),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiOperationReceipt.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_disclose_contacts,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def discover(self, query: FfiDiscoveryQuery) -> FfiCandidatePage:
+
+        _UniffiFfiConverterTypeFfiDiscoveryQuery.check_lower(query)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterTypeFfiDiscoveryQuery.lower(query),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiCandidatePage.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_discover,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def fetch_photo(self, owner: bytes,hash: bytes) -> FfiValidatedPhoto:
+
+        _UniffiFfiConverterBytes.check_lower(owner)
+
+        _UniffiFfiConverterBytes.check_lower(hash)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(owner),
+            _UniffiFfiConverterBytes.lower(hash),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiValidatedPhoto.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_fetch_photo,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def identity_summary(self, ) -> FfiIdentitySummary:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiIdentitySummary.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_identity_summary,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def import_credential(self, credential: bytes) -> None:
+        """
+        Accepts a bounded serialized public credential. The application service verifies trust,
+        validity, subject, and both account-key bindings before persisting it.
+"""
+
+        _UniffiFfiConverterBytes.check_lower(credential)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(credential),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_import_credential,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def like(self, profile_id: bytes) -> FfiOperationReceipt:
+
+        _UniffiFfiConverterBytes.check_lower(profile_id)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(profile_id),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiOperationReceipt.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_like,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def local_reports(self, limit: int) -> typing.List[FfiProfileReport]:
+
+        _UniffiFfiConverterUInt8.check_lower(limit)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(limit),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterSequenceTypeFfiProfileReport.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def local_reports_page(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiProfileReportPage:
+
+        _UniffiFfiConverterUInt8.check_lower(page_size)
+
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(cursor)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(page_size),
+            _UniffiFfiConverterOptionalTypeFfiPageCursor.lower(cursor),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiProfileReportPage.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_local_reports_page,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def matches(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiMatchPage:
+
+        _UniffiFfiConverterUInt8.check_lower(page_size)
+
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(cursor)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(page_size),
+            _UniffiFfiConverterOptionalTypeFfiPageCursor.lower(cursor),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiMatchPage.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_matches,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def notification_preferences(self, ) -> FfiNotificationPreferences:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiNotificationPreferences.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_notification_preferences,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def operations(self, limit: int) -> typing.List[FfiOperationReceipt]:
+
+        _UniffiFfiConverterUInt8.check_lower(limit)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(limit),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterSequenceTypeFfiOperationReceipt.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def operations_page(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiOperationPage:
+
+        _UniffiFfiConverterUInt8.check_lower(page_size)
+
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(cursor)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(page_size),
+            _UniffiFfiConverterOptionalTypeFfiPageCursor.lower(cursor),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiOperationPage.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_operations_page,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def _pass(self, profile_id: bytes) -> None:
+
+        _UniffiFfiConverterBytes.check_lower(profile_id)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(profile_id),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pass,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def pending_notifications(self, limit: int) -> typing.List[FfiNotificationEvent]:
+
+        _UniffiFfiConverterUInt8.check_lower(limit)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(limit),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterSequenceTypeFfiNotificationEvent.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_pending_notifications,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def publish_profile(self, photos: typing.List[bytes]) -> FfiPublicationReceipt:
+
+        _UniffiFfiConverterSequenceBytes.check_lower(photos)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterSequenceBytes.lower(photos),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiPublicationReceipt.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_publish_profile,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def published_profile(self, ) -> typing.Optional[FfiCandidateProfile]:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterOptionalTypeFfiCandidateProfile.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_published_profile,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def rank_candidates(self, candidates: typing.List[FfiRankingCandidate],filter: FfiCandidateFilter,exploration_fraction: float,seed: int) -> typing.List[FfiRankedCandidate]:
+
+        _UniffiFfiConverterSequenceTypeFfiRankingCandidate.check_lower(candidates)
+
+        _UniffiFfiConverterTypeFfiCandidateFilter.check_lower(filter)
+
+        _UniffiFfiConverterFloat64.check_lower(exploration_fraction)
+
+        _UniffiFfiConverterUInt64.check_lower(seed)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterSequenceTypeFfiRankingCandidate.lower(candidates),
+            _UniffiFfiConverterTypeFfiCandidateFilter.lower(filter),
+            _UniffiFfiConverterFloat64.lower(exploration_fraction),
+            _UniffiFfiConverterUInt64.lower(seed),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterSequenceTypeFfiRankedCandidate.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_rank_candidates,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def received_contacts(self, match_id: bytes) -> typing.List[FfiContactHandle]:
+
+        _UniffiFfiConverterBytes.check_lower(match_id)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(match_id),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterSequenceTypeFfiContactHandle.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_contacts,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def received_likes(self, page_size: int,cursor: typing.Optional[FfiPageCursor]) -> FfiIncomingLikePage:
+
+        _UniffiFfiConverterUInt8.check_lower(page_size)
+
+        _UniffiFfiConverterOptionalTypeFfiPageCursor.check_lower(cursor)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterUInt8.lower(page_size),
+            _UniffiFfiConverterOptionalTypeFfiPageCursor.lower(cursor),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiIncomingLikePage.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_received_likes,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def record_feedback(self, profile_id: bytes,embedding_version: int,embedding_values: typing.List[float],liked: bool) -> None:
+
+        _UniffiFfiConverterBytes.check_lower(profile_id)
+
+        _UniffiFfiConverterUInt16.check_lower(embedding_version)
+
+        _UniffiFfiConverterSequenceFloat64.check_lower(embedding_values)
+
+        _UniffiFfiConverterBoolean.check_lower(liked)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(profile_id),
+            _UniffiFfiConverterUInt16.lower(embedding_version),
+            _UniffiFfiConverterSequenceFloat64.lower(embedding_values),
+            _UniffiFfiConverterBoolean.lower(liked),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_record_feedback,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def recover_pending(self, ) -> typing.List[FfiOperationReceipt]:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterSequenceTypeFfiOperationReceipt.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_recover_pending,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def report_profile(self, subject: bytes,policy_reason: int,evidence_hashes: typing.List[bytes]) -> FfiProfileReport:
+
+        _UniffiFfiConverterBytes.check_lower(subject)
+
+        _UniffiFfiConverterUInt16.check_lower(policy_reason)
+
+        _UniffiFfiConverterSequenceBytes.check_lower(evidence_hashes)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterBytes.lower(subject),
+            _UniffiFfiConverterUInt16.lower(policy_reason),
+            _UniffiFfiConverterSequenceBytes.lower(evidence_hashes),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeFfiProfileReport.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_report_profile,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def reset_learning(self, ) -> None:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_reset_learning,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def set_notification_preferences(self, preferences: FfiNotificationPreferences) -> None:
+
+        _UniffiFfiConverterTypeFfiNotificationPreferences.check_lower(preferences)
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+            _UniffiFfiConverterTypeFfiNotificationPreferences.lower(preferences),
+        )
+        _uniffi_lift_return = lambda val: None
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_set_notification_preferences,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+    def start_sync_session(self, ) -> SyncSession:
+        _uniffi_lowered_args = (
+            self._uniffi_clone_handle(),
+        )
+        _uniffi_lift_return = _UniffiFfiConverterTypeSyncSession.lift
+        _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+        _uniffi_ffi_result = _uniffi_rust_call_with_error(
+            _uniffi_error_converter,
+            _UniffiLib.uniffi_annoda_mobile_ffi_fn_method_applicationhandle_start_sync_session,
+            *_uniffi_lowered_args,
+        )
+        return _uniffi_lift_return(_uniffi_ffi_result)
+
+
+
+
+
+class _UniffiFfiConverterTypeApplicationHandle:
+    @staticmethod
+    def lift(value: int) -> ApplicationHandle:
+        return ApplicationHandle._uniffi_make_instance(value)
+
+    @staticmethod
+    def check_lower(value: ApplicationHandle):
+        if not isinstance(value, ApplicationHandle):
+            raise TypeError("Expected ApplicationHandle instance, {} found".format(type(value).__name__))
+
+    @staticmethod
+    def lower(value: ApplicationHandle) -> ctypes.c_uint64:
+        return value._uniffi_clone_handle()
+
+    @classmethod
+    def read(cls, buf: _UniffiRustBuffer) -> ApplicationHandle:
+        ptr = buf.read_u64()
+        if ptr == 0:
+            raise InternalError("Raw handle value was null")
+        return cls.lift(ptr)
+
+    @classmethod
+    def write(cls, value: ApplicationHandle, buf: _UniffiRustBuffer):
+        buf.write_u64(cls.lower(value))
 
 
 class LocalPreferenceModelProtocol(typing.Protocol):
@@ -2544,6 +5326,23 @@ def create_account(directory: str,passphrase: str) -> AccountHandle:
         *_uniffi_lowered_args,
     )
     return _uniffi_lift_return(_uniffi_ffi_result)
+def create_application(config: FfiApplicationConfig,passphrase: str) -> ApplicationHandle:
+
+    _UniffiFfiConverterTypeFfiApplicationConfig.check_lower(config)
+
+    _UniffiFfiConverterString.check_lower(passphrase)
+    _uniffi_lowered_args = (
+        _UniffiFfiConverterTypeFfiApplicationConfig.lower(config),
+        _UniffiFfiConverterString.lower(passphrase),
+    )
+    _uniffi_lift_return = _UniffiFfiConverterTypeApplicationHandle.lift
+    _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+    _uniffi_ffi_result = _uniffi_rust_call_with_error(
+        _uniffi_error_converter,
+        _UniffiLib.uniffi_annoda_mobile_ffi_fn_func_create_application,
+        *_uniffi_lowered_args,
+    )
+    return _uniffi_lift_return(_uniffi_ffi_result)
 def open_account(directory: str,passphrase: str) -> AccountHandle:
 
     _UniffiFfiConverterString.check_lower(directory)
@@ -2561,31 +5360,80 @@ def open_account(directory: str,passphrase: str) -> AccountHandle:
         *_uniffi_lowered_args,
     )
     return _uniffi_lift_return(_uniffi_ffi_result)
+def open_application(config: FfiApplicationConfig,passphrase: str) -> ApplicationHandle:
+
+    _UniffiFfiConverterTypeFfiApplicationConfig.check_lower(config)
+
+    _UniffiFfiConverterString.check_lower(passphrase)
+    _uniffi_lowered_args = (
+        _UniffiFfiConverterTypeFfiApplicationConfig.lower(config),
+        _UniffiFfiConverterString.lower(passphrase),
+    )
+    _uniffi_lift_return = _UniffiFfiConverterTypeApplicationHandle.lift
+    _uniffi_error_converter = _UniffiFfiConverterTypeFfiError
+    _uniffi_ffi_result = _uniffi_rust_call_with_error(
+        _uniffi_error_converter,
+        _UniffiLib.uniffi_annoda_mobile_ffi_fn_func_open_application,
+        *_uniffi_lowered_args,
+    )
+    return _uniffi_lift_return(_uniffi_ffi_result)
 
 __all__ = [
     "InternalError",
+    "FfiContactService",
+    "FfiDeliveryFailureReason",
+    "FfiMatchState",
     "FfiNotificationKind",
+    "FfiOperationKind",
+    "FfiOperationStatus",
+    "FfiReportDeliveryStatus",
     "FfiSyncStatus",
     "FfiSyncDeferredReason",
     "FfiError",
+    "FfiSyncPeer",
+    "FfiSyncBudget",
+    "FfiApplicationConfig",
     "FfiAuthorizedReplicaPhoto",
     "FfiAuthorizedReplica",
+    "FfiCandidateFilter",
+    "FfiPhotoManifest",
+    "FfiCandidateProfile",
+    "FfiPageCursor",
+    "FfiCandidatePage",
+    "FfiContactHandle",
+    "FfiDeliveryFailure",
+    "FfiDiscoveryQuery",
     "FfiHostConditions",
+    "FfiIdentitySummary",
+    "FfiIncomingLike",
+    "FfiIncomingLikePage",
+    "FfiMatchSummary",
+    "FfiMatchPage",
     "FfiNotificationEvent",
     "FfiNotificationPreferences",
+    "FfiOperationReceipt",
+    "FfiOperationPage",
     "FfiPeerContributionPolicy",
+    "FfiProfileReport",
+    "FfiProfileReportPage",
+    "FfiPublicationReceipt",
+    "FfiRankedCandidate",
+    "FfiRankingCandidate",
     "FfiRankingScore",
-    "FfiSyncBudget",
-    "FfiSyncPeer",
     "FfiSyncReport",
     "FfiSyncRequest",
+    "FfiValidatedPhoto",
     "api_version",
     "create_account",
+    "create_application",
     "open_account",
+    "open_application",
     "SyncSession",
     "SyncSessionProtocol",
     "AccountHandle",
     "AccountHandleProtocol",
+    "ApplicationHandle",
+    "ApplicationHandleProtocol",
     "LocalPreferenceModel",
     "LocalPreferenceModelProtocol",
 ]

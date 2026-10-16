@@ -8,3 +8,5 @@ A new ADR records context, decision, alternatives, consequences and migration wh
 
 - [0004: persistent account and node identities](0004-persistent-identities.md)
 - [0005: bounded synchronization and notification outbox](0005-sync-outbox.md)
+
+- [0006: application orchestration and durable delivery](0006-application-service.md)
